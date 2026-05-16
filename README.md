@@ -375,4 +375,5 @@ Websocket接口地址: wss://2662r3426b.vicp.fun/xiaozhi/v1/
    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=xinnan-tech/xiaozhi-esp32-server&type=Date" />
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xinnan-tech/xiaozhi-esp32-server&type=Date" />
  </picture>
-</a>
+</a>#   v o i c e A L  
+ 
