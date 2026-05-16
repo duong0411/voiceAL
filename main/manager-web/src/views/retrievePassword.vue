@@ -4,8 +4,7 @@
       <!-- 保持相同的头部 -->
       <el-header>
         <div style="display: flex;align-items: center;margin-top: 15px;margin-left: 10px;gap: 10px;">
-          <img loading="lazy" alt="" src="@/assets/xiaozhi-logo.png" style="width: 45px;height: 45px;" />
-          <img loading="lazy" alt="" :src="xiaozhiAiIcon" style="height: 18px;" />
+          <BrandLogo size="md" />
         </div>
       </el-header>
       <div class="login-person">
@@ -100,6 +99,7 @@
 
 <script>
 import Api from '@/apis/api';
+import BrandLogo from '@/components/BrandLogo.vue';
 import VersionFooter from '@/components/VersionFooter.vue';
 import { getUUID, goToPage, showDanger, showSuccess, validateMobile, sm2Encrypt } from '@/utils';
 import { mapState } from 'vuex';
@@ -111,7 +111,8 @@ import { changeLanguage } from '@/i18n';
 export default {
   name: 'retrieve',
   components: {
-    VersionFooter
+    VersionFooter,
+    BrandLogo,
   },
   computed: {
     ...mapState({
@@ -121,27 +122,12 @@ export default {
     }),
     // 获取当前语言
     currentLanguage() {
-      return i18n.locale || "zh_CN";
+      return i18n.locale || "vi";
     },
-    // 根据当前语言获取对应的xiaozhi-ai图标
     xiaozhiAiIcon() {
-      const currentLang = this.currentLanguage;
-      switch (currentLang) {
-        case "zh_CN":
-          return require("@/assets/xiaozhi-ai.png");
-        case "zh_TW":
-          return require("@/assets/xiaozhi-ai_zh_TW.png");
-        case "en":
-          return require("@/assets/xiaozhi-ai_en.png");
-        case "de":
-          return require("@/assets/xiaozhi-ai_de.png");
-        case "vi":
-          return require("@/assets/xiaozhi-ai_vi.png");
-        case "pt_BR":
-          return require("@/assets/xiaozhi-ai_en.png");
-        default:
-          return require("@/assets/xiaozhi-ai.png");
-      }
+      return this.currentLanguage === "en"
+        ? require("@/assets/xiaozhi-ai_en.png")
+        : require("@/assets/xiaozhi-ai_vi.png");
     },
     canSendMobileCaptcha() {
       return this.countdown === 0 && validateMobile(this.form.mobile, this.form.areaCode);
@@ -168,8 +154,8 @@ export default {
   },
   methods: {
     openPage(url) {
-      const lang = this.$i18n ? this.$i18n.locale : 'zh_CN';
-      if (!lang.startsWith('zh')) {
+      const lang = this.$i18n ? this.$i18n.locale : 'vi';
+      if (lang === 'en') {
         url = url.replace('.html', '-en.html');
       }
       window.open(url, '_blank');

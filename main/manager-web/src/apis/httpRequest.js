@@ -30,12 +30,7 @@ function sendRequest() {
         'send'() {
             // 设置语言请求头
             const currentLang = i18n.locale;
-            // 转换语言代码格式，将zh_CN转换为zh-CN
-            let acceptLanguage = currentLang.replace('_', '-');
-            // 为英语添加默认地区代码
-            if (acceptLanguage === 'en') {
-                acceptLanguage = 'en-US';
-            }
+            let acceptLanguage = currentLang === 'en' ? 'en-US' : 'vi-VN';
             this._header['Accept-Language'] = acceptLanguage;
             
             if (isNotNull(store.getters.getToken)) {

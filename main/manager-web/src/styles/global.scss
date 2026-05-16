@@ -1,3 +1,16 @@
+@import './theme.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+#app {
+  font-family: var(--val-font);
+  background: var(--val-bg);
+  color: var(--val-text);
+}
+
 // 覆盖 autofill 样式
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -8,25 +21,46 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  -webkit-box-shadow: 0 0 0px 1000px #1a2238 inset;
+  -webkit-text-fill-color: #eef2ff;
   transition: background-color 5000s ease-in-out 0s;
-  background-color: transparent;
 }
 
 .el-footer {
-  height: 35px !important; /* 使用 !important 确保覆盖默认样式 */
+  height: 35px !important;
 }
 
-.el-icon-video-play, .el-icon-video-pause { 
+.el-icon-video-play,
+.el-icon-video-pause {
   font-size: 18px !important;
 }
 
+.el-button--primary {
+  background: var(--val-primary) !important;
+  border-color: var(--val-primary) !important;
+
+  &:hover,
+  &:focus {
+    background: var(--val-primary-hover) !important;
+    border-color: var(--val-primary-hover) !important;
+  }
+}
+
 .is-light {
-  border: 1px solid #e4e7ed !important;
-  color: #595959;
+  border: 1px solid var(--val-border) !important;
+  color: var(--val-text-muted);
   font-size: 14px;
-  background: #fafcfe !important;
+  background: var(--val-bg-elevated) !important;
+
   .popper__arrow {
-    border-top-color: #e4e7ed !important;
-   }
+    border-top-color: var(--val-border) !important;
+  }
+}
+
+.val-app-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 70% 50% at 0% 0%, rgba(124, 92, 255, 0.12), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, rgba(0, 229, 200, 0.08), transparent 45%),
+    var(--val-bg);
 }

@@ -1,47 +1,52 @@
 <template>
-  <div class="welcome">
-    <!-- 公共头部 -->
+  <div class="welcome val-app-shell">
     <HeaderBar :devices="devices" @search="handleSearch" @search-reset="handleSearchReset" />
-    <el-main style="padding: 20px;display: flex;flex-direction: column;">
+    <el-main class="studio-main">
       <div>
-        <!-- 首页内容 -->
-        <div class="add-device">
-          <div class="add-device-bg">
-            <div class="hellow-text" style="margin-top: 30px;">
-              {{ $t('home.greeting') }}
-            </div>
-            <div class="hellow-text">
-              {{ $t('home.wish') }}
-            </div>
-            <div class="hi-hint">
-              let's have a wonderful day!
-            </div>
-            <div class="add-device-btn">
-              <div class="left-add" @click="showAddDialog">
-                {{ $t('home.addAgent') }}
+        <div class="studio-hero">
+          <div class="studio-hero-content">
+            <p class="studio-hero-label">{{ $t('brand.name') }}</p>
+            <h1 class="studio-hero-title">{{ $t('home.greeting') }}</h1>
+            <p class="studio-hero-sub">{{ $t('home.wish') }}</p>
+            <div class="studio-stats">
+              <div class="studio-stat">
+                <span class="studio-stat-num">{{ devices.length }}</span>
+                <span class="studio-stat-label">{{ $t('home.statAgents') }}</span>
               </div>
-              <div style="width: 23px;height: 13px;background: #5778ff;margin-left: -10px;" />
-              <div class="right-add">
-                <i class="el-icon-right" @click="showAddDialog" style="font-size: 20px;color: #fff;" />
+              <div class="studio-stat">
+                <span class="studio-stat-num">{{ totalDevices }}</span>
+                <span class="studio-stat-label">{{ $t('home.statDevices') }}</span>
               </div>
             </div>
+            <button type="button" class="studio-cta" @click="showAddDialog">
+              <i class="el-icon-plus" />
+              {{ $t('home.addAgent') }}
+              <i class="el-icon-arrow-right" />
+            </button>
+          </div>
+          <div class="studio-hero-visual" aria-hidden="true">
+            <div class="studio-ring studio-ring-1" />
+            <div class="studio-ring studio-ring-2" />
+            <i class="el-icon-microphone studio-mic-icon" />
           </div>
         </div>
         <div class="device-list-container">
           <template v-if="isLoading">
             <div v-for="i in skeletonCount" :key="'skeleton-' + i" class="skeleton-item">
-              <div class="skeleton-image"></div>
-              <div class="skeleton-content">
-                <div class="skeleton-line"></div>
-                <div class="skeleton-line-short"></div>
-              </div>
+              <div class="skeleton-shimmer" />
             </div>
           </template>
-
           <template v-else>
-            <DeviceItem v-for="(item, index) in devices" :key="index" :device="item" :feature-status="featureStatus" 
-              @configure="goToRoleConfig" @deviceManage="handleDeviceManage" @delete="handleDeleteAgent" 
-              @chat-history="handleShowChatHistory" />
+            <DeviceItem
+              v-for="(item, index) in devices"
+              :key="index"
+              :device="item"
+              :feature-status="featureStatus"
+              @configure="goToRoleConfig"
+              @deviceManage="handleDeviceManage"
+              @delete="handleDeleteAgent"
+              @chat-history="handleShowChatHistory"
+            />
           </template>
         </div>
       </div>
@@ -50,9 +55,12 @@
     <el-footer>
       <version-footer />
     </el-footer>
-    <chat-history-dialog :visible.sync="showChatHistory" :agent-id="currentAgentId" :agent-name="currentAgentName" />
+    <chat-history-dialog
+      :visible.sync="showChatHistory"
+      :agent-id="currentAgentId"
+      :agent-name="currentAgentName"
+    />
   </div>
-
 </template>
 
 <script>
@@ -79,40 +87,39 @@ export default {
       showChatHistory: false,
       currentAgentId: '',
       currentAgentName: '',
-      // 功能状态
       featureStatus: {
         voiceprintRecognition: false,
         voiceClone: false,
-        knowledgeBase: false
-      }
-    }
+        knowledgeBase: false,
+      },
+    };
   },
-
+  computed: {
+    totalDevices() {
+      return this.devices.reduce((sum, d) => sum + (d.deviceCount || 0), 0);
+    },
+  },
   async mounted() {
     this.fetchAgentList();
     await this.loadFeatureStatus();
   },
-
   methods: {
-    // 加载功能状态
     async loadFeatureStatus() {
       await featureManager.waitForInitialization();
       const config = featureManager.getConfig();
       this.featureStatus = {
         voiceprintRecognition: config.voiceprintRecognition,
         voiceClone: config.voiceClone,
-        knowledgeBase: config.knowledgeBase
+        knowledgeBase: config.knowledgeBase,
       };
     },
-    
     showAddDialog() {
-      this.addDeviceDialogVisible = true
+      this.addDeviceDialogVisible = true;
     },
     goToRoleConfig() {
-      // 点击配置角色后跳转到角色配置页
-      this.$router.push('/role-config')
+      this.$router.push('/role-config');
     },
-    handleWisdomBodyAdded(res) {
+    handleWisdomBodyAdded() {
       this.fetchAgentList();
       this.addDeviceDialogVisible = false;
     },
@@ -122,266 +129,237 @@ export default {
     handleSearch(keyword) {
       this.isSearching = true;
       this.isLoading = true;
-      // 检测MAC地址格式：包含4个冒号
-      const isMac = /^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$/.test(keyword)
+      const isMac = /^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$/.test(keyword);
       const searchType = isMac ? 'mac' : 'name';
-      Api.agent.searchAgent(keyword, searchType, ({ data }) => {
-        if (data?.data) {
-          this.devices = data.data.map(item => ({
-            ...item,
-            agentId: item.id
-          }));
+      Api.agent.searchAgent(
+        keyword,
+        searchType,
+        ({ data }) => {
+          if (data?.data) {
+            this.devices = data.data.map((item) => ({ ...item, agentId: item.id }));
+          }
+          this.isLoading = false;
+        },
+        () => {
+          this.isLoading = false;
+          this.$message.error(this.$t('message.searchFailed'));
         }
-        this.isLoading = false;
-      }, (error) => {
-        console.error('搜索智能体失败:', error);
-        this.isLoading = false;
-        this.$message.error(this.$t('message.searchFailed'));
-      });
+      );
     },
     handleSearchReset() {
       this.isSearching = false;
-      // 直接将原始设备列表赋值给显示设备列表，避免重新加载数据
       this.devices = [...this.originalDevices];
     },
-
-    // 搜索更新智能体列表
-    handleSearchResult(filteredList) {
-      this.devices = filteredList; // 更新设备列表
-    },
-    // 获取智能体列表
     fetchAgentList() {
       this.isLoading = true;
-      Api.agent.getAgentList(({ data }) => {
-        if (data?.data) {
-          this.originalDevices = data.data.map(item => ({
-            ...item,
-            agentId: item.id
-          }));
-
-          // 动态设置骨架屏数量（可选）
-          this.skeletonCount = Math.min(
-            Math.max(this.originalDevices.length, 3), // 最少3个
-            10 // 最多10个
-          );
-
-          this.handleSearchReset();
+      Api.agent.getAgentList(
+        ({ data }) => {
+          if (data?.data) {
+            this.originalDevices = data.data.map((item) => ({ ...item, agentId: item.id }));
+            this.skeletonCount = Math.min(Math.max(this.originalDevices.length, 3), 10);
+            this.handleSearchReset();
+          }
+          this.isLoading = false;
+        },
+        () => {
+          this.isLoading = false;
         }
-        this.isLoading = false;
-      }, (error) => {
-        console.error('Failed to fetch agent list:', error);
-        this.isLoading = false;
-      });
+      );
     },
-    // 删除智能体
     handleDeleteAgent(agentId) {
-      this.$confirm(this.$t('home.confirmDeleteAgent'), '提示', {
+      this.$confirm(this.$t('home.confirmDeleteAgent'), this.$t('common.tip'), {
         confirmButtonText: this.$t('button.ok'),
         cancelButtonText: this.$t('button.cancel'),
-        type: 'warning'
+        type: 'warning',
       }).then(() => {
         Api.agent.deleteAgent(agentId, (res) => {
           if (res.data.code === 0) {
-            this.$message.success({
-              message: this.$t('home.deleteSuccess'),
-              showClose: true
-            });
-            this.fetchAgentList(); // 刷新列表
+            this.$message.success({ message: this.$t('home.deleteSuccess'), showClose: true });
+            this.fetchAgentList();
           } else {
-            this.$message.error({
-              message: res.data.msg || this.$t('home.deleteFailed'),
-              showClose: true
-            });
+            this.$message.error({ message: res.data.msg || this.$t('home.deleteFailed'), showClose: true });
           }
         });
-      }).catch(() => { });
+      }).catch(() => {});
     },
     handleShowChatHistory({ agentId, agentName }) {
       this.currentAgentId = agentId;
       this.currentAgentName = agentName;
       this.showChatHistory = true;
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
-<style scoped>
-.welcome {
-  min-width: 900px;
-  min-height: 506px;
-  height: 100vh;
+<style scoped lang="scss">
+.studio-main {
+  padding: 20px 24px 32px;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(145deg, #e6eeff, #eff0ff);
-  background-size: cover;
-  /* 确保背景图像覆盖整个元素 */
-  background-position: center;
-  /* 从顶部中心对齐 */
-  -webkit-background-size: cover;
-  /* 兼容老版本WebKit浏览器 */
-  -o-background-size: cover;
-  /* 兼容老版本Opera浏览器 */
 }
 
-.add-device {
-  height: 195px;
-  border-radius: 15px;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(269.62deg,
-      #e0e6fd 0%,
-      #cce7ff 49.69%,
-      #d3d3fe 100%);
+.welcome {
+  min-width: 900px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.add-device-bg {
-  width: 100%;
-  height: 100%;
-  text-align: left;
-  background-image: url("@/assets/home/main-top-bg.png");
-  overflow: hidden;
-  background-size: cover;
-  /* 确保背景图像覆盖整个元素 */
-  background-position: center;
-  /* 从顶部中心对齐 */
-  -webkit-background-size: cover;
-  /* 兼容老版本WebKit浏览器 */
-  -o-background-size: cover;
-  box-sizing: border-box;
-
-  /* 兼容老版本Opera浏览器 */
-  .hellow-text {
-    margin-left: 75px;
-    color: #3d4566;
-    font-size: 33px;
-    font-weight: 700;
-    letter-spacing: 0;
-  }
-
-  .hi-hint {
-    font-weight: 400;
-    font-size: 12px;
-    text-align: left;
-    color: #818cae;
-    margin-left: 75px;
-    margin-top: 5px;
-  }
-}
-
-.add-device-btn {
+.studio-hero {
   display: flex;
   align-items: center;
-  margin-left: 75px;
-  margin-top: 15px;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px 36px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(124, 92, 255, 0.2) 0%, rgba(0, 229, 200, 0.08) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 28px;
+  overflow: hidden;
+  position: relative;
+}
+
+.studio-hero-content {
+  flex: 1;
+  z-index: 1;
+}
+
+.studio-hero-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--val-accent, #00e5c8);
+  margin: 0 0 8px;
+}
+
+.studio-hero-title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #f1f5f9;
+}
+
+.studio-hero-sub {
+  margin: 8px 0 20px;
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+.studio-stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.studio-stat-num {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.studio-stat-label {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.studio-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #7c5cff, #5b3fd9);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
   cursor: pointer;
+  box-shadow: 0 8px 28px rgba(124, 92, 255, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-  .left-add {
-    padding: 0 14px;
-    height: 34px;
-    border-radius: 17px;
-    background: #5778ff;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 500;
-    text-align: center;
-    line-height: 34px;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(124, 92, 255, 0.5);
   }
+}
 
-  .right-add {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: #5778ff;
-    margin-left: -6px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.studio-hero-visual {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+}
+
+.studio-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(124, 92, 255, 0.35);
+}
+
+.studio-ring-1 {
+  inset: 0;
+  animation: pulse-ring 2.5s ease-out infinite;
+}
+
+.studio-ring-2 {
+  inset: 18px;
+  border-color: rgba(0, 229, 200, 0.35);
+  animation: pulse-ring 2.5s ease-out infinite 0.6s;
+}
+
+.studio-mic-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  color: var(--val-primary, #7c5cff);
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0;
   }
 }
 
 .device-list-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 30px;
-  padding: 30px 0;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
 }
 
-/* 在 DeviceItem.vue 的样式中 */
-.device-item {
-  margin: 0 !important;
-  /* 避免冲突 */
-  width: auto !important;
+.skeleton-item {
+  height: 160px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
 }
 
-.footer {
-  font-size: 12px;
-  font-weight: 400;
-  margin-top: auto;
-  padding-top: 30px;
-  color: #979db1;
-  text-align: center;
-  /* 居中显示 */
+.skeleton-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
 }
 
-/* 骨架屏动画 */
 @keyframes shimmer {
   100% {
     transform: translateX(100%);
   }
-}
-
-.skeleton-item {
-  background: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  height: 120px;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-.skeleton-image {
-  width: 80px;
-  height: 80px;
-  background: #f0f2f5;
-  border-radius: 4px;
-  float: left;
-  position: relative;
-  overflow: hidden;
-}
-
-.skeleton-content {
-  margin-left: 100px;
-}
-
-.skeleton-line {
-  height: 16px;
-  background: #f0f2f5;
-  border-radius: 4px;
-  margin-bottom: 12px;
-  width: 70%;
-  position: relative;
-  overflow: hidden;
-}
-
-.skeleton-line-short {
-  height: 12px;
-  background: #f0f2f5;
-  border-radius: 4px;
-  width: 50%;
-}
-
-.skeleton-item::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.3),
-      rgba(255, 255, 255, 0));
-  animation: shimmer 1.5s infinite;
 }
 </style>

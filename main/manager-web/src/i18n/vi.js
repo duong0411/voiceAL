@@ -1,4 +1,10 @@
 export default {
+  'brand.name': 'Voice AL Studio',
+  'brand.tagline': 'Nền tảng điều khiển giọng nói AI — thiết kế, huấn luyện và triển khai tác nhân thông minh.',
+  'brand.feature.voice': 'Giọng nói AI',
+  'brand.feature.agents': 'Tác nhân thông minh',
+  'brand.feature.devices': 'Thiết bị IoT',
+
   // Login page related prompt text
   'login.requiredUsername': 'Tên đăng nhập không được để trống',
   'login.requiredPassword': 'Mật khẩu không được để trống',
@@ -298,7 +304,7 @@ export default {
 
   // Register page related
   'register.title': 'Tạo tài khoản',
-  'register.welcome': 'Chào mừng đến với XiaoZhi AI',
+  'register.welcome': 'Tham gia Voice AL Studio',
   'register.usernamePlaceholder': 'Vui lòng nhập tên đăng nhập',
   'register.mobilePlaceholder': 'Vui lòng nhập số điện thoại di động',
   'register.captchaPlaceholder': 'Vui lòng nhập mã xác minh',
@@ -399,8 +405,11 @@ export default {
   'replacementWordManagement.batchDeleteHint': 'Gợi ý xóa hàng loạt',
 
   // Login page text
-  'login.title': 'DN',
-  'login.welcome': 'CHÀO MỪNG ĐẾN VỚI ĐĂNG NHẬP',
+  'login.title': 'Đăng nhập',
+  'login.welcome': 'Điều khiển studio giọng nói của bạn',
+  'login.captchaLoadFailed': 'Không tải được mã xác minh, nhấn để thử lại',
+  'login.userInfoFailed': 'Không lấy được thông tin người dùng',
+  'login.loginFailed': 'Đăng nhập thất bại',
   'login.username': 'Tên đăng nhập',
   'login.usernamePlaceholder': 'Vui lòng nhập tên đăng nhập',
   'login.mobilePlaceholder': 'Vui lòng nhập số điện thoại di động',
@@ -410,6 +419,7 @@ export default {
   'login.loginButton': 'Đăng nhập',
   'login.login': 'Đăng nhập',
   'login.register': 'Đăng ký',
+  'login.noAccount': 'Chưa có tài khoản?',
   'login.forgotPassword': 'Quên mật khẩu',
   'login.forgetPassword': 'Quên mật khẩu?',
   'login.mobileLogin': 'Đăng nhập bằng điện thoại',
@@ -582,7 +592,7 @@ export default {
   'button.close': 'Đóng',
 
   // System information
-  'system.name': 'Dịch vụ XiaoZhi',
+  'system.name': 'Voice AL Studio',
 
   // Voiceprint related
   'voiceprint.management': 'Quản lý dấu giọng nói',
@@ -706,17 +716,15 @@ export default {
   'common.loading': 'Đang tải',
 
   // Language switch
-  'language.zhCN': '中文简体',
-  'language.zhTW': '中文繁體',
   'language.en': 'English',
-  'language.de': 'Deutsch',
   'language.vi': 'Tiếng Việt',
-  'language.ptBR': 'Português (Brasil)',
 
   // Home page text
   'home.addAgent': 'Thêm tác nhân',
-  'home.greeting': 'Xin chào XiaoZhi',
-  'home.wish': 'Chúc bạn một ngày tuyệt vời!',
+  'home.greeting': 'Studio của bạn đã sẵn sàng',
+  'home.wish': 'Thiết kế trải nghiệm giọng nói mới cho thiết bị của bạn.',
+  'home.statAgents': 'Tác nhân',
+  'home.statDevices': 'Thiết bị',
   'home.languageModel': 'LLM',
   'home.voiceModel': 'TTS',
   'home.configureRole': 'Vai trò',

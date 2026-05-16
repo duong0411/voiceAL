@@ -2,6 +2,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 import 'normalize.css/normalize.css'; // A modern alternative to CSS resets
 import Vue from 'vue';
 import ElementUI from 'element-ui';
+import ElementLocale from 'element-ui/lib/locale';
+import elementEnLocale from 'element-ui/lib/locale/lang/en';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -13,6 +15,7 @@ import featureManager from './utils/featureManager';
 // 创建事件总线，用于组件间通信
 Vue.prototype.$eventBus = new Vue();
 
+ElementLocale.use(elementEnLocale);
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false

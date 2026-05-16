@@ -1,4 +1,10 @@
 export default {
+  'brand.name': 'Voice AL Studio',
+  'brand.tagline': 'AI voice control platform — design, train, and deploy intelligent voice agents.',
+  'brand.feature.voice': 'AI Voice',
+  'brand.feature.agents': 'Smart Agents',
+  'brand.feature.devices': 'IoT Devices',
+
   // Login page related prompt text
   'login.requiredUsername': 'Username cannot be empty',
   'login.requiredPassword': 'Password cannot be empty',
@@ -298,7 +304,7 @@ export default {
 
   // Register page related
   'register.title': 'Create Account',
-  'register.welcome': 'Welcome to XiaoZhi AI',
+  'register.welcome': 'Join Voice AL Studio',
   'register.usernamePlaceholder': 'Please enter username',
   'register.mobilePlaceholder': 'Please enter mobile phone number',
   'register.captchaPlaceholder': 'Please enter captcha',
@@ -399,8 +405,11 @@ export default {
   'replacementWordManagement.batchDeleteHint': 'Batch Delete Hint',
 
   // Login page text
-  'login.title': 'Login',
-  'login.welcome': 'WELCOME TO LOGIN',
+  'login.title': 'Sign in',
+  'login.welcome': 'Control your voice studio',
+  'login.captchaLoadFailed': 'Could not load captcha — tap to retry',
+  'login.userInfoFailed': 'Failed to load user profile',
+  'login.loginFailed': 'Sign in failed',
   'login.username': 'Username',
   'login.usernamePlaceholder': 'Please enter username',
   'login.mobilePlaceholder': 'Please enter mobile number',
@@ -410,6 +419,7 @@ export default {
   'login.loginButton': 'Login',
   'login.login': 'Login',
   'login.register': 'Register',
+  'login.noAccount': "Don't have an account?",
   'login.forgotPassword': 'Forgot Password',
   'login.forgetPassword': 'Forgot Password?',
   'login.mobileLogin': 'Mobile Login',
@@ -582,7 +592,7 @@ export default {
   'button.close': 'Close',
 
   // System information
-  'system.name': 'XiaoZhi Service',
+  'system.name': 'Voice AL Studio',
 
   // Voiceprint related
   'voiceprint.management': 'Voiceprint Management',
@@ -706,17 +716,15 @@ export default {
   'common.loading': 'Loading',
 
   // Language switch
-  'language.zhCN': '中文简体',
-  'language.zhTW': '中文繁體',
   'language.en': 'English',
-  'language.de': 'Deutsch',
   'language.vi': 'Tiếng Việt',
-  'language.ptBR': 'Português (Brasil)',
 
   // Home page text
   'home.addAgent': 'Add Agent',
-  'home.greeting': 'Hi XiaoZhi',
-  'home.wish': "Let's have a wonderful day!",
+  'home.greeting': 'Your studio is ready',
+  'home.statAgents': 'Agents',
+  'home.statDevices': 'Devices',
+  'home.wish': 'Design the next voice experience for your devices.',
   'home.languageModel': 'LLM',
   'home.voiceModel': 'TTS',
   'home.configureRole': 'Config Role',

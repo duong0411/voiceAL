@@ -3,8 +3,7 @@
     <div class="header-container">
       <!-- 左侧元素 -->
       <div class="header-left" @click="handleRouter('home')">
-        <img loading="lazy" alt="" src="@/assets/xiaozhi-logo.png" class="logo-img" />
-        <img loading="lazy" alt="" :src="xiaozhiAiIcon" class="brand-img" />
+        <BrandLogo compact size="sm" />
       </div>
 
       <!-- 中间导航菜单 -->
@@ -193,12 +192,14 @@
 import userApi from "@/apis/module/user";
 import i18n, { changeLanguage } from "@/i18n";
 import { mapActions, mapState } from "vuex";
+import BrandLogo from './BrandLogo.vue';
 import ChangePasswordDialog from "./ChangePasswordDialog.vue"; // 引入修改密码弹窗组件
 import featureManager from "@/utils/featureManager"; // 引入功能管理工具类
 
 export default {
   name: "HeaderBar",
   components: {
+    BrandLogo,
     ChangePasswordDialog,
   },
   props: ["devices"], // 接收父组件设备列表
@@ -252,47 +253,17 @@ export default {
     }),
     // 获取当前语言
     currentLanguage() {
-      return i18n.locale || "zh_CN";
+      return i18n.locale || "vi";
     },
-    // 获取当前语言显示文本
     currentLanguageText() {
-      const currentLang = this.currentLanguage;
-      switch (currentLang) {
-        case "zh_CN":
-          return this.$t("language.zhCN");
-        case "zh_TW":
-          return this.$t("language.zhTW");
-        case "en":
-          return this.$t("language.en");
-        case "de":
-          return this.$t("language.de");
-        case "vi":
-          return this.$t("language.vi");
-        case "pt_BR":
-          return this.$t("language.ptBR");
-        default:
-          return this.$t("language.zhCN");
-      }
+      return this.currentLanguage === "en"
+        ? this.$t("language.en")
+        : this.$t("language.vi");
     },
-    // 根据当前语言获取对应的xiaozhi-ai图标
     xiaozhiAiIcon() {
-      const currentLang = this.currentLanguage;
-      switch (currentLang) {
-        case "zh_CN":
-          return require("@/assets/xiaozhi-ai.png");
-        case "zh_TW":
-          return require("@/assets/xiaozhi-ai_zh_TW.png");
-        case "en":
-          return require("@/assets/xiaozhi-ai_en.png");
-        case "de":
-          return require("@/assets/xiaozhi-ai_de.png");
-        case "vi":
-          return require("@/assets/xiaozhi-ai_vi.png");
-        case "pt_BR":
-          return require("@/assets/xiaozhi-ai_en.png");
-        default:
-          return require("@/assets/xiaozhi-ai.png");
-      }
+      return this.currentLanguage === "en"
+        ? require("@/assets/xiaozhi-ai_en.png")
+        : require("@/assets/xiaozhi-ai_vi.png");
     },
     // 用户菜单选项
     userMenuOptions() {
@@ -302,28 +273,12 @@ export default {
           value: "language",
           children: [
             {
-              label: this.$t("language.zhCN"),
-              value: "zh_CN",
-            },
-            {
-              label: this.$t("language.zhTW"),
-              value: "zh_TW",
-            },
-            {
-              label: this.$t("language.en"),
-              value: "en",
-            },
-            {
-              label: this.$t("language.de"),
-              value: "de",
-            },
-            {
               label: this.$t("language.vi"),
               value: "vi",
             },
             {
-              label: this.$t("language.ptBR"),
-              value: "pt_BR",
+              label: this.$t("language.en"),
+              value: "en",
             },
           ],
         },
@@ -619,11 +574,11 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  background: #f6fcfe66;
-  border: 1px solid #fff;
-  height: 63px !important;
+  background: rgba(18, 24, 41, 0.85);
+  border-bottom: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(16px);
+  height: 64px !important;
   min-width: 900px;
-  /* 设置最小宽度防止过度压缩 */
   overflow: visible;
 }
 
@@ -670,28 +625,36 @@ export default {
 }
 
 .equipment-management {
-  height: 30px;
-  border-radius: 15px;
-  background: #deeafe;
+  height: 34px;
+  border-radius: 17px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: center;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   gap: 7px;
-  color: #3d4566;
+  color: #94a3b8;
   margin-left: 1px;
   align-items: center;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   cursor: pointer;
   flex-shrink: 0;
-  /* 防止导航按钮被压缩 */
   padding: 0 15px;
   position: relative;
+
+  &:hover {
+    color: #e2e8f0;
+    border-color: rgba(124, 92, 255, 0.4);
+    transform: translateY(-1px);
+  }
 }
 
 .equipment-management.active-tab {
-  background: #5778ff !important;
+  background: linear-gradient(135deg, #7c5cff, #5b3fd9) !important;
   color: #fff !important;
+  border-color: transparent !important;
+  box-shadow: 0 8px 24px rgba(124, 92, 255, 0.35);
 }
 
 .equipment-management img {
@@ -788,13 +751,13 @@ export default {
 }
 
 .custom-search-input>>>.el-input__inner {
-  height: 18px;
-  border-radius: 9px;
-  background-color: #fff;
-  border: 1px solid #e4e6ef;
-  padding-left: 8px;
-  font-size: 9px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  height: 32px;
+  border-radius: 16px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  padding-left: 12px;
+  font-size: 12px;
   width: 100%;
 }
 
@@ -820,6 +783,9 @@ export default {
 }
 .el-user-dropdown {
   cursor: pointer;
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 /* 导航文本样式 - 支持中英文换行 */
