@@ -72,13 +72,18 @@
             <i class="el-icon-key" />
             <el-input v-model="form.captcha" :placeholder="$t('login.captchaPlaceholder')" />
           </div>
-          <img
+          <div
             v-if="captchaUrl"
-            :src="captchaUrl"
-            class="val-captcha-img"
-            :alt="$t('login.captchaPlaceholder')"
+            class="val-captcha-wrap"
+            :title="$t('login.captchaRefresh')"
             @click="fetchCaptcha"
-          />
+          >
+            <img
+              :src="captchaUrl"
+              class="val-captcha-img"
+              :alt="$t('login.captchaPlaceholder')"
+            />
+          </div>
         </div>
 
         <div class="val-auth-links">

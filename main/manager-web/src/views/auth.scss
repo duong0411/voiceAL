@@ -198,28 +198,55 @@
 
 .val-captcha-row {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   margin-top: 16px;
-  align-items: stretch;
+  align-items: center;
+  width: 100%;
 
   .val-input-box {
     flex: 1;
+    min-width: 0;
     margin-top: 0;
   }
 }
 
-.val-captcha-img {
-  width: 130px;
-  height: 46px;
+.val-captcha-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 148px;
+  height: 48px;
+  padding: 4px 6px;
   border-radius: var(--val-radius-sm);
-  cursor: pointer;
+  background: #fff;
   border: 1px solid var(--val-border);
-  object-fit: cover;
+  box-sizing: border-box;
+  overflow: hidden;
+  cursor: pointer;
   transition: var(--val-transition);
 
   &:hover {
     border-color: var(--val-accent);
-    transform: scale(1.02);
+    box-shadow: 0 0 0 2px rgba(0, 229, 200, 0.15);
+  }
+}
+
+.val-captcha-img {
+  display: block;
+  width: 100%;
+  max-width: 136px;
+  height: 40px;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+
+  &:hover {
+    transform: none;
   }
 }
 

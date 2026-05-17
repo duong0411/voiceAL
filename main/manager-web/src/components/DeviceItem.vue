@@ -1,25 +1,25 @@
 <template>
   <div class="device-item">
     <div style="display: flex;justify-content: space-between;">
-    <el-tooltip :content="device.agentName" placement="top" effect="light">
+    <el-tooltip :content="displayAgentName" placement="top" effect="light">
       <div class="device-item-title">
-        {{ device.agentName }}
+        {{ displayAgentName }}
       </div>
     </el-tooltip>
       <div>
         <img src="@/assets/home/delete.png" alt="" style="width: 18px;height: 18px;margin-right: 10px;"
           @click.stop="handleDelete" />
-        <el-tooltip class="item" effect="light" :content="device.systemPrompt" placement="top"
+        <el-tooltip class="item" effect="light" :content="displaySystemPrompt" placement="top"
           popper-class="device-item-tooltip"> 
           <img src="@/assets/home/info.png" alt="" style="width: 18px;height: 18px;" />
         </el-tooltip>
       </div>
     </div>
     <div class="device-name">
-      {{ $t('home.languageModel') }}：{{ device.llmModelName }}
+      {{ $t('home.languageModel') }}：{{ displayLlmModelName }}
     </div>
     <div class="device-name">
-      {{ $t('home.voiceModel') }}：{{ device.ttsModelName }} ({{ device.ttsVoiceName }})
+      {{ $t('home.voiceModel') }}：{{ displayTtsModelName }} ({{ displayTtsVoiceName }})
     </div>
     <div style="display: flex;gap: 10px;align-items: center;">
       <div class="settings-btn" @click="handleConfigure">
@@ -41,9 +41,9 @@
     </div>
     <div class="version-info">
       <div>{{ $t('home.lastConversation') }}：{{ formattedLastConnectedTime }}</div>
-      <el-tooltip :content="tags.join()" placement="top" effect="light">
+      <el-tooltip :content="localizedTags.join(', ')" placement="top" effect="light">
         <div class="version-info-scroll">
-          {{ tags.join() }}
+          {{ localizedTags.join(', ') }}
         </div>
       </el-tooltip>
     </div>
@@ -51,8 +51,6 @@
 </template>
 
 <script>
-import i18n from '@/i18n';
-
 export default {
   name: 'DeviceItem',
   props: {
@@ -70,6 +68,21 @@ export default {
     return { switchValue: false }
   },
   computed: {
+    displayAgentName() {
+      return this.$dbLabel(this.device.agentName);
+    },
+    displayLlmModelName() {
+      return this.$dbLabel(this.device.llmModelName);
+    },
+    displayTtsModelName() {
+      return this.$dbLabel(this.device.ttsModelName);
+    },
+    displayTtsVoiceName() {
+      return this.$dbLabel(this.device.ttsVoiceName);
+    },
+    displaySystemPrompt() {
+      return this.$dbSystemPrompt(this.device.systemPrompt, this.device.agentName);
+    },
     formattedLastConnectedTime() {
       if (!this.device.lastConnectedAt) return this.$t('home.noConversation');
 
@@ -92,7 +105,10 @@ export default {
     tags() {
       if (!this.device.tags) return [];
       return this.device.tags.map((tag) => tag.tagName);
-    }
+    },
+    localizedTags() {
+      return this.tags.map((name) => this.$dbLabel(name));
+    },
   },
   methods: {
     handleDelete() {

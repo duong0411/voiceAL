@@ -15,7 +15,7 @@
                 <div class="header-icon">
                   <img loading="lazy" src="@/assets/home/setting-user.png" alt="" />
                 </div>
-                <span class="header-title">{{ form.agentName }}</span>
+                <span class="header-title">{{ $dbLabel(form.agentName) }}</span>
               </div>
               <div class="header-tags">
                 <el-tag
@@ -86,7 +86,7 @@
                           :class="{ 'template-loading': loadingTemplate }"
                           @click="selectTemplate(template)"
                         >
-                          {{ template.agentName }}
+                          {{ $dbLabel(template.agentName) }}
                         </div>
                       </div>
                     </el-form-item>
@@ -472,7 +472,8 @@ import ContextProviderDialog from "@/components/ContextProviderDialog.vue";
 import TtsAdvancedSettings from "@/components/TtsAdvancedSettings.vue";
 import HeaderBar from "@/components/HeaderBar.vue";
 import i18n from "@/i18n";
-import featureManager from "@/utils/featureManager"; 
+import featureManager from "@/utils/featureManager";
+import { localizeAgentFormFields } from "@/utils/dbLabelLocale";
 import VersionFooter from "@/components/VersionFooter.vue";
 
 export default {
@@ -488,6 +489,11 @@ export default {
         pitch: 0
       },
       tempSummaryMemory: "",
+      rawAgentFields: {
+        agentName: "",
+        systemPrompt: "",
+        summaryMemory: "",
+      },
       form: {
         agentCode: "",
         agentName: "",
@@ -669,7 +675,7 @@ export default {
       try {
         this.applyTemplateData(template);
         this.$message.success({
-          message: `${template.agentName}${i18n.t("roleConfig.templateApplied")}`,
+          message: `${this.$dbLabel(template.agentName)}${i18n.t("roleConfig.templateApplied")}`,
           showClose: true,
         });
       } catch (error) {
@@ -682,14 +688,33 @@ export default {
         this.loadingTemplate = false;
       }
     },
+    storeRawAgentFields(fields) {
+      this.rawAgentFields = {
+        agentName: fields.agentName || "",
+        systemPrompt: fields.systemPrompt || "",
+        summaryMemory: fields.summaryMemory || "",
+      };
+    },
+    applyLocalizedAgentFields() {
+      const localized = localizeAgentFormFields(i18n, { ...this.rawAgentFields });
+      if (localized.agentName) this.form.agentName = localized.agentName;
+      if (localized.systemPrompt) this.form.systemPrompt = localized.systemPrompt;
+      if (localized.summaryMemory) this.form.summaryMemory = localized.summaryMemory;
+    },
     applyTemplateData(templateData) {
-      this.form = {
-        ...this.form,
+      this.storeRawAgentFields({
         agentName: templateData.agentName || this.form.agentName,
-        ttsVoiceId: templateData.ttsVoiceId || this.form.ttsVoiceId,
-        chatHistoryConf: templateData.chatHistoryConf || this.form.chatHistoryConf,
         systemPrompt: templateData.systemPrompt || this.form.systemPrompt,
         summaryMemory: templateData.summaryMemory || this.form.summaryMemory,
+      });
+      const localized = localizeAgentFormFields(i18n, this.rawAgentFields);
+      this.form = {
+        ...this.form,
+        agentName: localized.agentName || this.form.agentName,
+        ttsVoiceId: templateData.ttsVoiceId || this.form.ttsVoiceId,
+        chatHistoryConf: templateData.chatHistoryConf || this.form.chatHistoryConf,
+        systemPrompt: localized.systemPrompt || this.form.systemPrompt,
+        summaryMemory: localized.summaryMemory || this.form.summaryMemory,
         langCode: templateData.langCode || this.form.langCode,
         model: {
           ttsModelId: templateData.ttsModelId || this.form.model.ttsModelId,
@@ -707,9 +732,14 @@ export default {
       Api.agent.getDeviceConfig(agentId, ({ data }) => {
         if (data.code === 0) {
           this.tempSummaryMemory = "";
+          this.storeRawAgentFields(data.data);
+          const localized = localizeAgentFormFields(i18n, this.rawAgentFields);
           this.form = {
             ...this.form,
             ...data.data,
+            agentName: localized.agentName || data.data.agentName,
+            systemPrompt: localized.systemPrompt || data.data.systemPrompt,
+            summaryMemory: localized.summaryMemory || data.data.summaryMemory,
             model: {
               ttsModelId: data.data.ttsModelId,
               vadModelId: data.data.vadModelId,
@@ -779,7 +809,7 @@ export default {
                 model.type,
                 data.data.map((item) => ({
                   value: item.id,
-                  label: item.modelName,
+                  label: this.$dbLabel(item.modelName),
                   isHidden: false,
                 }))
               );
@@ -799,7 +829,7 @@ export default {
               data.data.forEach((item) => {
                 LLMdata.push({
                   value: item.id,
-                  label: item.modelName,
+                  label: this.$dbLabel(item.modelName),
                   isHidden: false,
                 });
                 this.llmModeTypeMap.set(item.id, item.type);
@@ -839,7 +869,7 @@ export default {
 
           this.languageOptions = Array.from(allLanguages).map(lang => ({
             value: lang,
-            label: lang
+            label: this.$dbLabel(lang),
           }));
 
           // 使用后端返回的用户选择的语言，如果没有则使用第一个语言选项
@@ -881,7 +911,7 @@ export default {
 
       this.voiceOptions = filteredVoices.map((voice) => ({
         value: voice.id,
-        label: voice.name,
+        label: this.$dbLabel(voice.name),
         voiceDemo: voice.voiceDemo,
         voice_demo: voice.voice_demo,
         isClone: Boolean(voice.isClone),
@@ -1385,8 +1415,18 @@ export default {
     }
     this.fetchModelOptions();
     this.fetchTemplates();
-    // 加载功能状态，确保featureManager已初始化
     await this.loadFeatureStatus();
+    this._onLanguageChanged = () => {
+      if (this.rawAgentFields.agentName || this.rawAgentFields.systemPrompt) {
+        this.applyLocalizedAgentFields();
+      }
+    };
+    this.$eventBus.$on("languageChanged", this._onLanguageChanged);
+  },
+  beforeDestroy() {
+    if (this._onLanguageChanged) {
+      this.$eventBus.$off("languageChanged", this._onLanguageChanged);
+    }
   },
 };
 </script>

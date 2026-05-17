@@ -36,8 +36,7 @@
               :header-cell-style="{ padding: '10px 20px' }"
               :cell-style="{ padding: '10px 20px' }"
             >
-              <!-- 移除@row-click="handleRowClick" -->
-              <!-- 自定义选择列，实现表头是"选择"文字，数据行是小方框 -->
+          
               <el-table-column
                 :label="$t('agentTemplateManagement.select')"
                 align="center"
@@ -59,7 +58,7 @@
                 show-overflow-tooltip
               >
                 <template slot-scope="scope">
-                  <span>{{ scope.row.agentName }}</span>
+                  <span>{{ $dbLabel(scope.row.agentName) }}</span>
                 </template>
               </el-table-column>
               <!-- 修改为序号列，并移动到此处 -->
@@ -119,7 +118,6 @@
                 </el-button>
               </div>
 
-              <!-- 分页 -->
               <div class="custom-pagination">
                 <el-pagination
                   v-model:current-page="currentPage"
@@ -160,7 +158,7 @@ export default {
       templateList: [],
       templateLoading: false,
       selectedTemplates: [],
-      isAllSelected: false, // 添加全选状态
+      isAllSelected: false,
 
       search: "",
       // 分页相关数据
@@ -173,7 +171,6 @@ export default {
   created() {
     this.loadTemplateList();
   },
-  // 在computed部分添加hasSelected属性
   computed: {
     pageCount() {
       return Math.ceil(this.total / this.pageSize);
@@ -186,8 +183,6 @@ export default {
     },
   },
   methods: {
-    // 加载模板列表
-    // 改进loadTemplateList方法的错误处理逻辑
     loadTemplateList() {
       this.templateLoading = true;
       const params = {
@@ -202,11 +197,9 @@ export default {
         agentApi.getAgentTemplatesPage(
           params,
           (res) => {
-            // 更健壮的响应处理逻辑
             if (res && typeof res === "object") {
               if (res.data && res.data.code === 0) {
                 const responseData = res.data.data || {};
-                // 为每个模板添加selected属性
                 this.templateList = Array.isArray(responseData.list)
                   ? responseData.list.map((item) => ({ ...item, selected: false }))
                   : [];

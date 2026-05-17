@@ -89,7 +89,11 @@
                 :label="$t('modelConfig.modelName')"
                 prop="modelName"
                 align="center"
-              ></el-table-column>
+              >
+                <template slot-scope="scope">
+                  {{ $dbLabel(scope.row.modelName) }}
+                </template>
+              </el-table-column>
               <el-table-column :label="$t('modelConfig.provider')" align="center">
                 <template slot-scope="scope">
                   {{ scope.row.configJson.type || $t("modelConfig.unknown") }}

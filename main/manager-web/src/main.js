@@ -8,6 +8,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import i18n from './i18n';
+import { installDbLabelLocale } from './utils/dbLabelLocale';
 import './styles/global.scss';
 import { register as registerServiceWorker } from './registerServiceWorker';
 import featureManager from './utils/featureManager';
@@ -18,7 +19,9 @@ Vue.prototype.$eventBus = new Vue();
 ElementLocale.use(elementEnLocale);
 Vue.use(ElementUI);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+installDbLabelLocale(Vue, i18n);
 
 // 注册Service Worker
 registerServiceWorker();
