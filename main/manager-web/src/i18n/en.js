@@ -316,9 +316,6 @@ export default {
   'register.confirmPasswordPlaceholder': 'Please confirm password',
   'register.goToLogin': 'Already have an account? Login',
   'register.registerButton': 'Register',
-  'register.agreeTo': 'By registering, you agree to our',
-  'register.userAgreement': 'User Agreement',
-  'register.privacyPolicy': 'Privacy Policy',
   'register.notAllowRegister': 'User registration is not allowed',
   'register.captchaLoadFailed': 'Failed to load captcha',
   'register.inputCaptcha': 'Please enter captcha',
@@ -462,7 +459,6 @@ export default {
   'retrievePassword.newPasswordRequired': 'New password cannot be empty',
   'retrievePassword.confirmNewPasswordRequired': 'Confirm new password cannot be empty',
   'retrievePassword.passwordUpdateSuccess': 'Password updated successfully',
-  'retrievePassword.agreeTo': 'Reset means agree',
 
   // Change password page text
   'changePassword.title': 'Change Password',

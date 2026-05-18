@@ -70,10 +70,13 @@ public class LoginController {
     @PostMapping("/smsVerification")
     @Operation(summary = "短信验证码")
     public Result<Void> smsVerification(@RequestBody SmsVerificationDTO dto) {
-        // 验证图形验证码
-        boolean validate = captchaService.validate(dto.getCaptchaId(), dto.getCaptcha(), false);
-        if (!validate) {
-            throw new RenException(ErrorCode.SMS_CAPTCHA_ERROR);
+        String captchaId = Sm2DecryptUtil.normalizeCaptchaId(dto.getCaptchaId());
+        String captcha = StringUtils.trimToNull(dto.getCaptcha());
+        if (captchaId != null && captcha != null) {
+            boolean validate = captchaService.validate(captchaId, captcha, false);
+            if (!validate) {
+                throw new RenException(ErrorCode.SMS_CAPTCHA_ERROR);
+            }
         }
 
         Boolean isMobileRegister = sysParamsService
@@ -91,10 +94,7 @@ public class LoginController {
     public Result<TokenDTO> login(@RequestBody LoginDTO login) {
         String password = login.getPassword();
 
-        // 使用工具类解密并验证验证码
-        String actualPassword = Sm2DecryptUtil.decryptAndValidateCaptcha(
-                password, login.getCaptchaId(), captchaService, sysParamsService);
-
+        String actualPassword = decryptLoginPassword(password, login.getCaptchaId());
         login.setPassword(actualPassword);
 
         // 按照用户名获取用户
@@ -116,10 +116,7 @@ public class LoginController {
 
         String password = login.getPassword();
 
-        // 使用工具类解密并验证验证码
-        String actualPassword = Sm2DecryptUtil.decryptAndValidateCaptcha(
-                password, login.getCaptchaId(), captchaService, sysParamsService);
-
+        String actualPassword = decryptLoginPassword(password, login.getCaptchaId());
         login.setPassword(actualPassword);
 
         // 是否开启手机注册
@@ -201,14 +198,22 @@ public class LoginController {
 
         String password = dto.getPassword();
 
-        // 使用工具类解密并验证验证码
-        String actualPassword = Sm2DecryptUtil.decryptAndValidateCaptcha(
-                password, dto.getCaptchaId(), captchaService, sysParamsService);
-
+        String actualPassword = decryptLoginPassword(password, dto.getCaptchaId());
         dto.setPassword(actualPassword);
 
         sysUserService.changePasswordDirectly(userDTO.getId(), dto.getPassword());
         return new Result<>();
+    }
+
+    /**
+     * 解密登录/注册/找回密码请求中的密码；无图形验证码 ID 时不校验图形验证码。
+     */
+    private String decryptLoginPassword(String encryptedPassword, String captchaId) {
+        return Sm2DecryptUtil.decryptAndValidateCaptcha(
+                encryptedPassword,
+                Sm2DecryptUtil.normalizeCaptchaId(captchaId),
+                captchaService,
+                sysParamsService);
     }
 
     @GetMapping("/pub-config")

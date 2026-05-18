@@ -315,9 +315,6 @@ export default {
   'register.confirmPasswordPlaceholder': 'Vui lòng xác nhận mật khẩu',
   'register.goToLogin': 'Đã có tài khoản? Đăng nhập',
   'register.registerButton': 'Đăng ký',
-  'register.agreeTo': 'Bằng cách đăng ký, bạn đồng ý với',
-  'register.userAgreement': 'Thỏa thuận người dùng',
-  'register.privacyPolicy': 'Chính sách bảo mật',
   'register.notAllowRegister': 'Không cho phép đăng ký người dùng',
   'register.captchaLoadFailed': 'Không thể tải mã xác minh',
   'register.inputCaptcha': 'Vui lòng nhập mã xác minh',
@@ -461,7 +458,6 @@ export default {
   'retrievePassword.newPasswordRequired': 'Mật khẩu mới không được để trống',
   'retrievePassword.confirmNewPasswordRequired': 'Xác nhận mật khẩu mới không được để trống',
   'retrievePassword.passwordUpdateSuccess': 'Đã cập nhật mật khẩu thành công',
-  'retrievePassword.agreeTo': 'Đặt lại có nghĩa là đồng ý',
 
   // Change password page text
   'changePassword.title': 'Đổi mật khẩu',

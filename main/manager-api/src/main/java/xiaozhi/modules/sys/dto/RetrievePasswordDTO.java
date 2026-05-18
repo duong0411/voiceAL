@@ -26,7 +26,6 @@ public class RetrievePasswordDTO implements Serializable {
     private String password;
 
     @Schema(description = "图形验证码ID")
-    @NotBlank(message = "{sysuser.uuid.require}")
     private String captchaId;
 
 

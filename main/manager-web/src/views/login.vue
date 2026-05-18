@@ -67,27 +67,8 @@
           />
         </div>
 
-        <div class="val-captcha-row">
-          <div class="val-input-box">
-            <i class="el-icon-key" />
-            <el-input v-model="form.captcha" :placeholder="$t('login.captchaPlaceholder')" />
-          </div>
-          <div
-            v-if="captchaUrl"
-            class="val-captcha-wrap"
-            :title="$t('login.captchaRefresh')"
-            @click="fetchCaptcha"
-          >
-            <img
-              :src="captchaUrl"
-              class="val-captcha-img"
-              :alt="$t('login.captchaPlaceholder')"
-            />
-          </div>
-        </div>
-
         <div class="val-auth-links">
-          <span v-if="enableMobileRegister" class="link" @click="goToForgetPassword">{{ $t('login.forgetPassword') }}</span>
+          <span class="link" @click="goToForgetPassword">{{ $t('login.forgetPassword') }}</span>
         </div>
 
         <div class="val-primary-btn" @click="login">{{ $t('login.login') }}</div>
@@ -117,8 +98,6 @@
             />
           </el-tooltip>
         </div>
-
-
       </div>
     </section>
 
@@ -133,7 +112,7 @@ import Api from '@/apis/api';
 import BrandLogo from '@/components/BrandLogo.vue';
 import VersionFooter from '@/components/VersionFooter.vue';
 import i18n, { changeLanguage } from '@/i18n';
-import { getUUID, goToPage, showDanger, showSuccess, sm2Encrypt, validateMobile } from '@/utils';
+import { goToPage, showDanger, showSuccess, sm2Encrypt, validateMobile } from '@/utils';
 import { mapState } from 'vuex';
 
 export default {
@@ -165,50 +144,20 @@ export default {
       form: {
         username: '',
         password: '',
-        captcha: '',
-        captchaId: '',
         areaCode: '+86',
         mobile: '',
       },
-      captchaUuid: '',
-      captchaUrl: '',
       isMobileLogin: false,
       languageDropdownVisible: false,
     };
   },
   mounted() {
-    this.fetchCaptcha();
     localStorage.removeItem('pubConfig');
     this.$store.dispatch('fetchPubConfig').then(() => {
       this.isMobileLogin = this.enableMobileRegister;
     });
   },
   methods: {
-    openPage(url) {
-      const lang = this.$i18n ? this.$i18n.locale : 'vi';
-      if (lang === 'en') {
-        url = url.replace('.html', '-en.html');
-      }
-      window.open(url, '_blank');
-    },
-    fetchCaptcha() {
-      const token = localStorage.getItem('token');
-      if (token) {
-        if (this.$route.path !== '/home') {
-          this.$router.push('/home');
-        }
-        return;
-      }
-      this.captchaUuid = getUUID();
-      Api.user.getCaptcha(this.captchaUuid, (res) => {
-        if (res.status === 200) {
-          const blob = new Blob([res.data], { type: res.data.type });
-          this.captchaUrl = URL.createObjectURL(blob);
-        } else {
-          showDanger(this.$t('login.captchaLoadFailed'));
-        }
-      });
-    },
     handleLanguageDropdownVisibleChange(visible) {
       this.languageDropdownVisible = visible;
     },
@@ -222,8 +171,6 @@ export default {
       this.form.username = '';
       this.form.mobile = '';
       this.form.password = '';
-      this.form.captcha = '';
-      this.fetchCaptcha();
     },
     validateInput(input, messageKey) {
       if (!input.trim()) {
@@ -254,22 +201,20 @@ export default {
       }
 
       if (!this.validateInput(this.form.password, 'login.requiredPassword')) return;
-      if (!this.validateInput(this.form.captcha, 'login.requiredCaptcha')) return;
 
       let encryptedPassword;
       try {
-        encryptedPassword = sm2Encrypt(this.sm2PublicKey, this.form.captcha + this.form.password);
+        encryptedPassword = sm2Encrypt(this.sm2PublicKey, this.form.password);
       } catch (error) {
         showDanger(this.$t('sm2.encryptionFailed'));
         return;
       }
 
-      this.form.captchaId = this.captchaUuid;
       Api.user.login(
         {
           username: this.form.username,
           password: encryptedPassword,
-          captchaId: this.form.captchaId,
+          captchaId: '',
         },
         ({ data }) => {
           showSuccess(this.$t('login.loginSuccess'));
@@ -280,8 +225,6 @@ export default {
           showDanger(err.data?.msg || this.$t('login.loginFailed'));
         }
       );
-
-      setTimeout(() => this.fetchCaptcha(), 1000);
     },
     goToRegister() {
       goToPage('/register');
