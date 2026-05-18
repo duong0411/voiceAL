@@ -92,7 +92,7 @@
 
         <div class="val-primary-btn" @click="login">{{ $t('login.login') }}</div>
 
-        <div v-if="allowUserRegister" class="val-register-block">
+        <div class="val-register-block">
           <p class="val-no-account">{{ $t('login.noAccount') }}</p>
           <button type="button" class="val-secondary-btn" @click="goToRegister">
             {{ $t('login.registerAccount') }}
@@ -118,12 +118,7 @@
           </el-tooltip>
         </div>
 
-        <p class="val-legal">
-          {{ $t('login.agreeTo') }}
-          <span class="link" @click="openPage('/user-agreement.html')">{{ $t('login.userAgreement') }}</span>
-          {{ $t('login.and') }}
-          <span class="link" @click="openPage('/privacy-policy.html')">{{ $t('login.privacyPolicy') }}</span>
-        </p>
+
       </div>
     </section>
 

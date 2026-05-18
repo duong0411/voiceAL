@@ -113,9 +113,6 @@ public class LoginController {
     @PostMapping("/register")
     @Operation(summary = "注册")
     public Result<Void> register(@RequestBody LoginDTO login) {
-        if (!sysUserService.getAllowUserRegister()) {
-            throw new RenException(ErrorCode.USER_REGISTER_DISABLED);
-        }
 
         String password = login.getPassword();
 

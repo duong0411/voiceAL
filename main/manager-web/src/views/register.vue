@@ -173,14 +173,6 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('fetchPubConfig').then(() => {
-      if (!this.allowUserRegister) {
-        showDanger(this.$t('register.notAllowRegister'));
-        setTimeout(() => {
-          goToPage('/login');
-        }, 1500);
-      }
-    });
     this.fetchCaptcha();
   },
   methods: {
