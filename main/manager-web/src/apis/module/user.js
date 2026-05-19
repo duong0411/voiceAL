@@ -3,7 +3,6 @@ import RequestService from '../httpRequest'
 
 
 export default {
-    // 登录
     login(loginForm, callback, failCallback) {
         RequestService.sendRequest()
             .url(`${getServiceUrl()}/user/login`)
@@ -23,7 +22,6 @@ export default {
                 })
             }).send()
     },
-    // 获取验证码
     getCaptcha(uuid, callback) {
         RequestService.sendRequest()
             .url(`${getServiceUrl()}/user/captcha?uuid=${uuid}`)
@@ -38,11 +36,11 @@ export default {
                 RequestService.clearRequestTime();
                 callback(res);
             })
-            .networkFail((err) => {  // 添加错误参数
+            .networkFail((err) => {  
 
             }).send()
     },
-    // 发送短信验证码
+    
     sendSmsVerification(data, callback, failCallback) {
         RequestService.sendRequest()
             .url(`${getServiceUrl()}/user/smsVerification`)
@@ -62,7 +60,6 @@ export default {
                 })
             }).send()
     },
-    // 注册账号
     register(registerForm, callback, failCallback) {
         RequestService.sendRequest()
             .url(`${getServiceUrl()}/user/register`)
@@ -82,7 +79,6 @@ export default {
                 })
             }).send()
     },
-    // 保存设备配置
     saveDeviceConfig(device_id, configData, callback) {
         RequestService.sendRequest()
             .url(`${getServiceUrl()}/user/configDevice/${device_id}`)
@@ -99,7 +95,6 @@ export default {
                 });
             }).send();
     },
-    // 用户信息获取
     getUserInfo(callback) {
         RequestService.sendRequest()
             .url(`${getServiceUrl()}/user/info`)
@@ -115,7 +110,6 @@ export default {
                 })
             }).send()
     },
-    // 修改用户密码
     changePassword(oldPassword, newPassword, successCallback, errorCallback) {
         RequestService.sendRequest()
             .url(`${getServiceUrl()}/user/change-password`)
@@ -135,7 +129,6 @@ export default {
             })
             .send();
     },
-    // 修改用户状态
     changeUserStatus(status, userIds, successCallback) {
         console.log(555, userIds)
         RequestService.sendRequest()
@@ -153,7 +146,6 @@ export default {
                 })
             }).send()
     },
-    // 获取公共配置
     getPubConfig(callback, failCallback) {
         RequestService.sendRequest()
             .url(`${getServiceUrl()}/user/pub-config`)
@@ -175,14 +167,12 @@ export default {
                 });
             }).send();
     },
-    // 找回用户密码
     retrievePassword(passwordData, callback, failCallback) {
         RequestService.sendRequest()
             .url(`${getServiceUrl()}/user/retrieve-password`)
             .method('PUT')
             .data({
-                phone: passwordData.phone,
-                code: passwordData.code,
+                username: passwordData.username,
                 password: passwordData.password,
                 captchaId: passwordData.captchaId
             })
