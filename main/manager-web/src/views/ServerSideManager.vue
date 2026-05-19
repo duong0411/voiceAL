@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="welcome val-app-shell">
     <HeaderBar />
 
     <div class="operation-bar">
@@ -181,10 +181,6 @@ export default {
   display: flex;
   position: relative;
   flex-direction: column;
-  background-size: cover;
-  background: linear-gradient(to bottom right, #dce8ff, #e4eeff, #e6cbfd) center;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
   overflow: hidden;
 }
 
@@ -192,10 +188,12 @@ export default {
   // 顶部 63px 底部 35px 查询58px
   height: calc(100vh - 63px - 35px - 58px);
   margin: 0 22px;
-  border-radius: 15px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: var(--val-radius-lg, 20px);
+  box-shadow: var(--val-shadow);
   position: relative;
-  background: rgba(237, 242, 255, 0.5);
+  background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
+  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
 }
@@ -210,6 +208,9 @@ export default {
 .page-title {
   font-size: 24px;
   margin: 0;
+  color: var(--val-text);
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(124, 92, 255, 0.15);
 }
 
 .right-operations {
@@ -223,9 +224,11 @@ export default {
 }
 
 .btn-search {
-  background: linear-gradient(135deg, #6b8cff, #a966ff);
-  border: none;
-  color: white;
+  background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
+  border: none !important;
+  color: white !important;
+  border-radius: var(--val-radius-sm, 10px);
+  transition: var(--val-transition);
 }
 
 .content-panel {
@@ -233,9 +236,9 @@ export default {
   display: flex;
   overflow: hidden;
   height: 100%;
-  border-radius: 15px;
+  border-radius: var(--val-radius-lg, 20px);
   background: transparent;
-  border: 1px solid #fff;
+  border: none;
 }
 
 .content-area {
@@ -243,13 +246,13 @@ export default {
   height: 100%;
   min-width: 600px;
   overflow: auto;
-  background-color: white;
+  background-color: transparent !important;
   display: flex;
   flex-direction: column;
 }
 
 .params-card {
-  background: white;
+  background: transparent !important;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -284,7 +287,7 @@ export default {
     height: 32px;
     padding: 7px 12px 7px 10px;
     font-size: 12px;
-    border-radius: 4px;
+    border-radius: var(--val-radius-sm, 10px);
     line-height: 1;
     font-weight: 500;
     border: none;
@@ -298,18 +301,18 @@ export default {
   }
 
   .el-button--primary {
-    background: #5f70f3;
+    background: var(--val-primary) !important;
     color: white;
   }
 
   .el-button--danger {
-    background: #fd5b63;
+    background: var(--val-danger) !important;
     color: white;
   }
 }
 
 :deep(.transparent-table) {
-  background: white;
+  background: transparent !important;
   flex: 1;
   width: 100%;
   display: flex;
@@ -326,37 +329,53 @@ export default {
   }
 
   .el-table__header th {
-    background: white !important;
-    color: black;
+    background: rgba(255, 255, 255, 0.02) !important;
+    color: var(--val-text) !important;
+    font-weight: 600;
+    height: 40px;
+    padding: 8px 0;
+    font-size: 14px;
+    border-bottom: 1px solid var(--val-border) !important;
+  }
+
+  .el-table__body tr {
+    background-color: transparent !important;
+
+    td {
+      border-top: 1px solid rgba(255, 255, 255, 0.03) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+      padding: 8px 0;
+      height: 40px;
+      color: var(--val-text-muted) !important;
+      font-size: 14px;
+      background-color: transparent !important;
+    }
+  }
+
+  .el-table__row:hover>td {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    color: var(--val-text) !important;
   }
 
   &::before {
     display: none;
   }
-
-  .el-table__body tr {
-    background-color: white;
-
-    td {
-      border-top: 1px solid rgba(0, 0, 0, 0.04);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-    }
-  }
 }
 
 
 :deep(.el-checkbox__inner) {
-  background-color: #ffffff !important;
-  border-color: #cccccc !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border-color: var(--val-border) !important;
+  transition: all 0.2s ease-in-out;
 }
 
 :deep(.el-checkbox__inner:hover) {
-  border-color: #cccccc !important;
+  border-color: var(--val-primary) !important;
 }
 
 :deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-  background-color: #5f70f3 !important;
-  border-color: #5f70f3 !important;
+  background-color: var(--val-primary) !important;
+  border-color: var(--val-primary) !important;
 }
 
 @media (min-width: 1144px) {
@@ -382,15 +401,26 @@ export default {
 }
 
 :deep(.el-table .el-button--text) {
-  color: #7079aa;
+  color: var(--val-primary-hover) !important;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 :deep(.el-table .el-button--text:hover) {
-  color: #5a64b5;
+  color: var(--val-primary) !important;
+  transform: translateY(-1px);
+}
+
+:deep(.el-table .el-button--text:last-child) {
+  color: var(--val-danger) !important;
+}
+
+:deep(.el-table .el-button--text:last-child:hover) {
+  color: #ff8fa3 !important;
 }
 
 .el-button--success {
-  background: #5bc98c;
+  background: var(--val-success) !important;
   color: white;
 }
 
@@ -407,10 +437,10 @@ export default {
   :deep(.el-input__inner) {
     height: 32px;
     line-height: 32px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
+    border-radius: var(--val-radius-sm, 10px);
+    border: 1px solid var(--val-border) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: var(--val-text) !important;
     font-size: 14px;
   }
 
@@ -437,7 +467,7 @@ export default {
     display: inline-block;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 9px solid #606266;
+    border-top: 9px solid var(--val-text-muted);
     position: relative;
     transform: rotate(0deg);
     transition: transform 0.3s;
@@ -458,5 +488,25 @@ export default {
     max-height: calc(var(--table-max-height) - 40px);
     overflow-y: auto;
   }
+}
+
+:deep(.el-loading-mask) {
+  background-color: rgba(11, 15, 26, 0.7) !important;
+  backdrop-filter: blur(2px);
+}
+
+:deep(.el-loading-spinner .circular) {
+  width: 28px;
+  height: 28px;
+}
+
+:deep(.el-loading-spinner .path) {
+  stroke: var(--val-primary);
+}
+
+:deep(.el-loading-text) {
+  color: var(--val-primary) !important;
+  font-size: 14px;
+  margin-top: 8px;
 }
 </style>

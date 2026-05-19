@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="welcome val-app-shell">
     <HeaderBar />
 
     <div class="operation-bar">
@@ -501,19 +501,18 @@ export default {
   display: flex;
   position: relative;
   flex-direction: column;
-  background: linear-gradient(to bottom right, #dce8ff, #e4eeff, #e6cbfd);
-  background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
+  overflow: hidden;
 }
 
 .main-wrapper {
   height: calc(100vh - 63px - 35px - 72px);
   margin: 0 22px;
-  border-radius: 15px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: var(--val-radius-lg, 20px);
+  box-shadow: var(--val-shadow);
   position: relative;
-  background: rgba(237, 242, 255, 0.5);
+  background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
+  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
 }
@@ -528,7 +527,9 @@ export default {
 .page-title {
   font-size: 24px;
   margin: 0;
-  color: #2c3e50;
+  color: var(--val-text);
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(124, 92, 255, 0.15);
 }
 
 .right-operations {
@@ -539,20 +540,37 @@ export default {
 
 .search-input {
   width: 280px;
-  border-radius: 4px;
+  border-radius: var(--val-radius-sm, 10px);
 }
 
 .btn-search {
-  background: linear-gradient(135deg, #6b8cff, #a966ff);
-  border: none;
-  color: white;
+  background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
+  border: none !important;
+  color: white !important;
+  border-radius: var(--val-radius-sm, 10px) !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(124, 92, 255, 0.2) !important;
+}
+
+.btn-search:hover {
+  opacity: 0.95;
+  box-shadow: 0 4px 16px rgba(124, 92, 255, 0.3) !important;
+  transform: translateY(-1px);
 }
 
 ::v-deep .search-input .el-input__inner {
-  border-radius: 4px;
-  border: 1px solid #DCDFE6;
-  background-color: white;
+  border-radius: var(--val-radius-sm, 10px) !important;
+  border: 1px solid var(--val-border) !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text) !important;
   transition: border-color 0.2s;
+}
+
+::v-deep .search-input .el-input__inner:focus {
+  border-color: var(--val-primary) !important;
+  box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.2) !important;
+  outline: none;
 }
 
 ::v-deep .page-size-select {
@@ -563,10 +581,10 @@ export default {
 ::v-deep .page-size-select .el-input__inner {
   height: 32px;
   line-height: 32px;
-  border-radius: 4px;
-  border: 1px solid #e4e7ed;
-  background: #dee7ff;
-  color: #606266;
+  border-radius: var(--val-radius-sm, 10px);
+  border: 1px solid var(--val-border) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text) !important;
   font-size: 14px;
 }
 
@@ -593,15 +611,10 @@ export default {
   display: inline-block;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 9px solid #606266;
+  border-top: 9px solid var(--val-text-dim);
   position: relative;
   transform: rotate(0deg);
   transition: transform 0.3s;
-}
-
-::v-deep .search-input .el-input__inner:focus {
-  border-color: #6b8cff;
-  outline: none;
 }
 
 .content-panel {
@@ -609,9 +622,9 @@ export default {
   display: flex;
   overflow: hidden;
   height: 100%;
-  border-radius: 15px;
+  border-radius: var(--val-radius-lg, 20px);
   background: transparent;
-  border: 1px solid #fff;
+  border: none;
 }
 
 .content-area {
@@ -619,13 +632,13 @@ export default {
   height: 100%;
   min-width: 600px;
   overflow: auto;
-  background-color: white;
+  background-color: transparent !important;
   display: flex;
   flex-direction: column;
 }
 
 .device-card {
-  background: white;
+  background: transparent !important;
   border: none;
   box-shadow: none;
   display: flex;
@@ -647,9 +660,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  /* padding-bottom: 10px; */
 }
-
 
 .ctrl_btn {
   display: flex;
@@ -662,32 +673,51 @@ export default {
   height: 32px;
   padding: 7px 12px 7px 10px;
   font-size: 12px;
-  border-radius: 4px;
+  border-radius: var(--val-radius-sm, 10px);
   line-height: 1;
   font-weight: 500;
-  border: none;
+  border: 1px solid var(--val-border) !important;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 }
 
 .ctrl_btn .el-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.ctrl_btn .el-button--primary {
-  background: #5f70f3;
-  color: white;
+.ctrl_btn .select-all-btn {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text-muted) !important;
+  border-color: var(--val-border) !important;
 }
 
-.ctrl_btn .el-button--success {
-  background: #5bc98c;
-  color: white;
+.ctrl_btn .select-all-btn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--val-text) !important;
+  border-color: var(--val-border-hover) !important;
+}
+
+.ctrl_btn .add-device-btn {
+  background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(124, 92, 255, 0.2);
+}
+
+.ctrl_btn .add-device-btn:hover {
+  opacity: 0.95;
+  box-shadow: 0 4px 16px rgba(124, 92, 255, 0.3);
 }
 
 .ctrl_btn .el-button--danger {
-  background: #fd5b63;
-  color: white;
+  background: rgba(245, 108, 108, 0.1) !important;
+  color: #f56c6c !important;
+  border: 1px solid rgba(245, 108, 108, 0.3) !important;
+}
+
+.ctrl_btn .el-button--danger:hover {
+  background: rgba(245, 108, 108, 0.2) !important;
+  border-color: #f56c6c !important;
 }
 
 .custom-pagination {
@@ -707,10 +737,10 @@ export default {
   min-width: 60px;
   height: 32px;
   padding: 0 12px;
-  border-radius: 4px;
-  border: 1px solid #e4e7ed;
-  background: #dee7ff;
-  color: #606266;
+  border-radius: var(--val-radius-sm, 10px);
+  border: 1px solid var(--val-border) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text-muted) !important;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -720,11 +750,13 @@ export default {
 .custom-pagination .pagination-btn:nth-child(2):hover,
 .custom-pagination .pagination-btn:nth-last-child(2):hover,
 .custom-pagination .pagination-btn:nth-child(3):hover {
-  background: #d7dce6;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--val-text) !important;
+  border-color: var(--val-border-hover) !important;
 }
 
 .custom-pagination .pagination-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
@@ -732,84 +764,86 @@ export default {
   min-width: 28px;
   height: 32px;
   padding: 0;
-  border-radius: 4px;
+  border-radius: var(--val-radius-sm, 10px);
   border: 1px solid transparent;
   background: transparent;
-  color: #606266;
+  color: var(--val-text-muted);
   font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .custom-pagination .pagination-btn:not(:first-child):not(:nth-child(3)):not(:nth-child(2)):not(:nth-last-child(2)):hover {
-  background: rgba(245, 247, 250, 0.3);
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--val-text) !important;
 }
 
 .custom-pagination .pagination-btn.active {
-  background: #5f70f3 !important;
+  background: var(--val-primary) !important;
   color: #ffffff !important;
-  border-color: #5f70f3 !important;
+  border-color: var(--val-primary) !important;
 }
 
 .custom-pagination .pagination-btn.active:hover {
-  background: #6d7cf5 !important;
+  opacity: 0.95;
 }
 
 .custom-pagination .total-text {
-  color: #909399;
+  color: var(--val-text-dim);
   font-size: 14px;
   margin-left: 10px;
 }
 
 :deep(.transparent-table) {
-  background: white;
+  background: transparent !important;
   border: none;
 }
 
 :deep(.transparent-table .el-table__header th) {
-  background: white !important;
-  color: black;
-  border-right: none !important;
+  background: transparent !important;
+  color: var(--val-text) !important;
+  border-bottom: 1px solid var(--val-border) !important;
+}
+
+:deep(.transparent-table .el-table__body tr) {
+  background: transparent !important;
+  color: var(--val-text-muted) !important;
+}
+
+:deep(.transparent-table .el-table__body tr:hover > td) {
+  background-color: rgba(255, 255, 255, 0.02) !important;
 }
 
 :deep(.transparent-table .el-table__body tr td) {
-  border-top: 1px solid rgba(0, 0, 0, 0.04);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-  border-right: none !important;
-}
-
-:deep(.transparent-table .el-table__header tr th:first-child .cell),
-:deep(.transparent-table .el-table__body tr td:first-child .cell) {
-  padding-left: 10px;
+  border-bottom: 1px solid var(--val-border) !important;
 }
 
 :deep(.el-icon-edit) {
-  color: #7079aa;
+  color: var(--val-text-muted);
   cursor: pointer;
 }
 
 :deep(.el-icon-edit:hover) {
-  color: #5a64b5;
+  color: var(--val-primary);
 }
 
 :deep(.custom-selection-header .el-checkbox) {
   display: none !important;
 }
 
-
 :deep(.el-table .el-button--text) {
-  color: #7079aa;
+  color: var(--val-text-muted) !important;
+  transition: color 0.3s ease;
 }
 
 :deep(.el-table .el-button--text:hover) {
-  color: #5a64b5;
+  color: var(--val-primary) !important;
 }
 
 :deep(.transparent-table) {
   flex: 1;
   display: flex;
   flex-direction: column;
-  /* max-height: calc(100vh - 40vh); */
 }
 
 :deep(.el-table__body-wrapper) {
@@ -834,17 +868,18 @@ export default {
 }
 
 :deep(.el-checkbox__inner) {
-  background-color: #ffffff !important;
-  border-color: #cccccc !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border-color: var(--val-border) !important;
+  transition: all 0.2s ease;
 }
 
 :deep(.el-checkbox__inner:hover) {
-  border-color: #cccccc !important;
+  border-color: var(--val-primary) !important;
 }
 
 :deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-  background-color: #5f70f3 !important;
-  border-color: #5f70f3 !important;
+  background-color: var(--val-primary) !important;
+  border-color: var(--val-primary) !important;
 }
 
 ::v-deep .el-table--border::after,

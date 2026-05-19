@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="welcome val-app-shell">
     <HeaderBar />
 
     <div class="operation-bar">
@@ -657,20 +657,19 @@ export default {
   display: flex;
   position: relative;
   flex-direction: column;
-  background-size: cover;
-  background: linear-gradient(to bottom right, #dce8ff, #e4eeff, #e6cbfd) center;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
+  overflow: hidden;
 }
 
 .main-wrapper {
   // 顶部 63px 底部 35px 查询72px
   height: calc(100vh - 63px - 35px - 72px);
   margin: 0 22px;
-  border-radius: 15px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: var(--val-radius-lg, 20px);
+  box-shadow: var(--val-shadow);
   position: relative;
-  background: rgba(237, 242, 255, 0.5);
+  background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
+  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(8px);
 }
 
 .operation-bar {
@@ -683,6 +682,9 @@ export default {
 .page-title {
   font-size: 24px;
   margin: 0;
+  color: var(--val-text);
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(124, 92, 255, 0.15);
 }
 
 .content-panel {
@@ -690,21 +692,15 @@ export default {
   display: flex;
   overflow: hidden;
   height: 100%;
-  border-radius: 15px;
+  border-radius: var(--val-radius-lg, 20px);
   background: transparent;
 }
 
 .nav-panel {
   min-width: 242px;
   height: 100%;
-  border-right: 1px solid #ebeef5;
-  background: linear-gradient(
-      120deg,
-      rgba(107, 140, 255, 0.3) 0%,
-      rgba(169, 102, 255, 0.3) 25%,
-      transparent 60%
-    ),
-    url("../assets/model/model.png") no-repeat center / cover;
+  border-right: 1px solid var(--val-border);
+  background: rgba(255, 255, 255, 0.01);
   padding: 16px 0;
   flex-shrink: 0;
   display: flex;
@@ -713,22 +709,25 @@ export default {
 
 .nav-panel .el-menu-item {
   height: 50px;
-  background: #e9f0ff;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   line-height: 50px;
-  border-radius: 4px 0 0 4px !important;
+  border-radius: var(--val-radius-sm, 10px) 0 0 var(--val-radius-sm, 10px) !important;
   transition: all 0.3s;
   display: flex !important;
   justify-content: flex-end;
-  padding-right: 12px !important;
-  width: fit-content;
+  padding-right: 20px !important;
+  width: calc(100% - 20px);
   margin: 8px 0 8px auto;
   min-width: unset;
 }
 
 .nav-panel .el-menu-item.is-active {
-  background: #5778ff;
+  background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
   position: relative;
   padding-left: 40px !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3);
 }
 
 .nav-panel .el-menu-item.is-active::before {
@@ -737,16 +736,16 @@ export default {
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  width: 13px;
-  height: 13px;
+  width: 10px;
+  height: 10px;
   background: #fff;
   border-radius: 50%;
-  box-shadow: 0 0 4px rgba(64, 158, 255, 0.5);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
 .menu-text {
   font-size: 14px;
-  color: #606266;
+  color: var(--val-text-muted);
   text-align: right;
   width: 100%;
   padding-right: 8px;
@@ -758,7 +757,7 @@ export default {
   height: 100%;
   min-width: 600px;
   overflow: hidden;
-  background-color: white;
+  background-color: transparent !important;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -780,21 +779,32 @@ export default {
 }
 
 .btn-search {
-  background: linear-gradient(135deg, #6b8cff, #a966ff);
-  border: none;
-  color: white;
+  background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
+  border: none !important;
+  color: white !important;
+  border-radius: var(--val-radius-sm, 10px);
+  transition: var(--val-transition);
 }
 
 .btn-search:hover {
-  opacity: 0.9;
+  opacity: 0.95;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3) !important;
 }
 
 ::v-deep .search-input .el-input__inner {
-  border-radius: 4px;
-  border: 1px solid #dcdfe6;
-  background-color: white;
-  transition: border-color 0.2s;
+  border-radius: var(--val-radius-sm, 10px);
+  border: 1px solid var(--val-border) !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text) !important;
+  transition: var(--val-transition);
+}
+
+::v-deep .search-input .el-input__inner:focus {
+  border-color: var(--val-primary) !important;
+  box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.2) !important;
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  outline: none;
 }
 
 ::v-deep .page-size-select {
@@ -805,10 +815,10 @@ export default {
 ::v-deep .page-size-select .el-input__inner {
   height: 32px;
   line-height: 32px;
-  border-radius: 4px;
-  border: 1px solid #e4e7ed;
-  background: #dee7ff;
-  color: #606266;
+  border-radius: var(--val-radius-sm, 10px);
+  border: 1px solid var(--val-border) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text) !important;
   font-size: 14px;
 }
 
@@ -835,30 +845,15 @@ export default {
   display: inline-block;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 9px solid #606266;
+  border-top: 9px solid var(--val-text-muted);
   position: relative;
   transform: rotate(0deg);
   transition: transform 0.3s;
 }
 
-::v-deep .search-input .el-input__inner:focus {
-  border-color: #6b8cff;
-  outline: none;
-}
-
-// .data-table {
-//   border-radius: 6px;
-//   overflow: hidden;
-//   background-color: transparent !important;
-// }
-
-// .data-table ::v-deep .el-table__row {
-//   background-color: transparent !important;
-// }
-
 .table-header th {
   background-color: transparent !important;
-  color: #606266;
+  color: var(--val-text);
   font-weight: 600;
 }
 
@@ -866,11 +861,12 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // padding: 16px 0;
   width: 100%;
   flex-shrink: 0;
   min-height: 60px;
-  background: white;
+  background: transparent !important;
+  border-top: 1px solid var(--val-border);
+  padding-top: 12px;
 }
 
 .batch-actions {
@@ -883,7 +879,7 @@ export default {
   height: 32px;
   padding: 7px 12px 7px 10px;
   font-size: 12px;
-  border-radius: 4px;
+  border-radius: var(--val-radius-sm, 10px);
   line-height: 1;
   font-weight: 500;
   border: none;
@@ -897,28 +893,28 @@ export default {
 }
 
 .batch-actions .el-button--primary {
-  background: #5f70f3 !important;
+  background: var(--val-primary) !important;
   color: white;
 }
 
 .batch-actions .el-button--success {
-  background: #5bc98c;
+  background: var(--val-success) !important;
   color: white;
 }
 
 .batch-actions .el-button--danger {
-  background: #fd5b63;
+  background: var(--val-danger) !important;
   color: white;
 }
 
 .batch-actions .el-button:first-child {
-  background: linear-gradient(135deg, #409eff, #6b8cff);
+  background: linear-gradient(135deg, var(--val-primary), var(--val-primary-hover)) !important;
   border: none;
   color: white;
 }
 
 .batch-actions .el-button:first-child:hover {
-  background: linear-gradient(135deg, #3a8ee6, #5a7cff);
+  background: linear-gradient(135deg, var(--val-primary-hover), var(--val-primary-dark)) !important;
 }
 
 .el-table th ::v-deep .el-table__cell {
@@ -938,10 +934,8 @@ export default {
   display: block;
   text-align: center;
   line-height: 32px;
-  /* 设置合适的行高，确保文本完整显示 */
-  color: black;
+  color: var(--val-text) !important;
   margin-top: 0;
-  /* 移除可能导致偏移的上边距 */
   height: 32px;
   position: absolute;
   top: 50%;
@@ -954,21 +948,17 @@ export default {
   position: relative;
 }
 
-/* 已移除可能影响文本显示的空伪元素 */
-
 ::v-deep .el-table__body .el-checkbox__inner {
   display: inline-block !important;
-  background: #ffffff;
 }
 
 ::v-deep .el-table thead th:not(:first-child) .cell {
-  color: #303133 !important;
+  color: var(--val-text) !important;
 }
 
 ::v-deep .nav-panel .el-menu-item.is-active .menu-text {
   color: #fff !important;
 }
-
 
 .el-button img {
   height: 1em;
@@ -978,18 +968,20 @@ export default {
 }
 
 ::v-deep .el-checkbox__inner {
-  border-color: #cfcfcf !important;
+  border-color: var(--val-border) !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
   transition: all 0.2s ease-in-out;
 }
 
 ::v-deep .el-checkbox__input.is-checked .el-checkbox__inner {
-  background-color: #5f70f3;
-  border-color: #5f70f3;
+  background-color: var(--val-primary) !important;
+  border-color: var(--val-primary) !important;
 }
 
 .voice-management-btn {
-  background: #9db3ea;
-  color: white;
+  background: var(--val-accent-soft) !important;
+  color: var(--val-accent) !important;
+  border: 1px solid rgba(0, 229, 200, 0.2) !important;
   min-width: 68px;
   line-height: 14px;
   white-space: nowrap;
@@ -998,8 +990,8 @@ export default {
 }
 
 .voice-management-btn:hover {
-  background: #8aa2e0;
-  /* 悬停时颜色加深 */
+  background: var(--val-accent) !important;
+  color: #0b0f1a !important;
   transform: scale(1.05);
 }
 
@@ -1011,10 +1003,16 @@ export default {
   padding-right: 15px !important;
 }
 
-.edit-btn,
+.edit-btn {
+  margin: 0 8px;
+  color: var(--val-primary-hover) !important;
+  font-weight: 600;
+}
+
 .delete-btn {
   margin: 0 8px;
-  color: #7079aa !important;
+  color: var(--val-danger) !important;
+  font-weight: 600;
 }
 
 ::v-deep .el-table .cell {
@@ -1036,20 +1034,21 @@ export default {
     min-width: 60px;
     height: 32px;
     padding: 0 12px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
+    border-radius: var(--val-radius-sm, 10px);
+    border: 1px solid var(--val-border) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: var(--val-text-muted) !important;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
 
-    &:hover {
-      background: #d7dce6;
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.08) !important;
+      color: var(--val-text) !important;
     }
 
     &:disabled {
-      opacity: 0.6;
+      opacity: 0.4;
       cursor: not-allowed;
     }
   }
@@ -1059,38 +1058,39 @@ export default {
     min-width: 28px;
     height: 32px;
     padding: 0;
-    border-radius: 4px;
+    border-radius: var(--val-radius-sm, 10px);
     border: 1px solid transparent;
     background: transparent;
-    color: #606266;
+    color: var(--val-text-muted) !important;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
 
     &:hover {
-      background: rgba(245, 247, 250, 0.3);
+      background: rgba(255, 255, 255, 0.06) !important;
+      color: var(--val-text) !important;
     }
   }
 
   .pagination-btn.active {
-    background: #5f70f3 !important;
+    background: var(--val-primary) !important;
     color: #ffffff !important;
-    border-color: #5f70f3 !important;
+    border-color: var(--val-primary) !important;
 
     &:hover {
-      background: #6d7cf5 !important;
+      background: var(--val-primary-hover) !important;
     }
   }
 
   .total-text {
-    color: #909399;
+    color: var(--val-text-dim);
     font-size: 14px;
     margin-left: 10px;
   }
 }
 
 .model-card {
-  background: white;
+  background: transparent !important;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -1106,58 +1106,60 @@ export default {
   flex: 1;
   overflow: hidden;
 }
+
 :deep(.transparent-table) {
-    background: white;
+  background: transparent !important;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .el-table__body-wrapper {
     flex: 1;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+    overflow-y: auto;
+    max-height: none !important;
+  }
 
-    .el-table__body-wrapper {
-        flex: 1;
-        overflow-y: auto;
-        max-height: none !important;
+  .el-table__header-wrapper {
+    flex-shrink: 0;
+  }
+
+  .el-table__header th {
+    background: rgba(255, 255, 255, 0.02) !important;
+    color: var(--val-text) !important;
+    font-weight: 600;
+    height: 40px;
+    padding: 8px 0;
+    font-size: 14px;
+    border-bottom: 1px solid var(--val-border) !important;
+  }
+
+  .el-table__body tr {
+    background-color: transparent !important;
+
+    td {
+      border-top: 1px solid rgba(255, 255, 255, 0.03) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+      padding: 8px 0;
+      height: 40px;
+      color: var(--val-text-muted) !important;
+      font-size: 14px;
+      background-color: transparent !important;
     }
+  }
 
-    .el-table__header-wrapper {
-        flex-shrink: 0;
-    }
+  .el-table__row:hover>td {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    color: var(--val-text) !important;
+  }
 
-    .el-table__header th {
-        background: white !important;
-        color: black;
-        font-weight: 600;
-        height: 40px;
-        padding: 8px 0;
-        font-size: 14px;
-        border-bottom: 1px solid #e4e7ed;
-    }
-
-    .el-table__body tr {
-        background-color: white;
-
-        td {
-            border-top: 1px solid rgba(0, 0, 0, 0.04);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-            padding: 8px 0;
-            height: 40px;
-            color: #606266;
-            font-size: 14px;
-        }
-    }
-
-    .el-table__row:hover>td {
-        background-color: #f5f7fa !important;
-    }
-
-    &::before {
-        display: none;
-    }
+  &::before {
+    display: none;
+  }
 }
 
-
 ::v-deep .el-loading-mask {
-  background-color: rgba(255, 255, 255, 0.6) !important;
+  background-color: rgba(11, 15, 26, 0.7) !important;
   backdrop-filter: blur(2px);
 }
 
@@ -1167,11 +1169,11 @@ export default {
 }
 
 ::v-deep .el-loading-spinner .path {
-  stroke: #6b8cff;
+  stroke: var(--val-primary);
 }
 
 ::v-deep .el-loading-text {
-  color: #6b8cff !important;
+  color: var(--val-primary) !important;
   font-size: 14px;
   margin-top: 8px;
 }

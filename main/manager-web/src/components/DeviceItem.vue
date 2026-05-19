@@ -7,12 +7,8 @@
       </div>
     </el-tooltip>
       <div>
-        <img src="@/assets/home/delete.png" alt="" style="width: 18px;height: 18px;margin-right: 10px;"
+        <img src="@/assets/home/delete.png" alt="" style="width: 18px;height: 18px;"
           @click.stop="handleDelete" />
-        <el-tooltip class="item" effect="light" :content="displaySystemPrompt" placement="top"
-          popper-class="device-item-tooltip"> 
-          <img src="@/assets/home/info.png" alt="" style="width: 18px;height: 18px;" />
-        </el-tooltip>
       </div>
     </div>
     <div class="device-name">

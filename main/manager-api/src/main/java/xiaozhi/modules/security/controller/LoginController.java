@@ -119,27 +119,10 @@ public class LoginController {
         String actualPassword = decryptLoginPassword(password, login.getCaptchaId());
         login.setPassword(actualPassword);
 
-        // 是否开启手机注册
-        Boolean isMobileRegister = sysParamsService
-                .getValueObject(Constant.SysMSMParam.SERVER_ENABLE_MOBILE_REGISTER.getValue(), Boolean.class);
-        boolean validate;
-        if (isMobileRegister) {
-            // 验证用户是否是手机号码
-            boolean validPhone = ValidatorUtils.isValidPhone(login.getUsername());
-            if (!validPhone) {
-                throw new RenException(ErrorCode.USERNAME_NOT_PHONE);
-            }
-            // 验证短信验证码是否正常
-            validate = captchaService.validateSMSValidateCode(login.getUsername(), login.getMobileCaptcha(), false);
-            if (!validate) {
-                throw new RenException(ErrorCode.SMS_CODE_ERROR);
-            }
-        }
-
         // 按照用户名获取用户
         SysUserDTO userDTO = sysUserService.getByUsername(login.getUsername());
         if (userDTO != null) {
-            throw new RenException(ErrorCode.PHONE_ALREADY_REGISTERED);
+            throw new RenException(ErrorCode.DB_RECORD_EXISTS);
         }
         userDTO = new SysUserDTO();
         userDTO.setUsername(login.getUsername());
@@ -170,30 +153,13 @@ public class LoginController {
     @PutMapping("/retrieve-password")
     @Operation(summary = "找回密码")
     public Result<?> retrievePassword(@RequestBody RetrievePasswordDTO dto) {
-        // 是否开启手机注册
-        Boolean isMobileRegister = sysParamsService
-                .getValueObject(Constant.SysMSMParam.SERVER_ENABLE_MOBILE_REGISTER.getValue(), Boolean.class);
-        if (!isMobileRegister) {
-            throw new RenException(ErrorCode.RETRIEVE_PASSWORD_DISABLED);
-        }
         // 判断非空
         ValidatorUtils.validateEntity(dto);
-        // 验证用户是否是手机号码
-        boolean validPhone = ValidatorUtils.isValidPhone(dto.getPhone());
-        if (!validPhone) {
-            throw new RenException(ErrorCode.PHONE_FORMAT_ERROR);
-        }
 
-        // 按照用户名获取用户
+        // 按照用户名/手机号获取用户
         SysUserDTO userDTO = sysUserService.getByUsername(dto.getPhone());
         if (userDTO == null) {
             throw new RenException(ErrorCode.PHONE_NOT_REGISTERED);
-        }
-        // 验证短信验证码是否正常
-        boolean validate = captchaService.validateSMSValidateCode(dto.getPhone(), dto.getCode(), false);
-        // 判断是否通过验证
-        if (!validate) {
-            throw new RenException(ErrorCode.SMS_CODE_ERROR);
         }
 
         String password = dto.getPassword();

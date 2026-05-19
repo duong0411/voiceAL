@@ -5,17 +5,17 @@ update `ai_model_config` set config_json =  '{\"type\": \"intent_llm\", \"llm\":
 -- 添加edge音色
 delete from `ai_tts_voice` where tts_model_id = 'TTS_EdgeTTS';
 INSERT INTO `ai_tts_voice` VALUES 
-('TTS_EdgeTTS0001', 'TTS_EdgeTTS', 'EdgeTTS女声-晓晓', 'zh-CN-XiaoxiaoNeural', '普通话', NULL, NULL, 1, NULL, NULL, NULL, NULL),
-('TTS_EdgeTTS0002', 'TTS_EdgeTTS', 'EdgeTTS男声-云扬', 'zh-CN-YunyangNeural', '普通话', NULL, NULL, 1, NULL, NULL, NULL, NULL),
-('TTS_EdgeTTS0003', 'TTS_EdgeTTS', 'EdgeTTS女声-晓伊', 'zh-CN-XiaoyiNeural', '普通话', NULL, NULL, 1, NULL, NULL, NULL, NULL),
-('TTS_EdgeTTS0004', 'TTS_EdgeTTS', 'EdgeTTS男声-云健', 'zh-CN-YunjianNeural', '普通话', NULL, NULL, 1, NULL, NULL, NULL, NULL),
-('TTS_EdgeTTS0005', 'TTS_EdgeTTS', 'EdgeTTS男声-云希', 'zh-CN-YunxiNeural', '普通话', NULL, NULL, 1, NULL, NULL, NULL, NULL),
-('TTS_EdgeTTS0006', 'TTS_EdgeTTS', 'EdgeTTS男声-云夏', 'zh-CN-YunxiaNeural', '普通话', NULL, NULL, 1, NULL, NULL, NULL, NULL),
-('TTS_EdgeTTS0007', 'TTS_EdgeTTS', 'EdgeTTS女声-辽宁小贝', 'zh-CN-liaoning-XiaobeiNeural', '辽宁', NULL, NULL, 1, NULL, NULL, NULL, NULL),
-('TTS_EdgeTTS0008', 'TTS_EdgeTTS', 'EdgeTTS女声-陕西小妮', 'zh-CN-shaanxi-XiaoniNeural', '陕西', NULL, NULL, 1, NULL, NULL, NULL, NULL),
-('TTS_EdgeTTS0009', 'TTS_EdgeTTS', 'EdgeTTS女声-香港海佳', 'zh-HK-HiuGaaiNeural', '粤语', 'General', 'Friendly, Positive', 1, NULL, NULL, NULL, NULL),
-('TTS_EdgeTTS0010', 'TTS_EdgeTTS', 'EdgeTTS女声-香港海曼', 'zh-HK-HiuMaanNeural', '粤语', 'General', 'Friendly, Positive', 1, NULL, NULL, NULL, NULL),
-('TTS_EdgeTTS0011', 'TTS_EdgeTTS', 'EdgeTTS男声-香港万龙', 'zh-HK-WanLungNeural', '粤语', 'General', 'Friendly, Positive', 1, NULL, NULL, NULL, NULL);
+('TTS_EdgeTTS0001', 'TTS_EdgeTTS', 'Edge TTS — Xiaoxiao (nữ)', 'zh-CN-XiaoxiaoNeural', 'tiếng Phổ thông', NULL, NULL, 1, NULL, NULL, NULL, NULL),
+('TTS_EdgeTTS0002', 'TTS_EdgeTTS', 'Edge TTS — Yunyang (nam)', 'zh-CN-YunyangNeural', 'tiếng Phổ thông', NULL, NULL, 1, NULL, NULL, NULL, NULL),
+('TTS_EdgeTTS0003', 'TTS_EdgeTTS', 'Edge TTS — Xiaoyi (nữ)', 'zh-CN-XiaoyiNeural', 'tiếng Phổ thông', NULL, NULL, 1, NULL, NULL, NULL, NULL),
+('TTS_EdgeTTS0004', 'TTS_EdgeTTS', 'Edge TTS — Yunjian (nam)', 'zh-CN-YunjianNeural', 'tiếng Phổ thông', NULL, NULL, 1, NULL, NULL, NULL, NULL),
+('TTS_EdgeTTS0005', 'TTS_EdgeTTS', 'Edge TTS — Yunxi (nam)', 'zh-CN-YunxiNeural', 'tiếng Phổ thông', NULL, NULL, 1, NULL, NULL, NULL, NULL),
+('TTS_EdgeTTS0006', 'TTS_EdgeTTS', 'Edge TTS — Yunxia (nam)', 'zh-CN-YunxiaNeural', 'tiếng Phổ thông', NULL, NULL, 1, NULL, NULL, NULL, NULL),
+('TTS_EdgeTTS0007', 'TTS_EdgeTTS', 'Edge TTS — Xiaobei (nữ, Liêu Ninh)', 'zh-CN-liaoning-XiaobeiNeural', 'Liêu Ninh', NULL, NULL, 1, NULL, NULL, NULL, NULL),
+('TTS_EdgeTTS0008', 'TTS_EdgeTTS', 'Edge TTS — Xiaoni (nữ, Thiểm Tây)', 'zh-CN-shaanxi-XiaoniNeural', 'Thiểm Tây', NULL, NULL, 1, NULL, NULL, NULL, NULL),
+('TTS_EdgeTTS0009', 'TTS_EdgeTTS', 'Edge TTS — HiuGaai (nữ, HK)', 'zh-HK-HiuGaaiNeural', 'tiếng Quảng Đông', 'General', 'Friendly, Positive', 1, NULL, NULL, NULL, NULL),
+('TTS_EdgeTTS0010', 'TTS_EdgeTTS', 'Edge TTS — HiuMaan (nữ, HK)', 'zh-HK-HiuMaanNeural', 'tiếng Quảng Đông', 'General', 'Friendly, Positive', 1, NULL, NULL, NULL, NULL),
+('TTS_EdgeTTS0011', 'TTS_EdgeTTS', 'Edge TTS — WanLung (nam, HK)', 'zh-HK-WanLungNeural', 'tiếng Quảng Đông', 'General', 'Friendly, Positive', 1, NULL, NULL, NULL, NULL);
 
 -- 增加是否允许用户注册参数
 delete from `sys_params` where  id in (103,104);
@@ -24,5 +24,5 @@ INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, r
 
 -- 修正CosyVoiceSiliconflow音色
 delete from `ai_tts_voice` where tts_model_id = 'TTS_CosyVoiceSiliconflow';
-INSERT INTO `ai_tts_voice` VALUES ('TTS_CosyVoiceSiliconflow0001', 'TTS_CosyVoiceSiliconflow', 'CosyVoice男声', 'FunAudioLLM/CosyVoice2-0.5B:alex', '中文', 'https://example.com/cosyvoice/alex.mp3', NULL, 6, NULL, NULL, NULL, NULL);
-INSERT INTO `ai_tts_voice` VALUES ('TTS_CosyVoiceSiliconflow0002', 'TTS_CosyVoiceSiliconflow', 'CosyVoice女声', 'FunAudioLLM/CosyVoice2-0.5B:bella', '中文', 'https://example.com/cosyvoice/bella.mp3', NULL, 6, NULL, NULL, NULL, NULL);
+INSERT INTO `ai_tts_voice` VALUES ('TTS_CosyVoiceSiliconflow0001', 'TTS_CosyVoiceSiliconflow', 'CosyVoice (nam)', 'FunAudioLLM/CosyVoice2-0.5B:alex', 'tiếng Trung', 'https://example.com/cosyvoice/alex.mp3', NULL, 6, NULL, NULL, NULL, NULL);
+INSERT INTO `ai_tts_voice` VALUES ('TTS_CosyVoiceSiliconflow0002', 'TTS_CosyVoiceSiliconflow', 'CosyVoice (nữ)', 'FunAudioLLM/CosyVoice2-0.5B:bella', 'tiếng Trung', 'https://example.com/cosyvoice/bella.mp3', NULL, 6, NULL, NULL, NULL, NULL);

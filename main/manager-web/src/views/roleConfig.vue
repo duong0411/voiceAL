@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="welcome val-app-shell">
     <HeaderBar />
 
     <div class="operation-bar">
@@ -1447,10 +1447,6 @@ export default {
   display: flex;
   position: relative;
   flex-direction: column;
-  background: linear-gradient(to bottom right, #dce8ff, #e4eeff, #e6cbfd);
-  background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
   overflow: hidden;
 }
 
@@ -1464,16 +1460,20 @@ export default {
 .page-title {
   font-size: 24px;
   margin: 0;
-  color: #2c3e50;
+  color: var(--val-text);
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(124, 92, 255, 0.15);
 }
 
 .main-wrapper {
   height: calc(100vh - 63px - 35px - 60px);
   margin: 0 22px;
-  border-radius: 15px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: var(--val-radius-lg, 20px);
+  box-shadow: var(--val-shadow);
   position: relative;
-  background: rgba(237, 242, 255, 0.5);
+  background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
+  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
 }
@@ -1483,9 +1483,9 @@ export default {
   display: flex;
   overflow: hidden;
   height: 100%;
-  border-radius: 15px;
+  border-radius: var(--val-radius-lg, 20px);
   background: transparent;
-  border: 1px solid #fff;
+  border: none;
 }
 
 .content-area {
@@ -1493,13 +1493,13 @@ export default {
   height: 100%;
   min-width: 600px;
   overflow: auto;
-  background-color: white;
+  background-color: transparent !important;
   display: flex;
   flex-direction: column;
 }
 
 .config-card {
-  background: white;
+  background: transparent !important;
   border: none;
   box-shadow: none;
   display: flex;
@@ -1513,10 +1513,10 @@ export default {
   display: flex;
   align-items: center;
   gap: 13px;
-  padding: 0 0 5px 0;
+  padding: 0 0 10px 0;
   font-weight: 700;
   font-size: 19px;
-  color: #3d4566;
+  color: var(--val-text);
   justify-content: space-between;
 }
 
@@ -1525,6 +1525,10 @@ export default {
   align-items: center;
   gap: 13px;
   flex-shrink: 0;
+}
+
+.header-title {
+  color: var(--val-text) !important;
 }
 
 .header-tags {
@@ -1537,10 +1541,10 @@ export default {
   padding-bottom: 4px;
   &::-webkit-scrollbar {
       height: 6px;
-      background: #e6ebff;
+      background: rgba(255, 255, 255, 0.04);
     }
     &::-webkit-scrollbar-thumb {
-      background: #5778ff;
+      background: var(--val-primary);
       border-radius: 8px;
     }
 }
@@ -1564,11 +1568,12 @@ export default {
 .header-icon {
   width: 37px;
   height: 37px;
-  background: #5778ff;
+  background: rgba(124, 92, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid var(--val-border);
 }
 
 .header-icon img {
@@ -1578,7 +1583,7 @@ export default {
 
 .divider {
   height: 1px;
-  background: #e8f0ff;
+  background: var(--val-border);
 }
 
 .form-content {
@@ -1608,16 +1613,16 @@ export default {
 }
 
 .play-button {
-  color: #409eff;
+  color: var(--val-primary-hover) !important;
   transition: color 0.3s;
 }
 
 .play-button:hover {
-  color: #66b1ff;
+  color: var(--val-primary) !important;
 }
 
 .play-button.is-loading {
-  color: #909399;
+  color: var(--val-text-muted) !important;
 }
 
 .form-textarea {
@@ -1637,23 +1642,25 @@ export default {
 }
 
 .template-item {
-  height: 4vh;
+  height: 32px;
   min-width: 60px;
   padding: 0 12px;
-  border-radius: 8px;
-  background: #e6ebff;
-  line-height: 4vh;
-  font-weight: 400;
+  border-radius: var(--val-radius-sm, 10px);
+  background: rgba(124, 92, 255, 0.1) !important;
+  line-height: 32px;
+  font-weight: 500;
   font-size: 11px;
   text-align: center;
-  color: #5778ff;
+  color: var(--val-primary) !important;
   cursor: pointer;
   transition: background-color 0.3s ease;
   white-space: nowrap;
+  border: 1px solid rgba(124, 92, 255, 0.2);
 }
 
 .template-item:hover {
-  background-color: #d0d8ff;
+  background-color: rgba(124, 92, 255, 0.2) !important;
+  border-color: var(--val-primary) !important;
 }
 
 .model-select-wrapper {
@@ -1684,7 +1691,7 @@ export default {
 
 .model-row .el-form-item__label {
   font-size: 12px !important;
-  color: #3d4566 !important;
+  color: var(--val-text) !important;
   font-weight: 400;
   line-height: 22px;
   padding-bottom: 2px;
@@ -1704,24 +1711,25 @@ export default {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #5778ff;
+  color: var(--val-primary) !important;
   font-weight: bold;
   font-size: 12px;
   margin-right: 8px;
   position: relative;
-  background-color: #e6ebff;
+  background-color: rgba(124, 92, 255, 0.15) !important;
+  border: 1px solid rgba(124, 92, 255, 0.3);
 }
 
 ::v-deep .el-form-item__label {
   font-size: 12px !important;
-  color: #3d4566 !important;
+  color: var(--val-text) !important;
   font-weight: 400;
   line-height: 22px;
   padding-bottom: 2px;
 }
 
 ::v-deep .el-textarea .el-input__count {
-  color: #909399;
+  color: var(--val-text-dim) !important;
   background: none;
   position: absolute;
   font-size: 12px;
@@ -1736,11 +1744,11 @@ export default {
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  border: 2px solid #cfcfcf;
+  border: 2px solid var(--val-border);
   background: none;
   font-size: 30px;
   font-weight: lighter;
-  color: #cfcfcf;
+  color: var(--val-text-muted);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1748,16 +1756,218 @@ export default {
   z-index: 1;
   padding: 0;
   outline: none;
+  transition: all 0.3s ease;
 }
 
 .custom-close-btn:hover {
-  color: #409eff;
-  border-color: #409eff;
+  color: var(--val-primary);
+  border-color: var(--val-primary);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .edit-function-btn {
-  background: #e6ebff;
-  color: #5778ff;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text-muted) !important;
+  border: 1px solid var(--val-border) !important;
+  border-radius: var(--val-radius-sm, 10px) !important;
+  padding: 8px 16px !important;
+  transition: all 0.3s;
+  font-weight: 500;
+  height: 32px;
+}
+
+.edit-function-btn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--val-text) !important;
+  border-color: var(--val-border-hover) !important;
+}
+
+.edit-function-btn.active-btn {
+  background: var(--val-primary) !important;
+  color: white !important;
+  border-color: var(--val-primary) !important;
+}
+
+.chat-history-options {
+  display: flex;
+  gap: 10px;
+  min-width: 250px;
+  justify-content: flex-end;
+}
+
+.chat-history-options ::v-deep .el-radio-button {
+  border-color: var(--val-border);
+}
+
+.chat-history-options ::v-deep .el-radio-button .el-radio-button__inner {
+  color: var(--val-text-muted) !important;
+  border-color: var(--val-border) !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+.chat-history-options ::v-deep .el-radio-button.is-active .el-radio-button__inner {
+  background: var(--val-primary) !important;
+  border-color: var(--val-primary) !important;
+  color: white !important;
+}
+
+.chat-history-options ::v-deep .el-radio-button .el-radio-button__inner:hover {
+  color: var(--val-text) !important;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.header-actions .hint-text {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--val-text-dim);
+  font-size: 12px;
+  margin-right: 8px;
+}
+
+.header-actions .hint-text img {
+  width: 16px;
+  height: 16px;
+}
+
+.header-actions .save-btn {
+  background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: var(--val-radius-sm, 10px);
+  padding: 8px 16px;
+  height: 32px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(124, 92, 255, 0.2);
+}
+
+.header-actions .save-btn:hover {
+  opacity: 0.95;
+  box-shadow: 0 4px 16px rgba(124, 92, 255, 0.3);
+}
+
+.header-actions .reset-btn {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text-muted) !important;
+  border: 1px solid var(--val-border) !important;
+  border-radius: var(--val-radius-sm, 10px);
+  padding: 8px 16px;
+  height: 32px;
+  transition: all 0.3s ease;
+}
+
+.header-actions .reset-btn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--val-text) !important;
+  border-color: var(--val-border-hover) !important;
+}
+
+.header-actions .custom-close-btn {
+  position: static;
+  transform: none;
+  width: 32px;
+  height: 32px;
+  margin-left: 8px;
+}
+
+.context-provider-item ::v-deep .el-form-item__label {
+  line-height: 42px !important;
+}
+
+.doc-link {
+  color: var(--val-primary) !important;
+  text-decoration: none;
+  margin-left: 4px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.slider-wrapper {
+  width: 100%;
+  padding-right: 12px;
+}
+
+.slider-hint {
+  display: block;
+  font-size: 12px;
+  color: var(--val-text-dim);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.tts-slider {
+  width: 100%;
+}
+
+.tts-slider ::v-deep .el-slider__input {
+  width: 80px;
+}
+
+.tts-slider ::v-deep .el-input__inner {
+  text-align: center;
+  padding: 0 8px;
+}
+.custom-tag {
+  background: rgba(124, 92, 255, 0.15) !important;
+  color: var(--val-primary) !important;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: normal;
+  border: 1px solid rgba(124, 92, 255, 0.3) !important;
+}
+.custom-tag-btn {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text-muted) !important;
+  border-radius: 8px;
+  font-weight: normal;
+  border: 1px solid var(--val-border) !important;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: var(--val-text) !important;
+  }
+}
+.input-new-tag {
+  width: 90px;
+  &::v-deep(.el-input__inner) {
+    width: 90px !important;
+  }
+}
+
+:deep(.el-input__inner), :deep(.el-textarea__inner) {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid var(--val-border) !important;
+  color: var(--val-text) !important;
+  border-radius: var(--val-radius-sm, 10px) !important;
+  transition: var(--val-transition);
+}
+
+:deep(.el-input__inner:focus), :deep(.el-textarea__inner:focus) {
+  border-color: var(--val-primary) !important;
+  box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.2) !important;
+  outline: none;
+}
+
+:deep(.el-form-item__label) {
+  color: var(--val-text) !important;
+}
+</style>
+
+<style>
+.custom-tooltip {
+  max-width: 400px !important;
+  word-break: break-word;
+}
+</style>lor: #5778ff;
   border: 1px solid #adbdff;
   border-radius: 18px;
   padding: 10px 20px;

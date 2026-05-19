@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="welcome val-app-shell">
     <HeaderBar />
 
     <div class="operation-bar">
@@ -1119,21 +1119,18 @@ export default {
   display: flex;
   position: relative;
   flex-direction: column;
-  background-size: cover;
-  background: linear-gradient(to bottom right, #dce8ff, #e4eeff, #e6cbfd) center;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
   overflow: hidden;
 }
 
 .main-wrapper {
-  // 顶部 63px 底部 35px 查询58px
   height: calc(100vh - 63px - 35px - 58px);
   margin: 0 22px;
-  border-radius: 15px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: var(--val-radius-lg, 20px);
+  box-shadow: var(--val-shadow);
   position: relative;
-  background: rgba(237, 242, 255, 0.5);
+  background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
+  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
 }
@@ -1154,22 +1151,23 @@ export default {
 .btn-back {
   font-size: 20px;
   font-weight: bold;
-  color: #606266;
+  color: var(--val-text-muted) !important;
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: var(--val-radius-sm, 10px);
   transition: all 0.3s ease;
 }
 
 .btn-back:hover {
-  background-color: #f5f7fa;
-  color: #409eff;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--val-text) !important;
 }
 
 .knowledge-base-title {
   font-size: 24px;
   margin: 0;
-  color: #303133;
-  font-weight: 600;
+  color: var(--val-text);
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(124, 92, 255, 0.15);
 }
 
 .right-operations {
@@ -1183,9 +1181,30 @@ export default {
 }
 
 .btn-search {
-  background: linear-gradient(135deg, #6b8cff, #a966ff);
-  border: none;
-  color: white;
+  background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
+  border: none !important;
+  color: white !important;
+  border-radius: var(--val-radius-sm, 10px);
+}
+
+.btn-search:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3) !important;
+}
+
+:deep(.search-input .el-input__inner) {
+  border-radius: var(--val-radius-sm, 10px);
+  border: 1px solid var(--val-border) !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text) !important;
+}
+
+:deep(.search-input .el-input__inner:focus) {
+  border-color: var(--val-primary) !important;
+  box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.2) !important;
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  outline: none;
 }
 
 .content-panel {
@@ -1193,9 +1212,9 @@ export default {
   display: flex;
   overflow: hidden;
   height: 100%;
-  border-radius: 15px;
+  border-radius: var(--val-radius-lg, 20px);
   background: transparent;
-  border: 1px solid #fff;
+  border: none;
 }
 
 .content-area {
@@ -1203,13 +1222,13 @@ export default {
   height: 100%;
   min-width: 600px;
   overflow: auto;
-  background-color: white;
+  background-color: transparent !important;
   display: flex;
   flex-direction: column;
 }
 
 .params-card {
-  background: white;
+  background: transparent !important;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -1231,7 +1250,8 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
-  padding-bottom: 10px;
+  border-top: 1px solid var(--val-border);
+  padding-top: 12px;
   width: 100%;
 }
 
@@ -1245,27 +1265,49 @@ export default {
     height: 32px;
     padding: 7px 12px 7px 10px;
     font-size: 12px;
-    border-radius: 4px;
+    border-radius: var(--val-radius-sm, 10px);
     line-height: 1;
     font-weight: 500;
     border: none;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
 
     &:hover {
       transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }
   }
 
   .el-button--primary {
-    background: #5f70f3;
-    color: white;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: var(--val-text-muted) !important;
+    border: 1px solid var(--val-border) !important;
+  }
+
+  .el-button--primary:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: var(--val-text) !important;
+  }
+
+  .el-button--success {
+    background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(124, 92, 255, 0.2) !important;
+  }
+
+  .el-button--success:hover {
+    opacity: 0.95;
+    box-shadow: 0 4px 16px rgba(124, 92, 255, 0.3) !important;
   }
 
   .el-button--danger {
-    background: #fd5b63;
-    color: white;
+    background: rgba(245, 108, 108, 0.1) !important;
+    color: #f56c6c !important;
+    border: 1px solid rgba(245, 108, 108, 0.3) !important;
+  }
+
+  .el-button--danger:hover {
+    background: rgba(245, 108, 108, 0.2) !important;
+    border-color: #f56c6c !important;
   }
 }
 
@@ -1285,20 +1327,22 @@ export default {
     min-width: 60px;
     height: 32px;
     padding: 0 12px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
+    border-radius: var(--val-radius-sm, 10px);
+    border: 1px solid var(--val-border) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: var(--val-text-muted) !important;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
 
     &:hover {
-      background: #d7dce6;
+      background: rgba(255, 255, 255, 0.08) !important;
+      color: var(--val-text) !important;
+      border-color: var(--val-border-hover) !important;
     }
 
     &:disabled {
-      opacity: 0.6;
+      opacity: 0.4;
       cursor: not-allowed;
     }
   }
@@ -1307,33 +1351,34 @@ export default {
     min-width: 28px;
     height: 32px;
     padding: 0;
-    border-radius: 4px;
+    border-radius: var(--val-radius-sm, 10px);
     border: 1px solid transparent;
     background: transparent;
-    color: #606266;
+    color: var(--val-text-muted);
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
 
     &:hover {
-      background: rgba(245, 247, 250, 0.3);
+      background: rgba(255, 255, 255, 0.08) !important;
+      color: var(--val-text) !important;
     }
   }
 
   .pagination-btn.active {
-    background: #5f70f3 !important;
+    background: var(--val-primary) !important;
     color: #ffffff !important;
-    border-color: #5f70f3 !important;
+    border-color: var(--val-primary) !important;
 
     &:hover {
-      background: #6d7cf5 !important;
+      opacity: 0.95;
     }
   }
 }
 
 .total-text {
   margin-left: 10px;
-  color: #606266;
+  color: var(--val-text-dim);
   font-size: 14px;
 }
 
@@ -1344,10 +1389,10 @@ export default {
   :deep(.el-input__inner) {
     height: 32px;
     line-height: 32px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
+    border-radius: var(--val-radius-sm, 10px);
+    border: 1px solid var(--val-border) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: var(--val-text) !important;
     font-size: 14px;
   }
 
@@ -1374,7 +1419,7 @@ export default {
     display: inline-block;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 9px solid #606266;
+    border-top: 9px solid var(--val-text-dim);
     position: relative;
     transform: rotate(0deg);
     transition: transform 0.3s;
@@ -1382,7 +1427,7 @@ export default {
 }
 
 :deep(.transparent-table) {
-  background: white;
+  background: transparent !important;
   flex: 1;
   width: 100%;
   display: flex;
@@ -1399,30 +1444,30 @@ export default {
   }
 
   .el-table__header th {
-    background: white !important;
-    color: black;
+    background: transparent !important;
+    color: var(--val-text) !important;
     font-weight: 600;
     height: 40px;
     padding: 8px 0;
     font-size: 14px;
-    border-bottom: 1px solid #e4e7ed;
+    border-bottom: 1px solid var(--val-border) !important;
   }
 
   .el-table__body tr {
-    background-color: white;
+    background-color: transparent !important;
 
     td {
-      border-top: 1px solid rgba(0, 0, 0, 0.04);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      border-bottom: 1px solid var(--val-border) !important;
       padding: 8px 0;
       height: 40px;
-      color: #606266;
+      color: var(--val-text-muted) !important;
       font-size: 14px;
     }
   }
 
   .el-table__row:hover>td {
-    background-color: #f5f7fa !important;
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    color: var(--val-text) !important;
   }
 
   &::before {
@@ -1431,34 +1476,36 @@ export default {
 }
 
 :deep(.el-table .el-button--text) {
-  color: #7079aa !important;
+  color: var(--val-text-muted) !important;
+  transition: color 0.3s ease;
 }
 
 :deep(.el-table .el-button--text:hover) {
-  color: #5a64b5 !important;
+  color: var(--val-primary) !important;
 }
 
 :deep(.el-checkbox__inner) {
-  background-color: #ffffff !important;
-  border-color: #cccccc !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border-color: var(--val-border) !important;
+  transition: all 0.2s ease;
 }
 
 :deep(.el-checkbox__inner:hover) {
-  border-color: #cccccc !important;
+  border-color: var(--val-primary) !important;
 }
 
 :deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-  background-color: #5f70f3 !important;
-  border-color: #5f70f3 !important;
+  background-color: var(--val-primary) !important;
+  border-color: var(--val-primary) !important;
 }
 
 :deep(.el-loading-mask) {
-  background-color: rgba(255, 255, 255, 0.6) !important;
-  backdrop-filter: blur(2px);
+  background-color: rgba(22, 30, 52, 0.5) !important;
+  backdrop-filter: blur(4px);
 }
 
 :deep(.el-loading-spinner .path) {
-  stroke: #6b8cff;
+  stroke: var(--val-primary);
 }
 
 :deep(.el-table__empty-block) {
@@ -1475,7 +1522,8 @@ export default {
     width: 600px;
     height: 200px;
     min-height: 200px;
-    border: 2px dashed #c0c4cc;
+    border: 2px dashed var(--val-border) !important;
+    background-color: rgba(255, 255, 255, 0.02) !important;
     border-radius: 16px;
     cursor: pointer;
     position: relative;
@@ -1483,26 +1531,26 @@ export default {
     transition: border-color 0.3s ease;
 
     &:hover {
-      border-color: #409eff;
+      border-color: var(--val-primary) !important;
     }
 
     .el-icon-upload {
       font-size: 48px;
-      color: #c0c4cc;
+      color: var(--val-text-dim);
       margin: 20px 0 16px;
       line-height: 1;
     }
 
     .el-upload__text {
       font-size: 16px;
-      color: #606266;
+      color: var(--val-text) !important;
       margin-bottom: 8px;
       line-height: 1.5;
     }
 
     .el-upload__tip {
       font-size: 14px;
-      color: #909399;
+      color: var(--val-text-muted) !important;
       line-height: 1.5;
     }
   }
@@ -1524,6 +1572,14 @@ export default {
     height: 90vh !important;
     max-height: 90vh !important;
     min-height: 90vh !important;
+    background: var(--val-bg-card, rgba(22, 30, 52, 0.95)) !important;
+    border: 1px solid var(--val-border) !important;
+    backdrop-filter: blur(10px) !important;
+    color: var(--val-text) !important;
+  }
+
+  ::v-deep .el-dialog__title {
+    color: var(--val-text) !important;
   }
 
   ::v-deep .el-dialog__body {
@@ -1554,7 +1610,7 @@ export default {
     margin: 0 0 12px 0;
     font-size: 16px;
     font-weight: 600;
-    color: #303133;
+    color: var(--val-text);
     flex-shrink: 0;
   }
 
@@ -1563,6 +1619,8 @@ export default {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid var(--val-border) !important;
 
     .el-card__body {
       flex: 1;
@@ -1587,24 +1645,22 @@ export default {
   }
 
   &::-webkit-scrollbar-track {
-    background: #fafafa;
-    border-radius: 3px;
+    background: transparent;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #e0e0e0;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 3px;
-    border: 1px solid #f0f0f0;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: #d0d0d0;
+    background: rgba(255, 255, 255, 0.2);
   }
 }
 
 .result-chunk {
-  background-color: #f8f9fa;
-  border: 1px solid #e4e7ed;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--val-border);
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 16px;
@@ -1617,13 +1673,14 @@ export default {
     margin: 0 0 8px 0;
     font-size: 14px;
     line-height: 1.5;
+    color: var(--val-text-muted) !important;
 
     &:last-child {
       margin-bottom: 0;
     }
 
     strong {
-      color: #303133;
+      color: var(--val-text);
       font-weight: 600;
     }
   }
@@ -1639,21 +1696,21 @@ export default {
 
       .score-label {
         font-size: 12px;
-        color: #909399;
+        color: var(--val-text-dim);
         margin-bottom: 4px;
       }
 
       .score-value {
         font-size: 14px;
         font-weight: 600;
-        color: #409eff;
+        color: var(--val-primary);
       }
     }
   }
 
   .chunk-content {
-    background-color: white;
-    border: 1px solid #f0f0f0;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--val-border);
     border-radius: 4px;
     padding: 12px;
     margin-top: 8px;
@@ -1666,37 +1723,34 @@ export default {
     }
 
     &::-webkit-scrollbar-track {
-      background: #fafafa;
+      background: transparent;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: #e0e0e0;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 2px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #d0d0d0;
     }
   }
 
   :deep(.el-divider) {
     margin: 12px 0;
+    background-color: var(--val-border) !important;
   }
 }
 
 /* 已选择文件列表样式 */
 .selected-files-section {
   margin-top: 20px;
-  border: 1px solid #e4e7ed;
+  border: 1px solid var(--val-border);
   border-radius: 8px;
   padding: 16px;
-  background-color: #f8f9fa;
+  background-color: rgba(255, 255, 255, 0.02);
 
   h4 {
     margin: 0 0 12px 0;
     font-size: 14px;
     font-weight: 600;
-    color: #606266;
+    color: var(--val-text);
   }
 }
 
@@ -1710,8 +1764,8 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 8px 12px;
-  background-color: white;
-  border: 1px solid #e4e7ed;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--val-border);
   border-radius: 4px;
   margin-bottom: 8px;
 
@@ -1725,14 +1779,14 @@ export default {
     flex: 1;
 
     .el-icon-document {
-      color: #409eff;
+      color: var(--val-primary);
       margin-right: 8px;
       font-size: 16px;
     }
 
     .file-name {
       font-size: 14px;
-      color: #303133;
+      color: var(--val-text);
       margin-right: 12px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -1742,7 +1796,7 @@ export default {
 
     .file-size {
       font-size: 12px;
-      color: #909399;
+      color: var(--val-text-muted);
     }
   }
 
@@ -1752,7 +1806,7 @@ export default {
 
     &:hover {
       color: #f78989;
-      background-color: #fef0f0;
+      background-color: rgba(245, 108, 108, 0.1);
       border-radius: 4px;
     }
   }
@@ -1762,6 +1816,14 @@ export default {
 :deep(.el-dialog) {
   border-radius: 16px !important;
   overflow: hidden;
+  background: var(--val-bg-card, rgba(22, 30, 52, 0.95)) !important;
+  border: 1px solid var(--val-border) !important;
+  backdrop-filter: blur(10px) !important;
+  color: var(--val-text) !important;
+
+  .el-dialog__title {
+    color: var(--val-text) !important;
+  }
 }
 
 .el-table {
@@ -1792,18 +1854,12 @@ export default {
   }
 
   ::v-deep .el-dialog::-webkit-scrollbar-track {
-    background: #f8f9fa;
-    border-radius: 4px;
+    background: transparent;
   }
 
   ::v-deep .el-dialog::-webkit-scrollbar-thumb {
-    background: #f0f0f0;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
-    border: 1px solid #e8e8e8;
-  }
-
-  ::v-deep .el-dialog::-webkit-scrollbar-thumb:hover {
-    background: #e8e8e8;
   }
 
   ::v-deep .el-dialog {
@@ -1816,6 +1872,9 @@ export default {
     height: 90vh !important;
     max-height: 90vh !important;
     min-height: 90vh !important;
+    background: var(--val-bg-card, rgba(22, 30, 52, 0.95)) !important;
+    border: 1px solid var(--val-border) !important;
+    backdrop-filter: blur(10px) !important;
   }
 
   :deep(.el-dialog__body) {
@@ -1861,24 +1920,18 @@ export default {
     }
 
     &::-webkit-scrollbar-track {
-      background: #fafafa;
-      border-radius: 3px;
+      background: transparent;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: #e0e0e0;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 3px;
-      border: 1px solid #f0f0f0;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #d0d0d0;
     }
   }
 
   .slice-card {
-    background-color: #f8f9fa;
-    border: 1px solid #e4e7ed;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--val-border);
     border-radius: 8px;
     padding: 16px;
     margin-bottom: 16px;
@@ -1896,15 +1949,15 @@ export default {
         line-height: 1.5;
 
         strong {
-          color: #303133;
+          color: var(--val-text);
           font-weight: 600;
         }
       }
     }
 
     .slice-card-content {
-      background-color: white;
-      border: 1px solid #f0f0f0;
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--val-border);
       border-radius: 4px;
       padding: 12px;
       max-height: 280px;
@@ -1917,23 +1970,19 @@ export default {
       }
 
       &::-webkit-scrollbar-track {
-        background: #fafafa;
+        background: transparent;
       }
 
       &::-webkit-scrollbar-thumb {
-        background: #e0e0e0;
+        background: rgba(255, 255, 255, 0.1);
         border-radius: 2px;
-      }
-
-      &::-webkit-scrollbar-thumb:hover {
-        background: #d0d0d0;
       }
 
       .content-text {
         font-size: 14px;
         line-height: 1.6;
         text-align: left;
-        color: #333;
+        color: var(--val-text-muted);
         word-wrap: break-word;
         white-space: pre-wrap;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
@@ -1975,6 +2024,7 @@ export default {
           margin: 16px 0 8px 0;
           font-weight: 600;
           line-height: 1.4;
+          color: var(--val-text) !important;
         }
 
         h1 {

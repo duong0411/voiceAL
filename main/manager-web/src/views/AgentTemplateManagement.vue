@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="welcome val-app-shell">
     <HeaderBar />
 
     <div class="operation-bar">
@@ -439,8 +439,6 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
-  background: linear-gradient(to bottom right, #dce8ff, #e4eeff, #e6cbfd) center;
-  background-size: cover;
   overflow: hidden;
   width: 100%;
 }
@@ -456,6 +454,9 @@ export default {
 .page-title {
   font-size: 24px;
   margin: 0;
+  color: var(--val-text);
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(124, 92, 255, 0.15);
 }
 
 .right-operations {
@@ -469,9 +470,32 @@ export default {
 }
 
 .btn-search {
-  background: linear-gradient(135deg, #6b8cff, #a966ff);
-  border: none;
-  color: white;
+  background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
+  border: none !important;
+  color: white !important;
+  border-radius: var(--val-radius-sm, 10px);
+  transition: var(--val-transition);
+}
+
+.btn-search:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3) !important;
+}
+
+:deep(.search-input .el-input__inner) {
+  border-radius: var(--val-radius-sm, 10px);
+  border: 1px solid var(--val-border) !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text) !important;
+  transition: var(--val-transition);
+}
+
+:deep(.search-input .el-input__inner:focus) {
+  border-color: var(--val-primary) !important;
+  box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.2) !important;
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  outline: none;
 }
 
 /* 主容器样式 */
@@ -479,10 +503,12 @@ export default {
   // 顶部 63px 底部 35px 查询72px
   height: calc(100vh - 63px - 35px - 72px);
   margin: 0 22px;
-  border-radius: 15px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: var(--val-radius-lg, 20px);
+  box-shadow: var(--val-shadow);
   position: relative;
-  background: rgba(237, 242, 255, 0.5);
+  background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
+  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
 }
@@ -492,16 +518,16 @@ export default {
   flex: 1;
   display: flex;
   overflow: hidden;
-  border-radius: 15px;
+  border-radius: var(--val-radius-lg, 20px);
   background: transparent;
-  border: 1px solid #fff;
+  border: none;
 }
 
 .content-area {
   flex: 1;
   min-width: 600px;
   overflow-x: auto;
-  background-color: white;
+  background-color: transparent !important;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -511,6 +537,7 @@ export default {
 .template-card {
   border: none;
   box-shadow: none;
+  background: transparent !important;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -530,6 +557,7 @@ export default {
   width: 100%;
   flex: 1;
   min-height: 0;
+  background: transparent !important;
 }
 
 :deep(.el-table) {
@@ -538,15 +566,22 @@ export default {
   flex-direction: column;
   --table-max-height: calc(100vh - 42vh);
   max-height: var(--table-max-height);
+  background: transparent !important;
+
+  &::before {
+    display: none;
+  }
 
   /* 表格头部样式 */
   .el-table__header th {
     padding: 8px 0 !important;
     height: 40px !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    border-bottom: 1px solid var(--val-border) !important;
   }
 
   .el-table__header th .cell {
-    color: #303133 !important;
+    color: var(--val-text) !important;
     font-weight: 600;
   }
 
@@ -554,20 +589,32 @@ export default {
   .el-table__body {
     .el-table__row td {
       padding: 12px 0 !important;
-      border-bottom: 1px solid #ebeef5;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+      background: transparent !important;
+      color: var(--val-text-muted) !important;
     }
-    .el-table__row:hover {
-      background-color: #f5f7fa;
+    .el-table__row:hover td {
+      background-color: rgba(255, 255, 255, 0.04) !important;
+      color: var(--val-text) !important;
     }
   }
 
   /* 表格按钮样式 */
   .el-button--text {
-    color: #7079aa;
+    color: var(--val-primary-hover) !important;
+    font-weight: 600;
   }
 
   .el-button--text:hover {
-    color: #5a64b5;
+    color: var(--val-primary) !important;
+  }
+
+  .el-button--text:last-child {
+    color: var(--val-danger) !important;
+  }
+
+  .el-button--text:last-child:hover {
+    color: #ff8fa3 !important;
   }
 
   /* 单元格文本样式 */
@@ -584,9 +631,11 @@ export default {
   justify-content: space-between !important;
   align-items: center;
   margin-top: auto;
-  padding: 0 20px !important;
+  padding: 12px 20px 0 !important;
   width: 100% !important;
   box-sizing: border-box !important;
+  border-top: 1px solid var(--val-border);
+  background: transparent !important;
 }
 
 /* 控制按钮样式 */
@@ -601,7 +650,7 @@ export default {
     height: 32px;
     padding: 7px 12px 7px 10px;
     font-size: 12px;
-    border-radius: 4px;
+    border-radius: var(--val-radius-sm, 10px);
     line-height: 1;
     font-weight: 500;
     border: none;
@@ -615,16 +664,106 @@ export default {
   }
 
   .el-button--primary {
-    background: #5f70f3;
+    background: var(--val-primary) !important;
     color: white;
   }
   .el-button--success {
-    background: #5bc98c;
+    background: var(--val-success) !important;
     color: white;
   }
   .el-button--danger {
-    background: #fd5b63;
+    background: var(--val-danger) !important;
     color: white;
+  }
+}
+
+:deep(.el-checkbox__inner) {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border-color: var(--val-border) !important;
+  transition: all 0.2s ease-in-out;
+}
+
+:deep(.el-checkbox__inner:hover) {
+  border-color: var(--val-primary) !important;
+}
+
+:deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
+  background-color: var(--val-primary) !important;
+  border-color: var(--val-primary) !important;
+}
+
+:deep(.el-loading-mask) {
+  background-color: rgba(11, 15, 26, 0.7) !important;
+  backdrop-filter: blur(2px);
+}
+
+:deep(.el-loading-spinner .circular) {
+  width: 28px;
+  height: 28px;
+}
+
+:deep(.el-loading-spinner .path) {
+  stroke: var(--val-primary);
+}
+
+:deep(.el-loading-text) {
+  color: var(--val-primary) !important;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+:deep(.el-pagination) {
+  background: transparent !important;
+  color: var(--val-text-muted) !important;
+
+  button, .btn-prev, .btn-next {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid var(--val-border) !important;
+    color: var(--val-text-muted) !important;
+    border-radius: var(--val-radius-sm, 10px) !important;
+    min-width: 32px;
+    height: 32px;
+    line-height: 32px;
+    transition: all 0.3s ease;
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.08) !important;
+      color: var(--val-text) !important;
+    }
+  }
+
+  .el-pager li {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid var(--val-border) !important;
+    color: var(--val-text-muted) !important;
+    border-radius: var(--val-radius-sm, 10px) !important;
+    min-width: 32px;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 3px !important;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08) !important;
+      color: var(--val-text) !important;
+    }
+
+    &.active {
+      background: var(--val-primary) !important;
+      color: white !important;
+      border-color: var(--val-primary) !important;
+    }
+  }
+
+  .el-pagination__total, .el-pagination__jump {
+    color: var(--val-text-dim) !important;
+  }
+
+  .el-input__inner {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid var(--val-border) !important;
+    color: var(--val-text) !important;
+    border-radius: var(--val-radius-sm, 10px) !important;
   }
 }
 </style>

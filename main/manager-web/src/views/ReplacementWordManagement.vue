@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="welcome val-app-shell">
     <HeaderBar/>
     <div class="operation-bar">
       <h2 class="page-title">{{ $t('replacementWordManagement.pageTitle') }}</h2>
@@ -384,20 +384,18 @@ export default {
   display: flex;
   position: relative;
   flex-direction: column;
-  background-size: cover;
-  background: linear-gradient(to bottom right, #dce8ff, #e4eeff, #e6cbfd) center;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
   overflow: hidden;
 }
 
 .main-wrapper {
   height: calc(100vh - 63px - 35px - 72px);
   margin: 0 22px;
-  border-radius: 15px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: var(--val-radius-lg, 20px);
+  box-shadow: var(--val-shadow);
   position: relative;
-  background: rgba(237, 242, 255, 0.5);
+  background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
+  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
 }
@@ -412,6 +410,9 @@ export default {
 .page-title {
   font-size: 24px;
   margin: 0;
+  color: var(--val-text);
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(124, 92, 255, 0.15);
 }
 
 .right-operations {
@@ -425,9 +426,11 @@ export default {
 }
 
 .btn-search {
-  background: linear-gradient(135deg, #6b8cff, #a966ff);
-  border: none;
-  color: white;
+  background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
+  border: none !important;
+  color: white !important;
+  border-radius: var(--val-radius-sm, 10px);
+  transition: var(--val-transition);
 }
 
 .content-panel {
@@ -435,9 +438,9 @@ export default {
   display: flex;
   overflow: hidden;
   height: 100%;
-  border-radius: 15px;
+  border-radius: var(--val-radius-lg, 20px);
   background: transparent;
-  border: 1px solid #fff;
+  border: none;
 }
 
 .content-area {
@@ -445,13 +448,13 @@ export default {
   height: 100%;
   min-width: 600px;
   overflow: auto;
-  background-color: white;
+  background-color: transparent !important;
   display: flex;
   flex-direction: column;
 }
 
 .params-card {
-  background: white;
+  background: transparent !important;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -473,6 +476,9 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+  background: transparent !important;
+  border-top: 1px solid var(--val-border);
+  padding-top: 12px;
 }
 
 .ctrl_btn {
@@ -485,7 +491,7 @@ export default {
     height: 32px;
     padding: 7px 12px 7px 10px;
     font-size: 12px;
-    border-radius: 4px;
+    border-radius: var(--val-radius-sm, 10px);
     line-height: 1;
     font-weight: 500;
     border: none;
@@ -499,12 +505,17 @@ export default {
   }
 
   .el-button--primary {
-    background: #5f70f3;
+    background: var(--val-primary) !important;
+    color: white;
+  }
+
+  .el-button--success {
+    background: var(--val-success) !important;
     color: white;
   }
 
   .el-button--danger {
-    background: #fd5b63;
+    background: var(--val-danger) !important;
     color: white;
   }
 }
@@ -525,20 +536,21 @@ export default {
         min-width: 60px;
         height: 32px;
         padding: 0 12px;
-        border-radius: 4px;
-        border: 1px solid #e4e7ed;
-        background: #dee7ff;
-        color: #606266;
+        border-radius: var(--val-radius-sm, 10px);
+        border: 1px solid var(--val-border) !important;
+        background: rgba(255, 255, 255, 0.04) !important;
+        color: var(--val-text-muted) !important;
         font-size: 14px;
         cursor: pointer;
         transition: all 0.3s ease;
 
-        &:hover {
-            background: #d7dce6;
+        &:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.08) !important;
+            color: var(--val-text) !important;
         }
 
         &:disabled {
-            opacity: 0.6;
+            opacity: 0.4;
             cursor: not-allowed;
         }
     }
@@ -547,38 +559,39 @@ export default {
         min-width: 28px;
         height: 32px;
         padding: 0;
-        border-radius: 4px;
+        border-radius: var(--val-radius-sm, 10px);
         border: 1px solid transparent;
         background: transparent;
-        color: #606266;
+        color: var(--val-text-muted) !important;
         font-size: 14px;
         cursor: pointer;
         transition: all 0.3s ease;
 
         &:hover {
-            background: rgba(245, 247, 250, 0.3);
+            background: rgba(255, 255, 255, 0.06) !important;
+            color: var(--val-text) !important;
         }
     }
 
     .pagination-btn.active {
-        background: #5f70f3 !important;
+        background: var(--val-primary) !important;
         color: #ffffff !important;
-        border-color: #5f70f3 !important;
+        border-color: var(--val-primary) !important;
 
         &:hover {
-            background: #6d7cf5 !important;
+            background: var(--val-primary-hover) !important;
         }
     }
 
     .total-text {
-        color: #909399;
+        color: var(--val-text-dim);
         font-size: 14px;
         margin-left: 10px;
     }
 }
 
 :deep(.transparent-table) {
-  background: white;
+  background: transparent !important;
   flex: 1;
   width: 100%;
   display: flex;
@@ -595,36 +608,52 @@ export default {
   }
 
   .el-table__header th {
-    background: white !important;
-    color: black;
+    background: rgba(255, 255, 255, 0.02) !important;
+    color: var(--val-text) !important;
+    font-weight: 600;
+    height: 40px;
+    padding: 8px 0;
+    font-size: 14px;
+    border-bottom: 1px solid var(--val-border) !important;
+  }
+
+  .el-table__body tr {
+    background-color: transparent !important;
+
+    td {
+      border-top: 1px solid rgba(255, 255, 255, 0.03) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+      padding: 8px 0;
+      height: 40px;
+      color: var(--val-text-muted) !important;
+      font-size: 14px;
+      background-color: transparent !important;
+    }
+  }
+
+  .el-table__row:hover>td {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    color: var(--val-text) !important;
   }
 
   &::before {
     display: none;
   }
-
-  .el-table__body tr {
-    background-color: white;
-
-    td {
-      border-top: 1px solid rgba(0, 0, 0, 0.04);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-    }
-  }
 }
 
 :deep(.el-checkbox__inner) {
-  background-color: #ffffff !important;
-  border-color: #cccccc !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border-color: var(--val-border) !important;
+  transition: all 0.2s ease-in-out;
 }
 
 :deep(.el-checkbox__inner:hover) {
-  border-color: #cccccc !important;
+  border-color: var(--val-primary) !important;
 }
 
 :deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-  background-color: #5f70f3 !important;
-  border-color: #5f70f3 !important;
+  background-color: var(--val-primary) !important;
+  border-color: var(--val-primary) !important;
 }
 
 @media (min-width: 1144px) {
@@ -650,15 +679,24 @@ export default {
 }
 
 :deep(.el-table .el-button--text) {
-  color: #7079aa;
+  color: var(--val-primary-hover) !important;
+  font-weight: 600;
 }
 
 :deep(.el-table .el-button--text:hover) {
-  color: #5a64b5;
+  color: var(--val-primary) !important;
+}
+
+:deep(.el-table .el-button--text:last-child) {
+  color: var(--val-danger) !important;
+}
+
+:deep(.el-table .el-button--text:last-child:hover) {
+  color: #ff8fa3 !important;
 }
 
 .el-button--success {
-  background: #5bc98c;
+  background: var(--val-success) !important;
   color: white;
 }
 
@@ -683,10 +721,10 @@ export default {
   :deep(.el-input__inner) {
     height: 32px;
     line-height: 32px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
+    border-radius: var(--val-radius-sm, 10px);
+    border: 1px solid var(--val-border) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: var(--val-text) !important;
     font-size: 14px;
   }
 
@@ -713,7 +751,7 @@ export default {
     display: inline-block;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 9px solid #606266;
+    border-top: 9px solid var(--val-text-muted);
     position: relative;
     transform: rotate(0deg);
     transition: transform 0.3s;
@@ -735,22 +773,51 @@ export default {
   }
 }
 .custom-tag {
-  background: #e6ebff;
-  color: #5778ff;
+  background: rgba(124, 92, 255, 0.15) !important;
+  color: var(--val-primary) !important;
   border-radius: 8px;
   font-size: 12px;
   font-weight: normal;
-  border: none;
+  border: 1px solid rgba(124, 92, 255, 0.3) !important;
+}
+
+:deep(.el-loading-mask) {
+  background-color: rgba(11, 15, 26, 0.7) !important;
+  backdrop-filter: blur(2px);
+}
+
+:deep(.el-loading-spinner .circular) {
+  width: 28px;
+  height: 28px;
+}
+
+:deep(.el-loading-spinner .path) {
+  stroke: var(--val-primary);
+}
+
+:deep(.el-loading-text) {
+  color: var(--val-primary) !important;
+  font-size: 14px;
+  margin-top: 8px;
 }
 </style>
 
-<style>
-.replace-word-tooltip {
+<style lang="scss">
+.replace-word-tooltip.el-tooltip__popper {
+  background: rgba(22, 30, 52, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(12px) !important;
+  border-radius: 12px !important;
+
   .popper__arrow {
-    border-top-color: transparent !important;
-    border-right-color: #e4e7ed !important;
+    border-right-color: rgba(255, 255, 255, 0.15) !important;
+    &::after {
+      border-right-color: rgba(22, 30, 52, 0.95) !important;
+    }
   }
 }
+
 .replace-word-content {
   max-width: 400px;
   max-height: 60vh;
@@ -758,6 +825,7 @@ export default {
   scrollbar-width: thin;
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 6px;
+  padding: 8px;
 }
 </style>

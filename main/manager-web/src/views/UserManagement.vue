@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="welcome val-app-shell">
     <HeaderBar />
 
     <div class="operation-bar">
@@ -373,10 +373,6 @@ export default {
   display: flex;
   position: relative;
   flex-direction: column;
-  background-size: cover;
-  background: linear-gradient(to bottom right, #dce8ff, #e4eeff, #e6cbfd) center;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
   overflow: hidden;
 }
 
@@ -384,10 +380,12 @@ export default {
   // 顶部 63px 底部 35px 查询72px
   height: calc(100vh - 63px - 35px - 72px);
   margin: 0 22px;
-  border-radius: 15px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: var(--val-radius-lg, 20px);
+  box-shadow: var(--val-shadow);
   position: relative;
-  background: rgba(237, 242, 255, 0.5);
+  background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
+  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
 }
@@ -402,6 +400,9 @@ export default {
 .page-title {
   font-size: 24px;
   margin: 0;
+  color: var(--val-text);
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(124, 92, 255, 0.15);
 }
 
 .right-operations {
@@ -415,9 +416,32 @@ export default {
 }
 
 .btn-search {
-  background: linear-gradient(135deg, #6b8cff, #a966ff);
-  border: none;
-  color: white;
+  background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
+  border: none !important;
+  color: white !important;
+  border-radius: var(--val-radius-sm, 10px);
+  transition: var(--val-transition);
+}
+
+.btn-search:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3) !important;
+}
+
+:deep(.search-input .el-input__inner) {
+  border-radius: var(--val-radius-sm, 10px);
+  border: 1px solid var(--val-border) !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text) !important;
+  transition: var(--val-transition);
+}
+
+:deep(.search-input .el-input__inner:focus) {
+  border-color: var(--val-primary) !important;
+  box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.2) !important;
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  outline: none;
 }
 
 .content-panel {
@@ -425,9 +449,9 @@ export default {
   display: flex;
   overflow: hidden;
   height: 100%;
-  border-radius: 15px;
+  border-radius: var(--val-radius-lg, 20px);
   background: transparent;
-  border: 1px solid #fff;
+  border: none;
 }
 
 .content-area {
@@ -435,13 +459,13 @@ export default {
   height: 100%;
   min-width: 600px;
   overflow-x: auto;
-  background-color: white;
+  background-color: transparent !important;
   display: flex;
   flex-direction: column;
 }
 
 .user-card {
-  background: white;
+  background: transparent !important;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -463,6 +487,9 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+  background: transparent !important;
+  border-top: 1px solid var(--val-border);
+  padding-top: 12px;
 }
 
 .ctrl_btn {
@@ -475,7 +502,7 @@ export default {
     height: 32px;
     padding: 7px 12px 7px 10px;
     font-size: 12px;
-    border-radius: 4px;
+    border-radius: var(--val-radius-sm, 10px);
     line-height: 1;
     font-weight: 500;
     border: none;
@@ -489,22 +516,22 @@ export default {
   }
 
   .el-button--primary {
-    background: #5f70f3;
+    background: var(--val-primary) !important;
     color: white;
   }
 
   .el-button--success {
-    background: #5bc98c;
+    background: var(--val-success) !important;
     color: white;
   }
 
   .el-button--warning {
-    background: #f6d075;
+    background: #f6d075 !important;
     color: black;
   }
 
   .el-button--danger {
-    background: #fd5b63;
+    background: var(--val-danger) !important;
     color: white;
   }
 }
@@ -513,7 +540,7 @@ export default {
   display: inline-block;
   transform: rotate(45deg);
   margin-right: 4px;
-  color: black;
+  color: var(--val-text) !important;
 }
 
 .custom-pagination {
@@ -532,20 +559,21 @@ export default {
     min-width: 60px;
     height: 32px;
     padding: 0 12px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
+    border-radius: var(--val-radius-sm, 10px);
+    border: 1px solid var(--val-border) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: var(--val-text-muted) !important;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
 
-    &:hover {
-      background: #d7dce6;
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.08) !important;
+      color: var(--val-text) !important;
     }
 
     &:disabled {
-      opacity: 0.6;
+      opacity: 0.4;
       cursor: not-allowed;
     }
   }
@@ -554,38 +582,39 @@ export default {
     min-width: 28px;
     height: 32px;
     padding: 0;
-    border-radius: 4px;
+    border-radius: var(--val-radius-sm, 10px);
     border: 1px solid transparent;
     background: transparent;
-    color: #606266;
+    color: var(--val-text-muted) !important;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
 
     &:hover {
-      background: rgba(245, 247, 250, 0.3);
+      background: rgba(255, 255, 255, 0.06) !important;
+      color: var(--val-text) !important;
     }
   }
 
   .pagination-btn.active {
-    background: #5f70f3 !important;
+    background: var(--val-primary) !important;
     color: #ffffff !important;
-    border-color: #5f70f3 !important;
+    border-color: var(--val-primary) !important;
 
     &:hover {
-      background: #6d7cf5 !important;
+      background: var(--val-primary-hover) !important;
     }
   }
 
   .total-text {
-    color: #909399;
+    color: var(--val-text-dim);
     font-size: 14px;
     margin-left: 10px;
   }
 }
 
 :deep(.transparent-table) {
-  background: white;
+  background: transparent !important;
   flex: 1;
   width: 100%;
   display: flex;
@@ -602,45 +631,61 @@ export default {
   }
 
   .el-table__header th {
-    background: white !important;
-    color: black;
+    background: rgba(255, 255, 255, 0.02) !important;
+    color: var(--val-text) !important;
+    font-weight: 600;
+    height: 40px;
+    padding: 8px 0;
+    font-size: 14px;
+    border-bottom: 1px solid var(--val-border) !important;
+  }
+
+  .el-table__body tr {
+    background-color: transparent !important;
+
+    td {
+      border-top: 1px solid rgba(255, 255, 255, 0.03) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+      padding: 8px 0;
+      height: 40px;
+      color: var(--val-text-muted) !important;
+      font-size: 14px;
+      background-color: transparent !important;
+    }
+  }
+
+  .el-table__row:hover>td {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    color: var(--val-text) !important;
   }
 
   &::before {
     display: none;
   }
-
-  .el-table__body tr {
-    background-color: white;
-
-    td {
-      border-top: 1px solid rgba(0, 0, 0, 0.04);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-    }
-  }
 }
 
 :deep(.el-table .el-button--text) {
-  color: #7079aa !important;
+  color: var(--val-primary-hover) !important;
+  font-weight: 600;
 }
 
 :deep(.el-table .el-button--text:hover) {
-  color: #5a64b5 !important;
+  color: var(--val-primary) !important;
 }
 
-
 :deep(.el-checkbox__inner) {
-  background-color: #ffffff !important;
-  border-color: #cccccc !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border-color: var(--val-border) !important;
+  transition: all 0.2s ease-in-out;
 }
 
 :deep(.el-checkbox__inner:hover) {
-  border-color: #cccccc !important;
+  border-color: var(--val-primary) !important;
 }
 
 :deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-  background-color: #5f70f3 !important;
-  border-color: #5f70f3 !important;
+  background-color: var(--val-primary) !important;
+  border-color: var(--val-primary) !important;
 }
 
 @media (min-width: 1144px) {
@@ -672,10 +717,10 @@ export default {
   :deep(.el-input__inner) {
     height: 32px;
     line-height: 32px;
-    border-radius: 4px;
-    border: 1px solid #e4e7ed;
-    background: #dee7ff;
-    color: #606266;
+    border-radius: var(--val-radius-sm, 10px);
+    border: 1px solid var(--val-border) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: var(--val-text) !important;
     font-size: 14px;
   }
 
@@ -712,7 +757,7 @@ export default {
     display: inline-block;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 9px solid #606266;
+    border-top: 9px solid var(--val-text-muted);
     position: relative;
     transform: rotate(0deg);
     transition: transform 0.3s;
@@ -720,7 +765,6 @@ export default {
 }
 
 .el-table {
-  // --table-max-height: calc(100vh - 40vh);
   max-height: var(--table-max-height);
 
   .el-table__body-wrapper {
@@ -729,7 +773,7 @@ export default {
 }
 
 :deep(.el-loading-mask) {
-  background-color: rgba(255, 255, 255, 0.6) !important;
+  background-color: rgba(11, 15, 26, 0.7) !important;
   backdrop-filter: blur(2px);
 }
 
@@ -739,11 +783,11 @@ export default {
 }
 
 :deep(.el-loading-spinner .path) {
-  stroke: #6b8cff;
+  stroke: var(--val-primary);
 }
 
 :deep(.el-loading-text) {
-  color: #6b8cff !important;
+  color: var(--val-primary) !important;
   font-size: 14px;
   margin-top: 8px;
 }

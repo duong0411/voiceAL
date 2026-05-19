@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="welcome val-app-shell">
     <HeaderBar />
 
     <div class="operation-bar">
@@ -269,10 +269,6 @@ export default {
   display: flex;
   position: relative;
   flex-direction: column;
-  background: linear-gradient(to bottom right, #dce8ff, #e4eeff, #e6cbfd);
-  background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
   overflow: hidden;
 }
 
@@ -286,16 +282,20 @@ export default {
 .page-title {
   font-size: 24px;
   margin: 0;
-  color: #2c3e50;
+  color: var(--val-text);
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(124, 92, 255, 0.15);
 }
 
 .main-wrapper {
   height: calc(100vh - 63px - 35px - 60px);
   margin: 0 22px;
-  border-radius: 15px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: var(--val-radius-lg, 20px);
+  box-shadow: var(--val-shadow);
   position: relative;
-  background: rgba(237, 242, 255, 0.5);
+  background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
+  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
   padding: 0 !important;
@@ -306,23 +306,23 @@ export default {
   display: flex;
   overflow: hidden;
   height: 100%;
-  border-radius: 15px;
+  border-radius: var(--val-radius-lg, 20px);
   background: transparent;
-  border: 1px solid #fff;
+  border: none;
 }
 
 .content-area {
   flex: 1;
   height: 100%;
   overflow: auto;
-  background-color: white;
+  background-color: transparent !important;
   display: flex;
   flex-direction: column;
 }
 
 .config-card {
-  background: white !important;
-  border-radius: 15px !important;
+  background: transparent !important;
+  border-radius: var(--val-radius-lg, 20px) !important;
   overflow: hidden !important;
   height: 100% !important;
   margin: 0 !important;
@@ -364,23 +364,28 @@ export default {
   line-height: 1.6;
   font-size: 14px;
   padding: 10px;
-  border: 1px solid #dcdfe6;
-  border-radius: 4px;
-  background-color: #fff;
-  color: #303133;
+  border: 1px solid var(--val-border) !important;
+  border-radius: var(--val-radius-sm, 10px) !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text) !important;
+}
+
+::v-deep .description-item .el-textarea__inner:focus {
+  border-color: var(--val-primary) !important;
+  box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.2) !important;
 }
 
 ::v-deep .el-form-item__label {
   font-size: 12px !important;
-  color: #3d4566 !important;
+  color: var(--val-text) !important;
   font-weight: 400;
   line-height: 22px;
   padding-bottom: 2px;
 }
 
 ::v-deep .el-textarea .el-input__count {
-  color: #909399;
-  background: rgba(255, 255, 255, 0.8);
+  color: var(--val-text-dim) !important;
+  background: transparent !important;
   position: absolute;
   font-size: 12px;
   right: 10px;
@@ -394,18 +399,19 @@ export default {
   display: flex;
   align-items: center;
   gap: 15px;
-  background: #f8f9ff;
+  background: transparent;
   position: relative;
 }
 
 .header-icon {
   width: 37px;
   height: 37px;
-  background: #5778ff;
+  background: rgba(124, 92, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid var(--val-border);
 }
 
 .header-icon img {
@@ -416,7 +422,7 @@ export default {
 .header-title {
   font-size: 20px;
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--val-text);
 }
 
 .custom-close-btn {
@@ -427,11 +433,11 @@ export default {
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  border: 2px solid #cfcfcf;
+  border: 2px solid var(--val-border);
   background: none;
   font-size: 30px;
   font-weight: lighter;
-  color: #cfcfcf;
+  color: var(--val-text-muted);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -439,11 +445,13 @@ export default {
   z-index: 1;
   padding: 0;
   outline: none;
+  transition: all 0.3s ease;
 }
 
 .custom-close-btn:hover {
-  color: #409EFF;
-  border-color: #409EFF;
+  color: var(--val-primary);
+  border-color: var(--val-primary);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .header-actions {
@@ -454,22 +462,36 @@ export default {
 }
 
 .header-actions .save-btn {
-  background: #5778ff;
-  color: white;
-  border: none;
-  border-radius: 18px;
+  background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: var(--val-radius-sm, 10px);
   padding: 8px 16px;
   height: 32px;
   font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(124, 92, 255, 0.2);
+}
+
+.header-actions .save-btn:hover {
+  opacity: 0.95;
+  box-shadow: 0 4px 16px rgba(124, 92, 255, 0.3);
 }
 
 .header-actions .reset-btn {
-  background: #e6ebff;
-  color: #5778ff;
-  border: 1px solid #adbdff;
-  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text-muted) !important;
+  border: 1px solid var(--val-border) !important;
+  border-radius: var(--val-radius-sm, 10px);
   padding: 8px 16px;
   height: 32px;
+  transition: all 0.3s ease;
+}
+
+.header-actions .reset-btn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--val-text) !important;
+  border-color: var(--val-border-hover) !important;
 }
 
 .header-actions .custom-close-btn {
@@ -478,5 +500,19 @@ export default {
   width: 32px;
   height: 32px;
   margin-left: 8px;
+}
+
+::v-deep .el-input__inner {
+  border-radius: var(--val-radius-sm, 10px) !important;
+  border: 1px solid var(--val-border) !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  color: var(--val-text) !important;
+  transition: border-color 0.2s;
+}
+
+::v-deep .el-input__inner:focus {
+  border-color: var(--val-primary) !important;
+  box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.2) !important;
+  outline: none;
 }
 </style>
