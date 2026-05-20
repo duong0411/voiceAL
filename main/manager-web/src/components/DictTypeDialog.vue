@@ -90,7 +90,7 @@ export default {
 .dialog-footer {
     text-align: right;
 }
-:deep(.el-dialog) {
+::v-deep .el-dialog {
     border-radius: 15px;
 }
 

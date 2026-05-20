@@ -294,7 +294,7 @@ export default {
   box-shadow: var(--val-shadow);
   position: relative;
   background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
-  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--val-border, rgba(0, 0, 0, 0.1));
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
@@ -366,7 +366,7 @@ export default {
   padding: 10px;
   border: 1px solid var(--val-border) !important;
   border-radius: var(--val-radius-sm, 10px) !important;
-  background-color: rgba(255, 255, 255, 0.04) !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text) !important;
 }
 
@@ -451,7 +451,7 @@ export default {
 .custom-close-btn:hover {
   color: var(--val-primary);
   border-color: var(--val-primary);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .header-actions {
@@ -463,7 +463,7 @@ export default {
 
 .header-actions .save-btn {
   background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
-  color: white !important;
+  color: var(--val-text) !important;
   border: none !important;
   border-radius: var(--val-radius-sm, 10px);
   padding: 8px 16px;
@@ -479,7 +479,7 @@ export default {
 }
 
 .header-actions .reset-btn {
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text-muted) !important;
   border: 1px solid var(--val-border) !important;
   border-radius: var(--val-radius-sm, 10px);
@@ -489,7 +489,7 @@ export default {
 }
 
 .header-actions .reset-btn:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(0, 0, 0, 0.08) !important;
   color: var(--val-text) !important;
   border-color: var(--val-border-hover) !important;
 }
@@ -505,7 +505,7 @@ export default {
 ::v-deep .el-input__inner {
   border-radius: var(--val-radius-sm, 10px) !important;
   border: 1px solid var(--val-border) !important;
-  background-color: rgba(255, 255, 255, 0.04) !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text) !important;
   transition: border-color 0.2s;
 }

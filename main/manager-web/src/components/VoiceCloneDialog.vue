@@ -531,7 +531,7 @@ export default {
     &.active {
         .step-number {
             background: #6b8cff;
-            color: white;
+            color: var(--val-text) ;
         }
 
         .step-label {
@@ -543,7 +543,7 @@ export default {
     &.completed {
         .step-number {
             background: #67c23a;
-            color: white;
+            color: var(--val-text) ;
         }
 
         .step-line {
@@ -673,7 +673,7 @@ export default {
     top: 8px;
     right: 8px;
     background: rgba(0, 0, 0, 0.7);
-    color: white;
+    color: var(--val-text) ;
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 12px;

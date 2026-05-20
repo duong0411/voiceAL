@@ -81,7 +81,9 @@ public class ConfigServiceImpl implements ConfigService {
         // 查询默认智能体
         AgentTemplateEntity agent = agentTemplateService.getDefaultTemplate();
         if (agent == null) {
-            throw new RenException(ErrorCode.AGENT_TEMPLATE_NOT_FOUND);
+            // 将配置存入Redis
+            redisUtils.set(RedisKeys.getServerConfigKey(), result);
+            return result;
         }
 
         // 构建模块配置

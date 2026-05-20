@@ -119,7 +119,11 @@ public class SM2Utils {
             
             Map<String, String> result = new HashMap<>();
             result.put(KEY_PUBLIC_KEY, Hex.toHexString(p.getQ().getEncoded(false)));
-            result.put(KEY_PRIVATE_KEY, Hex.toHexString(s.getD().toByteArray()));
+            String privateKeyHex = s.getD().toString(16);
+            while (privateKeyHex.length() < 64) {
+                privateKeyHex = "0" + privateKeyHex;
+            }
+            result.put(KEY_PRIVATE_KEY, privateKeyHex);
             return result;
         } catch (Exception e) {
             throw new RuntimeException("生成SM2密钥对失败", e);

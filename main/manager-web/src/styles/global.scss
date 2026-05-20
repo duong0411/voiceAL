@@ -64,3 +64,36 @@ select:-webkit-autofill:focus {
     radial-gradient(ellipse 50% 40% at 100% 100%, rgba(0, 229, 200, 0.08), transparent 45%),
     var(--val-bg);
 }
+
+/* Override Element UI table defaults globally */
+.transparent-table,
+.el-table.transparent-table {
+  background: transparent !important;
+  border: none;
+}
+.transparent-table .el-table__body-wrapper {
+  background: transparent !important;
+}
+.transparent-table .el-table__header th,
+.transparent-table .el-table__header tr {
+  background: rgba(0, 0, 0, 0.02) !important;
+  color: var(--val-text) !important;
+  border-bottom: 1px solid var(--val-border) !important;
+}
+.transparent-table .el-table__body tr {
+  background-color: transparent !important;
+}
+.transparent-table .el-table__body tr td {
+  border-bottom: 1px solid var(--val-border) !important;
+  background-color: transparent !important;
+}
+.transparent-table .el-table__body tr:hover > td,
+.transparent-table .el-table__body tr.hover-row > td {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+.transparent-table::before,
+.transparent-table::after,
+.transparent-table .el-table__fixed-right::before,
+.transparent-table .el-table__fixed::before {
+  display: none !important;
+}

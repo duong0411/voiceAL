@@ -213,7 +213,7 @@ export default {
   padding: 32px 36px;
   border-radius: 20px;
   background: linear-gradient(135deg, rgba(124, 92, 255, 0.2) 0%, rgba(0, 229, 200, 0.08) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 28px;
   overflow: hidden;
   position: relative;
@@ -257,7 +257,7 @@ export default {
   display: block;
   font-size: 1.75rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--val-text) ;
 }
 
 .studio-stat-label {
@@ -273,7 +273,7 @@ export default {
   border: none;
   border-radius: 12px;
   background: linear-gradient(135deg, #7c5cff, #5b3fd9);
-  color: #fff;
+  color: var(--val-text) ;
   font-weight: 700;
   font-size: 0.95rem;
   cursor: pointer;
@@ -339,8 +339,8 @@ export default {
 .skeleton-item {
   height: 160px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   position: relative;
   overflow: hidden;
 }
@@ -351,7 +351,7 @@ export default {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.06),
+    rgba(0, 0, 0, 0.06),
     transparent
   );
   animation: shimmer 1.5s infinite;

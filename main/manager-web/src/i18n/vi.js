@@ -1526,6 +1526,11 @@ export default {
     ['(流式)', '(streaming)'],
     ['流式', 'streaming'],
   ],
+  // Network error messages
+  'network.requestError': 'Yêu cầu mạng gặp lỗi [{status}]',
+  'network.cannotConnect': 'Có vẻ như không thể kết nối đến máy chủ',
+  'network.connecting': 'Đang kết nối đến máy chủ ({index})',
+
   systemPrompts,
   systemPromptPatterns: systemPromptPatternsVi,
 };

@@ -1534,6 +1534,11 @@ export default {
     ['(streaming)', '(streaming)'],
     ['streaming', 'streaming'],
   ],
+  // Network error messages
+  'network.requestError': 'Network request error [{status}]',
+  'network.cannotConnect': 'Seems unable to connect to the server',
+  'network.connecting': 'Connecting to server ({index})',
+
   systemPrompts,
   systemPromptPatterns: systemPromptPatternsEn,
 };

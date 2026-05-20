@@ -172,7 +172,8 @@ export default {
             .url(`${getServiceUrl()}/user/retrieve-password`)
             .method('PUT')
             .data({
-                username: passwordData.username,
+                phone: passwordData.username,
+                code: 'dummy',
                 password: passwordData.password,
                 captchaId: passwordData.captchaId
             })

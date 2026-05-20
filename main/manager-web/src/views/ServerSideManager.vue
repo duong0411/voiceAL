@@ -12,7 +12,7 @@
           <el-card class="params-card" shadow="never">
             <el-table ref="paramsTable" :data="paramsList" class="transparent-table" v-loading="loading"
               :element-loading-text="$t('serverSideManager.loading')" element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(255, 255, 255, 0.7)" :header-cell-class-name="headerCellClassName">
+              element-loading-background="rgba(0, 0, 0, 0.7)" :header-cell-class-name="headerCellClassName">
               <el-table-column :label="$t('modelConfig.select')" align="center" width="120">
                 <template slot-scope="scope">
                   <el-checkbox v-model="scope.row.selected"></el-checkbox>
@@ -192,7 +192,7 @@ export default {
   box-shadow: var(--val-shadow);
   position: relative;
   background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
-  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--val-border, rgba(0, 0, 0, 0.1));
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
@@ -226,7 +226,7 @@ export default {
 .btn-search {
   background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
   border: none !important;
-  color: white !important;
+  color: var(--val-text) !important;
   border-radius: var(--val-radius-sm, 10px);
   transition: var(--val-transition);
 }
@@ -302,16 +302,16 @@ export default {
 
   .el-button--primary {
     background: var(--val-primary) !important;
-    color: white;
+    color: var(--val-text) ;
   }
 
   .el-button--danger {
     background: var(--val-danger) !important;
-    color: white;
+    color: var(--val-text) ;
   }
 }
 
-:deep(.transparent-table) {
+::v-deep .transparent-table {
   background: transparent !important;
   flex: 1;
   width: 100%;
@@ -329,7 +329,7 @@ export default {
   }
 
   .el-table__header th {
-    background: rgba(255, 255, 255, 0.02) !important;
+    background: rgba(0, 0, 0, 0.02) !important;
     color: var(--val-text) !important;
     font-weight: 600;
     height: 40px;
@@ -342,8 +342,8 @@ export default {
     background-color: transparent !important;
 
     td {
-      border-top: 1px solid rgba(255, 255, 255, 0.03) !important;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+      border-top: 1px solid rgba(0, 0, 0, 0.03) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.03) !important;
       padding: 8px 0;
       height: 40px;
       color: var(--val-text-muted) !important;
@@ -353,7 +353,7 @@ export default {
   }
 
   .el-table__row:hover>td {
-    background-color: rgba(255, 255, 255, 0.04) !important;
+    background-color: rgba(0, 0, 0, 0.04) !important;
     color: var(--val-text) !important;
   }
 
@@ -363,17 +363,17 @@ export default {
 }
 
 
-:deep(.el-checkbox__inner) {
-  background-color: rgba(255, 255, 255, 0.04) !important;
+::v-deep .el-checkbox__inner {
+  background-color: rgba(0, 0, 0, 0.04) !important;
   border-color: var(--val-border) !important;
   transition: all 0.2s ease-in-out;
 }
 
-:deep(.el-checkbox__inner:hover) {
+::v-deep .el-checkbox__inner:hover {
   border-color: var(--val-primary) !important;
 }
 
-:deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
+::v-deep .el-checkbox__input.is-checked .el-checkbox__inner {
   background-color: var(--val-primary) !important;
   border-color: var(--val-primary) !important;
 }
@@ -386,7 +386,7 @@ export default {
     margin-top: 40px;
   }
 
-  :deep(.transparent-table) {
+  ::v-deep .transparent-table {
     .el-table__body tr {
       td {
         padding-top: 16px;
@@ -400,31 +400,31 @@ export default {
   }
 }
 
-:deep(.el-table .el-button--text) {
+::v-deep .el-table .el-button--text {
   color: var(--val-primary-hover) !important;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
-:deep(.el-table .el-button--text:hover) {
+::v-deep .el-table .el-button--text:hover {
   color: var(--val-primary) !important;
   transform: translateY(-1px);
 }
 
-:deep(.el-table .el-button--text:last-child) {
+::v-deep .el-table .el-button--text:last-child {
   color: var(--val-danger) !important;
 }
 
-:deep(.el-table .el-button--text:last-child:hover) {
+::v-deep .el-table .el-button--text:last-child:hover {
   color: #ff8fa3 !important;
 }
 
 .el-button--success {
   background: var(--val-success) !important;
-  color: white;
+  color: var(--val-text) ;
 }
 
-:deep(.el-table .cell) {
+::v-deep .el-table .cell {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -434,17 +434,17 @@ export default {
   width: 100px;
   margin-right: 10px;
 
-  :deep(.el-input__inner) {
+  ::v-deep .el-input__inner {
     height: 32px;
     line-height: 32px;
     border-radius: var(--val-radius-sm, 10px);
     border: 1px solid var(--val-border) !important;
-    background: rgba(255, 255, 255, 0.04) !important;
+    background: rgba(0, 0, 0, 0.04) !important;
     color: var(--val-text) !important;
     font-size: 14px;
   }
 
-  :deep(.el-input__suffix) {
+  ::v-deep .el-input__suffix {
     right: 6px;
     width: 15px;
     height: 20px;
@@ -455,14 +455,14 @@ export default {
     border-radius: 4px;
   }
 
-  :deep(.el-input__suffix-inner) {
+  ::v-deep .el-input__suffix-inner {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
   }
 
-  :deep(.el-icon-arrow-up:before) {
+  ::v-deep .el-icon-arrow-up:before {
     content: "";
     display: inline-block;
     border-left: 6px solid transparent;
@@ -474,7 +474,7 @@ export default {
   }
 }
 
-:deep(.el-table) {
+::v-deep .el-table {
   .el-table__body-wrapper {
     transition: height 0.3s ease;
   }
@@ -490,21 +490,21 @@ export default {
   }
 }
 
-:deep(.el-loading-mask) {
+::v-deep .el-loading-mask {
   background-color: rgba(11, 15, 26, 0.7) !important;
   backdrop-filter: blur(2px);
 }
 
-:deep(.el-loading-spinner .circular) {
+::v-deep .el-loading-spinner .circular {
   width: 28px;
   height: 28px;
 }
 
-:deep(.el-loading-spinner .path) {
+::v-deep .el-loading-spinner .path {
   stroke: var(--val-primary);
 }
 
-:deep(.el-loading-text) {
+::v-deep .el-loading-text {
   color: var(--val-primary) !important;
   font-size: 14px;
   margin-top: 8px;

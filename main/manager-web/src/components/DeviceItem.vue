@@ -133,7 +133,7 @@ export default {
   width: 100%;
   border-radius: 16px;
   background: rgba(22, 30, 52, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   padding: 22px 22px 14px;
   box-sizing: border-box;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
@@ -179,7 +179,7 @@ export default {
 
 .settings-btn:hover {
   background: rgba(124, 92, 255, 0.25);
-  color: #fff;
+  color: var(--val-text) ;
 }
 
 .version-info {

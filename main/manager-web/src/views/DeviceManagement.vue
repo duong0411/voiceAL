@@ -18,7 +18,7 @@
             <el-table ref="deviceTable" :data="paginatedDeviceList" class="transparent-table"
               :header-cell-class-name="headerCellClassName" v-loading="loading"
               :element-loading-text="$t('deviceManagement.loading')" element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(255, 255, 255, 0.7)">
+              element-loading-background="rgba(0, 0, 0, 0.7)">
               <el-table-column :label="$t('modelConfig.select')" align="center" width="120">
                 <template slot-scope="scope">
                   <el-checkbox v-model="scope.row.selected"></el-checkbox>
@@ -493,7 +493,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .welcome {
   min-width: 900px;
   min-height: 506px;
@@ -511,7 +511,7 @@ export default {
   box-shadow: var(--val-shadow);
   position: relative;
   background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
-  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--val-border, rgba(0, 0, 0, 0.1));
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
@@ -546,7 +546,7 @@ export default {
 .btn-search {
   background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
   border: none !important;
-  color: white !important;
+  color: #333 !important;
   border-radius: var(--val-radius-sm, 10px) !important;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -562,7 +562,7 @@ export default {
 ::v-deep .search-input .el-input__inner {
   border-radius: var(--val-radius-sm, 10px) !important;
   border: 1px solid var(--val-border) !important;
-  background-color: rgba(255, 255, 255, 0.04) !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text) !important;
   transition: border-color 0.2s;
 }
@@ -583,7 +583,7 @@ export default {
   line-height: 32px;
   border-radius: var(--val-radius-sm, 10px);
   border: 1px solid var(--val-border) !important;
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text) !important;
   font-size: 14px;
 }
@@ -686,20 +686,20 @@ export default {
 }
 
 .ctrl_btn .select-all-btn {
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text-muted) !important;
   border-color: var(--val-border) !important;
 }
 
 .ctrl_btn .select-all-btn:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(0, 0, 0, 0.08) !important;
   color: var(--val-text) !important;
   border-color: var(--val-border-hover) !important;
 }
 
 .ctrl_btn .add-device-btn {
   background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
-  color: white !important;
+  color: #333 !important;
   border: none !important;
   box-shadow: 0 4px 12px rgba(124, 92, 255, 0.2);
 }
@@ -739,7 +739,7 @@ export default {
   padding: 0 12px;
   border-radius: var(--val-radius-sm, 10px);
   border: 1px solid var(--val-border) !important;
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text-muted) !important;
   font-size: 14px;
   cursor: pointer;
@@ -750,7 +750,7 @@ export default {
 .custom-pagination .pagination-btn:nth-child(2):hover,
 .custom-pagination .pagination-btn:nth-last-child(2):hover,
 .custom-pagination .pagination-btn:nth-child(3):hover {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(0, 0, 0, 0.08) !important;
   color: var(--val-text) !important;
   border-color: var(--val-border-hover) !important;
 }
@@ -774,13 +774,13 @@ export default {
 }
 
 .custom-pagination .pagination-btn:not(:first-child):not(:nth-child(3)):not(:nth-child(2)):not(:nth-last-child(2)):hover {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(0, 0, 0, 0.08) !important;
   color: var(--val-text) !important;
 }
 
 .custom-pagination .pagination-btn.active {
   background: var(--val-primary) !important;
-  color: #ffffff !important;
+  color: #333 !important;
   border-color: var(--val-primary) !important;
 }
 
@@ -794,97 +794,107 @@ export default {
   margin-left: 10px;
 }
 
-:deep(.transparent-table) {
+</style>
+
+<style lang="scss">
+.transparent-table {
   background: transparent !important;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   border: none;
+
+  .el-table__body-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    max-height: none !important;
+  }
+
+  .el-table__header-wrapper {
+    flex-shrink: 0;
+  }
+
+  .el-table__header th {
+    background: rgba(0, 0, 0, 0.02) !important;
+    color: var(--val-text) !important;
+    font-weight: 600;
+    height: 40px;
+    padding: 8px 0;
+    font-size: 14px;
+    border-bottom: 1px solid var(--val-border) !important;
+  }
+
+  .el-table__body tr {
+    background-color: transparent !important;
+    color: var(--val-text-muted) !important;
+
+    td {
+      border-top: 1px solid rgba(0, 0, 0, 0.03) !important;
+      border-bottom: 1px solid var(--val-border) !important;
+      padding: 8px 0;
+      height: 40px;
+      font-size: 14px;
+      background-color: transparent !important;
+    }
+  }
+
+  .el-table__row:hover > td {
+    background-color: rgba(0, 0, 0, 0.04) !important;
+    color: var(--val-text) !important;
+  }
+
+  &::before {
+    display: none !important;
+  }
 }
 
-:deep(.transparent-table .el-table__header th) {
-  background: transparent !important;
-  color: var(--val-text) !important;
-  border-bottom: 1px solid var(--val-border) !important;
-}
-
-:deep(.transparent-table .el-table__body tr) {
-  background: transparent !important;
-  color: var(--val-text-muted) !important;
-}
-
-:deep(.transparent-table .el-table__body tr:hover > td) {
-  background-color: rgba(255, 255, 255, 0.02) !important;
-}
-
-:deep(.transparent-table .el-table__body tr td) {
-  border-bottom: 1px solid var(--val-border) !important;
-}
-
-:deep(.el-icon-edit) {
+.transparent-table .el-icon-edit {
   color: var(--val-text-muted);
   cursor: pointer;
 }
 
-:deep(.el-icon-edit:hover) {
+.transparent-table .el-icon-edit:hover {
   color: var(--val-primary);
 }
 
-:deep(.custom-selection-header .el-checkbox) {
+.transparent-table .custom-selection-header .el-checkbox {
   display: none !important;
 }
 
-:deep(.el-table .el-button--text) {
+.transparent-table .el-button--text {
   color: var(--val-text-muted) !important;
   transition: color 0.3s ease;
 }
 
-:deep(.el-table .el-button--text:hover) {
+.transparent-table .el-button--text:hover {
   color: var(--val-primary) !important;
 }
 
-:deep(.transparent-table) {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-:deep(.el-table__body-wrapper) {
-  flex: 1;
-  overflow-y: auto;
-  max-height: none !important;
-}
-
-:deep(.el-table__header-wrapper) {
-  flex-shrink: 0;
-}
-
 @media (min-width: 1144px) {
-  .table_bottom {
-    margin-top: 40px;
-  }
-
-  :deep(.transparent-table) .el-table__body tr td {
+  .transparent-table .el-table__body tr td {
     padding-top: 16px;
     padding-bottom: 16px;
   }
 }
 
-:deep(.el-checkbox__inner) {
-  background-color: rgba(255, 255, 255, 0.04) !important;
+.transparent-table .el-checkbox__inner {
+  background-color: rgba(0, 0, 0, 0.04) !important;
   border-color: var(--val-border) !important;
   transition: all 0.2s ease;
 }
 
-:deep(.el-checkbox__inner:hover) {
+.transparent-table .el-checkbox__inner:hover {
   border-color: var(--val-primary) !important;
 }
 
-:deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
+.transparent-table .el-checkbox__input.is-checked .el-checkbox__inner {
   background-color: var(--val-primary) !important;
   border-color: var(--val-primary) !important;
 }
 
-::v-deep .el-table--border::after,
-::v-deep .el-table--group::after,
-::v-deep .el-table::before {
+.transparent-table.el-table--border::after,
+.transparent-table.el-table--group::after,
+.transparent-table.el-table::before {
   display: none !important;
 }
 </style>

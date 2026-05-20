@@ -491,7 +491,7 @@ export default {
 .mcp-access-point {
   position: relative;
   z-index: 1;
-  background: white;
+  background: transparent ;
 }
 
 .function-column::-webkit-scrollbar {
@@ -634,7 +634,7 @@ export default {
   border-top: 1px solid #e8e8e8;
   padding: 10px 16px;
   text-align: center;
-  background: #fff;
+  background: transparent ;
 }
 
 .info-icon {
@@ -749,7 +749,7 @@ export default {
       pointer-events: auto;
       border: none;
       background: #1677ff;
-      color: white;
+      color: var(--val-text) ;
       padding: 6px;
       margin-top: 4px;
       margin-left: 4px;
@@ -803,7 +803,7 @@ export default {
     display: flex;
     align-items: center;
     padding: 2px 10px;
-    background: white;
+    background: transparent ;
     color: black;
     border: 1px solid #DCDFE6;
     border-radius: 4px;
@@ -813,7 +813,7 @@ export default {
 
     &:hover {
       background: #1677ff;
-      color: white;
+      color: var(--val-text) ;
       border-color: #1677ff;
     }
 
@@ -851,12 +851,12 @@ export default {
     padding: 6px 12px;
     border-color: #1677ff;
     color: #1677ff;
-    background-color: white;
+    background-color: transparent ;
     font-size: 12px;
 
     &:hover {
       background-color: #1677ff;
-      color: white;
+      color: var(--val-text) ;
       border-color: #1677ff;
     }
   }

@@ -417,7 +417,7 @@ export default {
 
 .save-btn:hover {
   background: linear-gradient(to right, #237ff4, #9c40d5);
-  color: white;
+  color: var(--val-text) ;
   border: none;
 }
 

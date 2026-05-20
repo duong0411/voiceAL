@@ -51,7 +51,20 @@ class loginControllerTest {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
 
+    @Test
+    public void testSM2Utils() {
+        java.util.Map<String, String> keyPair = xiaozhi.common.utils.SM2Utils.createKey();
+        String pubKey = keyPair.get(xiaozhi.common.utils.SM2Utils.KEY_PUBLIC_KEY);
+        String priKey = keyPair.get(xiaozhi.common.utils.SM2Utils.KEY_PRIVATE_KEY);
+        org.junit.jupiter.api.Assertions.assertNotNull(pubKey);
+        org.junit.jupiter.api.Assertions.assertEquals(64, priKey.length());
+
+        String plainText = "helloWorld123";
+        String cipherText = xiaozhi.common.utils.SM2Utils.encrypt(pubKey, plainText);
+        String decrypted = xiaozhi.common.utils.SM2Utils.decrypt(priKey, cipherText);
+        org.junit.jupiter.api.Assertions.assertEquals(plainText, decrypted);
     }
 
 }

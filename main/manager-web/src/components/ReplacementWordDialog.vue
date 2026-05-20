@@ -330,7 +330,7 @@ export default {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     &:hover {
-      color: #ffffff;
+      color: var(--val-text) ;
       background: #ef4444;
       transform: rotate(90deg);
       box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);
@@ -345,7 +345,7 @@ export default {
     .form-item {
       margin-bottom: 20px;
 
-      :deep(.el-form-item__label) {
+      ::v-deep .el-form-item__label {
         color: #475569;
         font-weight: 500;
         padding-right: 12px;
@@ -356,14 +356,14 @@ export default {
     }
 
     .content-item {
-      :deep(.el-form-item__content) {
+      ::v-deep .el-form-item__content {
         line-height: 1;
       }
     }
 
     .custom-input {
-      :deep(.el-input__inner) {
-        background-color: #ffffff;
+      ::v-deep .el-input__inner {
+        background-color: transparent ;
         border-radius: 8px;
         border: 1px solid #e2e8f0;
         height: 42px;
@@ -376,7 +376,7 @@ export default {
         &:focus {
           border-color: #3b82f6;
           box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-          background-color: #ffffff;
+          background-color: transparent ;
         }
 
         &::placeholder {
@@ -391,8 +391,8 @@ export default {
     }
 
     .custom-textarea {
-      :deep(.el-textarea__inner) {
-        background-color: #ffffff;
+      ::v-deep .el-textarea__inner {
+        background-color: transparent ;
         border-radius: 8px;
         border: 1px solid #e2e8f0;
         padding: 12px 14px;
@@ -409,7 +409,7 @@ export default {
         &:focus {
           border-color: #3b82f6;
           box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-          background-color: #ffffff;
+          background-color: transparent ;
         }
 
         &::placeholder {
@@ -487,7 +487,7 @@ export default {
       border-radius: 8px;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       background: #3b82f6;
-      color: white;
+      color: var(--val-text) ;
       border: none;
       letter-spacing: 0.5px;
       box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
@@ -511,7 +511,7 @@ export default {
       font-weight: 500;
       border-radius: 8px;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      background: #ffffff;
+      background: transparent ;
       color: #64748b;
       border: 1px solid #e2e8f0;
       margin-left: 16px;

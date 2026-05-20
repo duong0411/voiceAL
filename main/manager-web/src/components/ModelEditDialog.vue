@@ -484,7 +484,7 @@ export default {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  background: white;
+  background: transparent ;
   padding-bottom: 17px;
 }
 
@@ -593,7 +593,7 @@ export default {
 
 .save-btn:hover {
   background: linear-gradient(to right, #237ff4, #9c40d5);
-  color: white;
+  color: var(--val-text) ;
   border: none;
 }
 
@@ -608,7 +608,7 @@ export default {
 .custom-switch .el-switch__core:after {
   width: 15px;
   height: 15px;
-  background-color: white;
+  background-color: transparent ;
   top: 3px;
   left: 4px;
   transition: all 0.3s;

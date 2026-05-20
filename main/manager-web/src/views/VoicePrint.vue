@@ -12,7 +12,7 @@
                     <el-card class="voice-print-card" shadow="never">
                         <el-table ref="paramsTable" :data="voicePrintList" class="transparent-table" v-loading="loading"
                            :element-loading-text="$t('voicePrint.loading')" element-loading-spinner="el-icon-loading"
-                          element-loading-background="rgba(255, 255, 255, 0.7)">
+                          element-loading-background="rgba(0, 0, 0, 0.7)">
                             <el-table-column :label="$t('voicePrint.name')" prop="sourceName" align="center"></el-table-column>
                         <el-table-column :label="$t('voicePrint.description')" prop="introduce" align="center"></el-table-column>
                         <el-table-column :label="$t('voicePrint.createTime')" prop="createDate" align="center"></el-table-column>
@@ -204,7 +204,7 @@ export default {
     box-shadow: var(--val-shadow);
     position: relative;
     background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
-    border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+    border: 1px solid var(--val-border, rgba(0, 0, 0, 0.1));
     backdrop-filter: blur(8px);
     display: flex;
     flex-direction: column;
@@ -238,7 +238,7 @@ export default {
 .btn-search {
     background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark));
     border: none;
-    color: white;
+    color: var(--val-text) ;
 }
 
 .content-panel {
@@ -309,19 +309,19 @@ export default {
     }
 
     .el-button--primary {
-        background: rgba(255, 255, 255, 0.04) !important;
+        background: rgba(0, 0, 0, 0.04) !important;
         color: var(--val-text-muted) !important;
         border: 1px solid var(--val-border) !important;
     }
 
     .el-button--primary:hover {
-        background: rgba(255, 255, 255, 0.08) !important;
+        background: rgba(0, 0, 0, 0.08) !important;
         color: var(--val-text) !important;
     }
 
     .el-button--success {
         background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
-        color: white !important;
+        color: var(--val-text) !important;
         box-shadow: 0 4px 12px rgba(124, 92, 255, 0.2) !important;
     }
 
@@ -360,14 +360,14 @@ export default {
         padding: 0 12px;
         border-radius: var(--val-radius-sm, 10px);
         border: 1px solid var(--val-border) !important;
-        background: rgba(255, 255, 255, 0.04) !important;
+        background: rgba(0, 0, 0, 0.04) !important;
         color: var(--val-text-muted) !important;
         font-size: 14px;
         cursor: pointer;
         transition: all 0.3s ease;
 
         &:hover {
-            background: rgba(255, 255, 255, 0.08) !important;
+            background: rgba(0, 0, 0, 0.08) !important;
             color: var(--val-text) !important;
             border-color: var(--val-border-hover) !important;
         }
@@ -391,14 +391,14 @@ export default {
         transition: all 0.3s ease;
 
         &:hover {
-            background: rgba(255, 255, 255, 0.08) !important;
+            background: rgba(0, 0, 0, 0.08) !important;
             color: var(--val-text) !important;
         }
     }
 
     .pagination-btn.active {
         background: var(--val-primary) !important;
-        color: #ffffff !important;
+        color: var(--val-text) !important;
         border-color: var(--val-primary) !important;
 
         &:hover {
@@ -413,7 +413,7 @@ export default {
     }
 }
 
-:deep(.transparent-table) {
+::v-deep .transparent-table {
     background: transparent !important;
     border: none;
     flex: 1;
@@ -446,7 +446,7 @@ export default {
         color: var(--val-text-muted) !important;
 
         &:hover > td {
-            background-color: rgba(255, 255, 255, 0.02) !important;
+            background-color: rgba(0, 0, 0, 0.02) !important;
         }
 
         td {
@@ -456,17 +456,17 @@ export default {
 }
 
 
-:deep(.el-checkbox__inner) {
-    background-color: rgba(255, 255, 255, 0.04) !important;
+::v-deep .el-checkbox__inner {
+    background-color: rgba(0, 0, 0, 0.04) !important;
     border-color: var(--val-border) !important;
     transition: all 0.2s ease;
 }
 
-:deep(.el-checkbox__inner:hover) {
+::v-deep .el-checkbox__inner:hover {
     border-color: var(--val-primary) !important;
 }
 
-:deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
+::v-deep .el-checkbox__input.is-checked .el-checkbox__inner {
     background-color: var(--val-primary) !important;
     border-color: var(--val-primary) !important;
 }
@@ -479,7 +479,7 @@ export default {
         margin-top: 40px;
     }
 
-    :deep(.transparent-table) {
+    ::v-deep .transparent-table {
         .el-table__body tr {
             td {
                 padding-top: 16px;
@@ -493,22 +493,22 @@ export default {
     }
 }
 
-:deep(.el-table .el-button--text) {
+::v-deep .el-table .el-button--text {
     color: var(--val-text-muted) !important;
     transition: color 0.3s ease;
 }
 
-:deep(.el-table .el-button--text:hover) {
+::v-deep .el-table .el-button--text:hover {
     color: var(--val-primary) !important;
 }
 
 .el-button--success {
     background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
-    color: white !important;
+    color: var(--val-text) !important;
     border: none !important;
 }
 
-:deep(.el-table .cell) {
+::v-deep .el-table .cell {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -518,17 +518,17 @@ export default {
     width: 100px;
     margin-right: 10px;
 
-    :deep(.el-input__inner) {
+    ::v-deep .el-input__inner {
         height: 32px;
         line-height: 32px;
         border-radius: var(--val-radius-sm, 10px);
         border: 1px solid var(--val-border) !important;
-        background: rgba(255, 255, 255, 0.04) !important;
+        background: rgba(0, 0, 0, 0.04) !important;
         color: var(--val-text) !important;
         font-size: 14px;
     }
 
-    :deep(.el-input__suffix) {
+    ::v-deep .el-input__suffix {
         right: 6px;
         width: 15px;
         height: 20px;
@@ -539,14 +539,14 @@ export default {
         border-radius: 4px;
     }
 
-    :deep(.el-input__suffix-inner) {
+    ::v-deep .el-input__suffix-inner {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
     }
 
-    :deep(.el-icon-arrow-up:before) {
+    ::v-deep .el-icon-arrow-up:before {
         content: "";
         display: inline-block;
         border-left: 6px solid transparent;
@@ -558,7 +558,7 @@ export default {
     }
 }
 
-:deep(.el-table) {
+::v-deep .el-table {
     .el-table__body-wrapper {
         transition: height 0.3s ease;
     }
@@ -572,21 +572,21 @@ export default {
     }
 }
 
-:deep(.el-loading-mask) {
+::v-deep .el-loading-mask {
     background-color: rgba(22, 30, 52, 0.5) !important;
     backdrop-filter: blur(4px);
 }
 
-:deep(.el-loading-spinner .circular) {
+::v-deep .el-loading-spinner .circular {
     width: 28px;
     height: 28px;
 }
 
-:deep(.el-loading-spinner .path) {
+::v-deep .el-loading-spinner .path {
     stroke: var(--val-primary);
 }
 
-:deep(.el-loading-text) {
+::v-deep .el-loading-text {
     color: var(--val-primary) !important;
     font-size: 14px;
     margin-top: 8px;

@@ -575,7 +575,7 @@ export default {
 <style lang="scss" scoped>
 .header {
   background: rgba(18, 24, 41, 0.85);
-  border-bottom: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  border-bottom: 1px solid var(--val-border, rgba(0, 0, 0, 0.1));
   backdrop-filter: blur(16px);
   height: 64px !important;
   min-width: 900px;
@@ -627,8 +627,8 @@ export default {
 .equipment-management {
   height: 34px;
   border-radius: 17px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   justify-content: center;
   font-size: 13px;
@@ -652,7 +652,7 @@ export default {
 
 .equipment-management.active-tab {
   background: linear-gradient(135deg, #7c5cff, #5b3fd9) !important;
-  color: #fff !important;
+  color: var(--val-text) !important;
   border-color: transparent !important;
   box-shadow: 0 8px 24px rgba(124, 92, 255, 0.35);
 }
@@ -678,7 +678,7 @@ export default {
   top: 100%;
   left: 0;
   right: 0;
-  background: white;
+  background: transparent ;
   border: 1px solid #e4e6ef;
   border-radius: 4px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -754,7 +754,7 @@ export default {
   height: 32px;
   border-radius: 16px;
   background-color: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   color: #e2e8f0;
   padding-left: 12px;
   font-size: 12px;

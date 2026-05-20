@@ -1436,7 +1436,7 @@ export default {
   .is-active {
     .el-radio-button__inner {
       &:hover {
-        color: #fff !important;
+        color: var(--val-text) !important;
       }
     }
   }
@@ -1472,7 +1472,7 @@ export default {
   box-shadow: var(--val-shadow);
   position: relative;
   background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
-  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--val-border, rgba(0, 0, 0, 0.1));
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
@@ -1541,7 +1541,7 @@ export default {
   padding-bottom: 4px;
   &::-webkit-scrollbar {
       height: 6px;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(0, 0, 0, 0.04);
     }
     &::-webkit-scrollbar-thumb {
       background: var(--val-primary);
@@ -1762,11 +1762,11 @@ export default {
 .custom-close-btn:hover {
   color: var(--val-primary);
   border-color: var(--val-primary);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .edit-function-btn {
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text-muted) !important;
   border: 1px solid var(--val-border) !important;
   border-radius: var(--val-radius-sm, 10px) !important;
@@ -1777,14 +1777,14 @@ export default {
 }
 
 .edit-function-btn:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(0, 0, 0, 0.08) !important;
   color: var(--val-text) !important;
   border-color: var(--val-border-hover) !important;
 }
 
 .edit-function-btn.active-btn {
   background: var(--val-primary) !important;
-  color: white !important;
+  color: var(--val-text) !important;
   border-color: var(--val-primary) !important;
 }
 
@@ -1802,13 +1802,13 @@ export default {
 .chat-history-options ::v-deep .el-radio-button .el-radio-button__inner {
   color: var(--val-text-muted) !important;
   border-color: var(--val-border) !important;
-  background-color: rgba(255, 255, 255, 0.04) !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
 }
 
 .chat-history-options ::v-deep .el-radio-button.is-active .el-radio-button__inner {
   background: var(--val-primary) !important;
   border-color: var(--val-primary) !important;
-  color: white !important;
+  color: var(--val-text) !important;
 }
 
 .chat-history-options ::v-deep .el-radio-button .el-radio-button__inner:hover {
@@ -1838,7 +1838,7 @@ export default {
 
 .header-actions .save-btn {
   background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
-  color: white !important;
+  color: var(--val-text) !important;
   border: none !important;
   border-radius: var(--val-radius-sm, 10px);
   padding: 8px 16px;
@@ -1854,7 +1854,7 @@ export default {
 }
 
 .header-actions .reset-btn {
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text-muted) !important;
   border: 1px solid var(--val-border) !important;
   border-radius: var(--val-radius-sm, 10px);
@@ -1864,7 +1864,7 @@ export default {
 }
 
 .header-actions .reset-btn:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(0, 0, 0, 0.08) !important;
   color: var(--val-text) !important;
   border-color: var(--val-border-hover) !important;
 }
@@ -1925,14 +1925,14 @@ export default {
   border: 1px solid rgba(124, 92, 255, 0.3) !important;
 }
 .custom-tag-btn {
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text-muted) !important;
   border-radius: 8px;
   font-weight: normal;
   border: 1px solid var(--val-border) !important;
   transition: all 0.3s ease;
   &:hover {
-    background-color: rgba(255, 255, 255, 0.08) !important;
+    background-color: rgba(0, 0, 0, 0.08) !important;
     color: var(--val-text) !important;
   }
 }
@@ -1943,21 +1943,21 @@ export default {
   }
 }
 
-:deep(.el-input__inner), :deep(.el-textarea__inner) {
-  background-color: rgba(255, 255, 255, 0.04) !important;
+::v-deep .el-input__inner, ::v-deep .el-textarea__inner {
+  background-color: rgba(0, 0, 0, 0.04) !important;
   border: 1px solid var(--val-border) !important;
   color: var(--val-text) !important;
   border-radius: var(--val-radius-sm, 10px) !important;
   transition: var(--val-transition);
 }
 
-:deep(.el-input__inner:focus), :deep(.el-textarea__inner:focus) {
+::v-deep .el-input__inner:focus, ::v-deep .el-textarea__inner:focus {
   border-color: var(--val-primary) !important;
   box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.2) !important;
   outline: none;
 }
 
-:deep(.el-form-item__label) {
+::v-deep .el-form-item__label {
   color: var(--val-text) !important;
 }
 </style>
@@ -1976,7 +1976,7 @@ export default {
 
 .edit-function-btn.active-btn {
   background: #5778ff;
-  color: white;
+  color: var(--val-text) ;
 }
 
 .chat-history-options {
@@ -1999,7 +1999,7 @@ export default {
 .chat-history-options ::v-deep .el-radio-button.is-active .el-radio-button__inner {
   background-color: #5778ff;
   border-color: #5778ff;
-  color: white;
+  color: var(--val-text) ;
 }
 
 .chat-history-options ::v-deep .el-radio-button .el-radio-button__inner:hover {
@@ -2029,7 +2029,7 @@ export default {
 
 .header-actions .save-btn {
   background: #5778ff;
-  color: white;
+  color: var(--val-text) ;
   border: none;
   border-radius: 18px;
   padding: 8px 16px;

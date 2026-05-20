@@ -24,7 +24,7 @@
         @click="closeDialog">
         关闭
       </div>
-      <div class="dialog-btn" style="background: #5778ff;color: white;" @click="copyPassword">
+      <div class="dialog-btn" style="background: #5778ff;color: var(--val-text) ;" @click="copyPassword">
         复制密码
       </div>
     </div>

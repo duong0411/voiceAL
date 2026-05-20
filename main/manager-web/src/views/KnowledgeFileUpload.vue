@@ -23,7 +23,7 @@
             <div class="table-wrapper">
               <el-table ref="fileTable" :data="fileList" class="transparent-table" v-loading="loading"
                 element-loading-text="Loading" element-loading-spinner="el-icon-loading"
-                element-loading-background="rgba(255, 255, 255, 0.7)" :header-cell-class-name="headerCellClassName"
+                element-loading-background="rgba(0, 0, 0, 0.7)" :header-cell-class-name="headerCellClassName"
                 @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
                 <el-table-column :label="$t('knowledgeFileUpload.documentName')" prop="name" align="left">
@@ -1129,7 +1129,7 @@ export default {
   box-shadow: var(--val-shadow);
   position: relative;
   background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
-  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--val-border, rgba(0, 0, 0, 0.1));
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
@@ -1158,7 +1158,7 @@ export default {
 }
 
 .btn-back:hover {
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: rgba(0, 0, 0, 0.06);
   color: var(--val-text) !important;
 }
 
@@ -1183,7 +1183,7 @@ export default {
 .btn-search {
   background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
   border: none !important;
-  color: white !important;
+  color: var(--val-text) !important;
   border-radius: var(--val-radius-sm, 10px);
 }
 
@@ -1193,17 +1193,17 @@ export default {
   box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3) !important;
 }
 
-:deep(.search-input .el-input__inner) {
+::v-deep .search-input .el-input__inner {
   border-radius: var(--val-radius-sm, 10px);
   border: 1px solid var(--val-border) !important;
-  background-color: rgba(255, 255, 255, 0.04) !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text) !important;
 }
 
-:deep(.search-input .el-input__inner:focus) {
+::v-deep .search-input .el-input__inner:focus {
   border-color: var(--val-primary) !important;
   box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.2) !important;
-  background-color: rgba(255, 255, 255, 0.06) !important;
+  background-color: rgba(0, 0, 0, 0.06) !important;
   outline: none;
 }
 
@@ -1278,19 +1278,19 @@ export default {
   }
 
   .el-button--primary {
-    background: rgba(255, 255, 255, 0.04) !important;
+    background: rgba(0, 0, 0, 0.04) !important;
     color: var(--val-text-muted) !important;
     border: 1px solid var(--val-border) !important;
   }
 
   .el-button--primary:hover {
-    background: rgba(255, 255, 255, 0.08) !important;
+    background: rgba(0, 0, 0, 0.08) !important;
     color: var(--val-text) !important;
   }
 
   .el-button--success {
     background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
-    color: white !important;
+    color: var(--val-text) !important;
     box-shadow: 0 4px 12px rgba(124, 92, 255, 0.2) !important;
   }
 
@@ -1329,14 +1329,14 @@ export default {
     padding: 0 12px;
     border-radius: var(--val-radius-sm, 10px);
     border: 1px solid var(--val-border) !important;
-    background: rgba(255, 255, 255, 0.04) !important;
+    background: rgba(0, 0, 0, 0.04) !important;
     color: var(--val-text-muted) !important;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.08) !important;
+      background: rgba(0, 0, 0, 0.08) !important;
       color: var(--val-text) !important;
       border-color: var(--val-border-hover) !important;
     }
@@ -1360,14 +1360,14 @@ export default {
     transition: all 0.3s ease;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.08) !important;
+      background: rgba(0, 0, 0, 0.08) !important;
       color: var(--val-text) !important;
     }
   }
 
   .pagination-btn.active {
     background: var(--val-primary) !important;
-    color: #ffffff !important;
+    color: var(--val-text) !important;
     border-color: var(--val-primary) !important;
 
     &:hover {
@@ -1386,17 +1386,17 @@ export default {
   width: 100px;
   margin-right: 10px;
 
-  :deep(.el-input__inner) {
+  ::v-deep .el-input__inner {
     height: 32px;
     line-height: 32px;
     border-radius: var(--val-radius-sm, 10px);
     border: 1px solid var(--val-border) !important;
-    background: rgba(255, 255, 255, 0.04) !important;
+    background: rgba(0, 0, 0, 0.04) !important;
     color: var(--val-text) !important;
     font-size: 14px;
   }
 
-  :deep(.el-input__suffix) {
+  ::v-deep .el-input__suffix {
     right: 6px;
     width: 15px;
     height: 20px;
@@ -1407,14 +1407,14 @@ export default {
     border-radius: 4px;
   }
 
-  :deep(.el-input__suffix-inner) {
+  ::v-deep .el-input__suffix-inner {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
   }
 
-  :deep(.el-icon-arrow-up:before) {
+  ::v-deep .el-icon-arrow-up:before {
     content: "";
     display: inline-block;
     border-left: 6px solid transparent;
@@ -1426,7 +1426,7 @@ export default {
   }
 }
 
-:deep(.transparent-table) {
+::v-deep .transparent-table {
   background: transparent !important;
   flex: 1;
   width: 100%;
@@ -1466,7 +1466,7 @@ export default {
   }
 
   .el-table__row:hover>td {
-    background-color: rgba(255, 255, 255, 0.02) !important;
+    background-color: rgba(0, 0, 0, 0.02) !important;
     color: var(--val-text) !important;
   }
 
@@ -1475,40 +1475,40 @@ export default {
   }
 }
 
-:deep(.el-table .el-button--text) {
+::v-deep .el-table .el-button--text {
   color: var(--val-text-muted) !important;
   transition: color 0.3s ease;
 }
 
-:deep(.el-table .el-button--text:hover) {
+::v-deep .el-table .el-button--text:hover {
   color: var(--val-primary) !important;
 }
 
-:deep(.el-checkbox__inner) {
-  background-color: rgba(255, 255, 255, 0.04) !important;
+::v-deep .el-checkbox__inner {
+  background-color: rgba(0, 0, 0, 0.04) !important;
   border-color: var(--val-border) !important;
   transition: all 0.2s ease;
 }
 
-:deep(.el-checkbox__inner:hover) {
+::v-deep .el-checkbox__inner:hover {
   border-color: var(--val-primary) !important;
 }
 
-:deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
+::v-deep .el-checkbox__input.is-checked .el-checkbox__inner {
   background-color: var(--val-primary) !important;
   border-color: var(--val-primary) !important;
 }
 
-:deep(.el-loading-mask) {
+::v-deep .el-loading-mask {
   background-color: rgba(22, 30, 52, 0.5) !important;
   backdrop-filter: blur(4px);
 }
 
-:deep(.el-loading-spinner .path) {
+::v-deep .el-loading-spinner .path {
   stroke: var(--val-primary);
 }
 
-:deep(.el-table__empty-block) {
+::v-deep .el-table__empty-block {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1518,12 +1518,12 @@ export default {
 
 /* 拖拽上传区域样式 */
 .document-uploader {
-  :deep(.el-upload-dragger) {
+  ::v-deep .el-upload-dragger {
     width: 600px;
     height: 200px;
     min-height: 200px;
     border: 2px dashed var(--val-border) !important;
-    background-color: rgba(255, 255, 255, 0.02) !important;
+    background-color: rgba(0, 0, 0, 0.02) !important;
     border-radius: 16px;
     cursor: pointer;
     position: relative;
@@ -1614,12 +1614,12 @@ export default {
     flex-shrink: 0;
   }
 
-  :deep(.el-card) {
+  ::v-deep .el-card {
     flex: 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.02) !important;
+    background: rgba(0, 0, 0, 0.02) !important;
     border: 1px solid var(--val-border) !important;
 
     .el-card__body {
@@ -1649,17 +1649,17 @@ export default {
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.2);
   }
 }
 
 .result-chunk {
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: rgba(0, 0, 0, 0.02);
   border: 1px solid var(--val-border);
   border-radius: 8px;
   padding: 16px;
@@ -1727,12 +1727,12 @@ export default {
     }
 
     &::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.1);
       border-radius: 2px;
     }
   }
 
-  :deep(.el-divider) {
+  ::v-deep .el-divider {
     margin: 12px 0;
     background-color: var(--val-border) !important;
   }
@@ -1744,7 +1744,7 @@ export default {
   border: 1px solid var(--val-border);
   border-radius: 8px;
   padding: 16px;
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: rgba(0, 0, 0, 0.02);
 
   h4 {
     margin: 0 0 12px 0;
@@ -1813,7 +1813,7 @@ export default {
 }
 
 /* 上传对话框容器样式 */
-:deep(.el-dialog) {
+::v-deep .el-dialog {
   border-radius: 16px !important;
   overflow: hidden;
   background: var(--val-bg-card, rgba(22, 30, 52, 0.95)) !important;
@@ -1858,7 +1858,7 @@ export default {
   }
 
   ::v-deep .el-dialog::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 4px;
   }
 
@@ -1877,7 +1877,7 @@ export default {
     backdrop-filter: blur(10px) !important;
   }
 
-  :deep(.el-dialog__body) {
+  ::v-deep .el-dialog__body {
     height: calc(100% - 90px) !important;
     max-height: calc(100% - 90px) !important;
     overflow: hidden;
@@ -1924,13 +1924,13 @@ export default {
     }
 
     &::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.1);
       border-radius: 3px;
     }
   }
 
   .slice-card {
-    background-color: rgba(255, 255, 255, 0.02);
+    background-color: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--val-border);
     border-radius: 8px;
     padding: 16px;
@@ -1974,7 +1974,7 @@ export default {
       }
 
       &::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.1);
         border-radius: 2px;
       }
 
@@ -2136,7 +2136,7 @@ export default {
     margin-top: auto;
   }
 
-  :deep(.transparent-table) {
+  ::v-deep .transparent-table {
     .el-table__body tr {
       td {
         padding-top: 16px;

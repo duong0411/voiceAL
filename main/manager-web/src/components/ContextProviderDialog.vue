@@ -231,7 +231,7 @@ export default {
   border-radius: 12px;
   border: 1px solid #e4e7ed;
   border-left: 4px solid #409EFF; /* 左侧强调色 */
-  background-color: #fff;
+  background-color: transparent ;
   transition: all 0.3s ease;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
 }
@@ -288,7 +288,7 @@ export default {
 
 .headers-list:hover {
   border-color: #c0c4cc;
-  background: #fff;
+  background: transparent ;
 }
 
 .header-row {

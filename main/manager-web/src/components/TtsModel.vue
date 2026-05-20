@@ -729,7 +729,7 @@ export default {
 .action-buttons {
   position: static;
   padding: 15px 0;
-  background: white;
+  background: transparent ;
 }
 
 /* 输入框自适应 */

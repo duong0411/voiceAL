@@ -290,7 +290,7 @@ export default {
   color: #5778ff;
 }
 .replacement-word-select ::v-deep .el-icon-close {
-  background: #fff;
+  background: transparent ;
 }
 </style>
 
@@ -324,7 +324,7 @@ export default {
 .replacement-tag {
   background-color: #409eff;
   border-color: #409eff;
-  color: #fff;
+  color: var(--val-text) ;
 }
 
 .tts-tooltip {

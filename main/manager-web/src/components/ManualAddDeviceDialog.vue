@@ -132,7 +132,7 @@ export default {
   height: 40px;
   font-weight: 500;
   font-size: 12px;
-  color: #fff;
+  color: var(--val-text) ;
   line-height: 40px;
   text-align: center;
 }

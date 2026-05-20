@@ -9,8 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: '',
-    userInfo: {}, // 添加用户信息存储
-    pubConfig: { // 添加公共配置存储
+    userInfo: {},
+    pubConfig: {
       version: '',
       beianIcpNum: 'null',
       beianGaNum: 'null',

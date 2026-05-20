@@ -381,7 +381,7 @@ export default {
 }
 
 .btn-select-all {
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text-muted) !important;
   border: 1px solid var(--val-border) !important;
   border-radius: var(--val-radius-sm, 10px);
@@ -392,14 +392,14 @@ export default {
 }
 
 .btn-select-all:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(0, 0, 0, 0.08) !important;
   color: var(--val-text) !important;
   border-color: var(--val-border-hover) !important;
 }
 
 .save-btn {
   background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
-  color: white !important;
+  color: var(--val-text) !important;
   border: none !important;
   border-radius: var(--val-radius-sm, 10px);
   padding: 8px 16px;
@@ -417,7 +417,7 @@ export default {
 }
 
 .reset-btn {
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text-muted) !important;
   border: 1px solid var(--val-border) !important;
   border-radius: var(--val-radius-sm, 10px);
@@ -427,7 +427,7 @@ export default {
 }
 
 .reset-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(0, 0, 0, 0.08) !important;
   color: var(--val-text) !important;
   border-color: var(--val-border-hover) !important;
 }
@@ -439,7 +439,7 @@ export default {
   box-shadow: var(--val-shadow);
   position: relative;
   background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
-  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--val-border, rgba(0, 0, 0, 0.1));
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
@@ -495,7 +495,7 @@ export default {
   padding: 20px;
   border-radius: var(--val-radius-md, 15px);
   border: 1px solid var(--val-border);
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: rgba(0, 0, 0, 0.02);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
@@ -528,7 +528,7 @@ export default {
 }
 
 .feature-checkbox ::v-deep .el-checkbox__inner {
-  background-color: rgba(255, 255, 255, 0.04) !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
   border-color: var(--val-border) !important;
   transition: all 0.2s ease-in-out;
 }

@@ -451,7 +451,7 @@ export default {
 
 .message-count {
     font-size: 14px;
-    color: #fff;
+    color: var(--val-text) ;
     background-color: #b4b4b4;
     border-radius: 20px;
     float: left;
@@ -499,12 +499,12 @@ export default {
 
 .user-message .message-content {
     background-color: #1890ff;
-    color: white;
+    color: var(--val-text) ;
     flex-direction: row-reverse;
 }
 
 .user-message .audio-icon {
-    color: white;
+    color: var(--val-text) ;
 }
 
 .content-wrapper {
@@ -599,7 +599,7 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: white;
+    background-color: transparent ;
 }
 
 .download-buttons .el-button {

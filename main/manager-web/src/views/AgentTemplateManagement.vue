@@ -31,7 +31,7 @@
               v-loading="templateLoading"
               :element-loading-text="$t('agentTemplateManagement.loading')"
               element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(255, 255, 255, 0.7)"
+              element-loading-background="rgba(0, 0, 0, 0.7)"
               class="transparent-table"
               :header-cell-style="{ padding: '10px 20px' }"
               :cell-style="{ padding: '10px 20px' }"
@@ -472,7 +472,7 @@ export default {
 .btn-search {
   background: linear-gradient(135deg, var(--val-primary), var(--val-primary-dark)) !important;
   border: none !important;
-  color: white !important;
+  color: var(--val-text) !important;
   border-radius: var(--val-radius-sm, 10px);
   transition: var(--val-transition);
 }
@@ -483,18 +483,18 @@ export default {
   box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3) !important;
 }
 
-:deep(.search-input .el-input__inner) {
+::v-deep .search-input .el-input__inner {
   border-radius: var(--val-radius-sm, 10px);
   border: 1px solid var(--val-border) !important;
-  background-color: rgba(255, 255, 255, 0.04) !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
   color: var(--val-text) !important;
   transition: var(--val-transition);
 }
 
-:deep(.search-input .el-input__inner:focus) {
+::v-deep .search-input .el-input__inner:focus {
   border-color: var(--val-primary) !important;
   box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.2) !important;
-  background-color: rgba(255, 255, 255, 0.06) !important;
+  background-color: rgba(0, 0, 0, 0.06) !important;
   outline: none;
 }
 
@@ -507,7 +507,7 @@ export default {
   box-shadow: var(--val-shadow);
   position: relative;
   background: var(--val-bg-card, rgba(22, 30, 52, 0.72));
-  border: 1px solid var(--val-border, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--val-border, rgba(0, 0, 0, 0.1));
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
@@ -543,7 +543,7 @@ export default {
   flex-direction: column;
   overflow: hidden;
 
-  :deep(.el-card__body) {
+  ::v-deep .el-card__body {
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -560,7 +560,7 @@ export default {
   background: transparent !important;
 }
 
-:deep(.el-table) {
+::v-deep .el-table {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -576,7 +576,7 @@ export default {
   .el-table__header th {
     padding: 8px 0 !important;
     height: 40px !important;
-    background: rgba(255, 255, 255, 0.02) !important;
+    background: rgba(0, 0, 0, 0.02) !important;
     border-bottom: 1px solid var(--val-border) !important;
   }
 
@@ -589,12 +589,12 @@ export default {
   .el-table__body {
     .el-table__row td {
       padding: 12px 0 !important;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.03) !important;
       background: transparent !important;
       color: var(--val-text-muted) !important;
     }
     .el-table__row:hover td {
-      background-color: rgba(255, 255, 255, 0.04) !important;
+      background-color: rgba(0, 0, 0, 0.04) !important;
       color: var(--val-text) !important;
     }
   }
@@ -665,59 +665,59 @@ export default {
 
   .el-button--primary {
     background: var(--val-primary) !important;
-    color: white;
+    color: var(--val-text) ;
   }
   .el-button--success {
     background: var(--val-success) !important;
-    color: white;
+    color: var(--val-text) ;
   }
   .el-button--danger {
     background: var(--val-danger) !important;
-    color: white;
+    color: var(--val-text) ;
   }
 }
 
-:deep(.el-checkbox__inner) {
-  background-color: rgba(255, 255, 255, 0.04) !important;
+::v-deep .el-checkbox__inner {
+  background-color: rgba(0, 0, 0, 0.04) !important;
   border-color: var(--val-border) !important;
   transition: all 0.2s ease-in-out;
 }
 
-:deep(.el-checkbox__inner:hover) {
+::v-deep .el-checkbox__inner:hover {
   border-color: var(--val-primary) !important;
 }
 
-:deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
+::v-deep .el-checkbox__input.is-checked .el-checkbox__inner {
   background-color: var(--val-primary) !important;
   border-color: var(--val-primary) !important;
 }
 
-:deep(.el-loading-mask) {
+::v-deep .el-loading-mask {
   background-color: rgba(11, 15, 26, 0.7) !important;
   backdrop-filter: blur(2px);
 }
 
-:deep(.el-loading-spinner .circular) {
+::v-deep .el-loading-spinner .circular {
   width: 28px;
   height: 28px;
 }
 
-:deep(.el-loading-spinner .path) {
+::v-deep .el-loading-spinner .path {
   stroke: var(--val-primary);
 }
 
-:deep(.el-loading-text) {
+::v-deep .el-loading-text {
   color: var(--val-primary) !important;
   font-size: 14px;
   margin-top: 8px;
 }
 
-:deep(.el-pagination) {
+::v-deep .el-pagination {
   background: transparent !important;
   color: var(--val-text-muted) !important;
 
   button, .btn-prev, .btn-next {
-    background: rgba(255, 255, 255, 0.04) !important;
+    background: rgba(0, 0, 0, 0.04) !important;
     border: 1px solid var(--val-border) !important;
     color: var(--val-text-muted) !important;
     border-radius: var(--val-radius-sm, 10px) !important;
@@ -727,13 +727,13 @@ export default {
     transition: all 0.3s ease;
 
     &:hover:not(:disabled) {
-      background: rgba(255, 255, 255, 0.08) !important;
+      background: rgba(0, 0, 0, 0.08) !important;
       color: var(--val-text) !important;
     }
   }
 
   .el-pager li {
-    background: rgba(255, 255, 255, 0.04) !important;
+    background: rgba(0, 0, 0, 0.04) !important;
     border: 1px solid var(--val-border) !important;
     color: var(--val-text-muted) !important;
     border-radius: var(--val-radius-sm, 10px) !important;
@@ -744,13 +744,13 @@ export default {
     transition: all 0.3s ease;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.08) !important;
+      background: rgba(0, 0, 0, 0.08) !important;
       color: var(--val-text) !important;
     }
 
     &.active {
       background: var(--val-primary) !important;
-      color: white !important;
+      color: var(--val-text) !important;
       border-color: var(--val-primary) !important;
     }
   }
@@ -760,7 +760,7 @@ export default {
   }
 
   .el-input__inner {
-    background: rgba(255, 255, 255, 0.04) !important;
+    background: rgba(0, 0, 0, 0.04) !important;
     border: 1px solid var(--val-border) !important;
     color: var(--val-text) !important;
     border-radius: var(--val-radius-sm, 10px) !important;

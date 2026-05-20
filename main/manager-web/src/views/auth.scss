@@ -219,7 +219,7 @@
   height: 48px;
   padding: 4px 6px;
   border-radius: var(--val-radius-sm);
-  background: #fff;
+  background: transparent;
   border: 1px solid var(--val-border);
   box-sizing: border-box;
   overflow: hidden;
@@ -309,7 +309,7 @@
 
   &:hover {
     background: var(--val-accent-soft);
-    color: #fff;
+    color: var(--val-text) ;
     border-color: var(--val-accent);
     transform: translateY(-1px);
   }
@@ -320,7 +320,7 @@
   height: 48px;
   border-radius: var(--val-radius-sm);
   background: linear-gradient(135deg, var(--val-primary) 0%, var(--val-primary-dark) 100%);
-  color: #fff;
+  color: var(--val-text) ;
   font-weight: 700;
   font-size: 0.95rem;
   text-align: center;
@@ -481,7 +481,7 @@
     border-radius: var(--val-radius-sm);
     font-weight: 700;
     cursor: pointer;
-    color: #fff;
+    color: var(--val-text) ;
     line-height: 44px;
     margin: 16px 30px;
     transition: var(--val-transition);
